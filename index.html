@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FellowFlow | We make customers flow to your business</title>
+<meta name="description" content="FellowFlow builds and grows the whole online identity of businesses in Amman: website, Google Maps, AI search, reviews and Instagram, all flowing to you. Arabic and English. Start with a free Presence Audit.">
+<!-- DRAFT: remove noindex at launch -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#050C1A">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="FellowFlow | We make customers flow to your business">
+<meta property="og:description" content="Website, Google, AI search and Instagram, built as one identity and looked after every month.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/work/apollo-d.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "name": "FellowFlow",
+      "url": "https://fellowflow.ai/",
+      "description": "Digital identity studio in Amman: websites, Google Business Profile, local SEO, generative engine optimisation (GEO), reviews and social media for local businesses.",
+      "email": "labsuncut@gmail.com",
+      "telephone": "+962796237444",
+      "address": { "@type": "PostalAddress", "addressLocality": "Amman", "addressCountry": "JO" },
+      "areaServed": { "@type": "City", "name": "Amman" },
+      "knowsLanguage": ["en", "ar"],
+      "knowsAbout": ["Web design", "Local SEO", "Generative engine optimisation", "Google Business Profile", "Online reputation"],
+      "founder": [
+        { "@type": "Person", "name": "Abdullah Kishtaini" },
+        { "@type": "Person", "name": "Ali Elbusaifi" },
+        { "@type": "Person", "name": "Mahmoud Abu Hijleh" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "Can you guarantee first place on Google?", "acceptedAnswer": { "@type": "Answer", "text": "No one honestly can. Google decides rankings. We do every piece that makes a business more likely to appear, and we show you the real numbers every month." } },
+        { "@type": "Question", "name": "What is GEO?", "acceptedAnswer": { "@type": "Answer", "text": "Generative engine optimisation: making sure AI assistants like ChatGPT and Gemini have clear, correct facts about your business, so they can recommend you." } },
+        { "@type": "Question", "name": "Who owns the website?", "acceptedAnswer": { "@type": "Answer", "text": "You do. The domain, the content and your profiles are in your name." } },
+        { "@type": "Question", "name": "Do you build in Arabic?", "acceptedAnswer": { "@type": "Answer", "text": "Yes. Every site we build works in Arabic and English, with Arabic reading right to left." } },
+        { "@type": "Question", "name": "Where are you based?", "acceptedAnswer": { "@type": "Answer", "text": "In Amman, Jordan. We work with local businesses across the city." } },
+        { "@type": "Question", "name": "How much does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "It depends on what your business needs. Start with the free audit, and we will recommend a plan with a clear price." } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+<!-- Opening, once per visit: a city of small lights at night drifts, then streams into the centre
+     and settles into the mark (assets/js/intro.js). The name is written, then both travel up into
+     the header and the dark lifts. Click or Escape to skip. -->
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-bg"></div>
+  <canvas class="intro-canvas" id="intro-canvas"></canvas>
+  <div class="intro-bloom"></div>
+  <div class="intro-lock">
+    <img class="intro-mark" id="intro-mark" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+    <img class="intro-word" id="intro-word" src="assets/img/logo/wordmark-cream.png" alt="" width="479" height="79">
+  </div>
+  <p class="intro-tag" data-i18n="intro_tag">We make customers flow to you.</p>
+  <button class="intro-skip" type="button" id="intro-skip" data-i18n="intro_skip">Skip</button>
+</div>
+
+<!-- Soft light and faint marks that drift slowly behind the navy parts of the page. -->
+<div class="drift" aria-hidden="true">
+  <div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+  <img class="mk-1" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+  <img class="mk-2" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+</div>
+
+<header class="top" id="top">
+  <div class="wrap top-in">
+    <a class="logo" href="#top" aria-label="FellowFlow home">
+      <img class="logo-mark" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+      <img class="logo-word" src="assets/img/logo/wordmark-cream.png" alt="FellowFlow" width="479" height="79">
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="#work" data-i18n="nav_work">Work</a>
+      <a href="#services" data-i18n="nav_services">Services</a>
+      <a href="#promise" data-i18n="nav_promise">Guarantee</a>
+      <a href="#team" data-i18n="nav_team">Team</a>
+      <a href="#faq" data-i18n="nav_faq">FAQ</a>
+    </nav>
+    <div class="top-actions">
+      <button class="lang" type="button" id="lang" lang="ar">عربي</button>
+      <a class="btn btn-gold btn-sm" href="#audit" data-i18n="nav_cta">Free audit</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- 1. Hero: the headline writes itself; beside it a living scene where lights stream from every
+     place a customer starts (Google, Instagram, WhatsApp, reviews, AI assistants) into one point: your business. -->
+<section class="hero">
+  <div class="wrap hero-in">
+    <div class="hero-copy">
+      <p class="eyebrow reveal"><span class="rule"></span><span data-i18n="hero_eyebrow">Digital identity studio · Amman</span></p>
+      <h1 class="words" data-i18n="hero_h1">We make customers <em>flow to you.</em></h1>
+      <p class="lede reveal" data-i18n="hero_lede">Google Maps, Instagram, WhatsApp and AI assistants, all pointing to one place: your business. We build the whole path, in Arabic and English, and look after it every month.</p>
+      <div class="cta-row reveal">
+        <a class="btn btn-gold" href="#audit" data-i18n="hero_cta1">Get your free Presence Audit</a>
+        <a class="btn btn-line" href="#work" data-i18n="hero_cta2">See our work</a>
+      </div>
+    </div>
+    <div class="hero-art orbit" id="orbit" aria-hidden="true">
+      <div class="bubbles" id="bubbles"></div>
+      <div class="halo"></div>
+      <div class="ring ring-a"></div>
+      <div class="ring ring-b"></div>
+      <img class="big-mark" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+      <img class="sat sat-1" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+      <img class="sat sat-2" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+      <img class="sat sat-3" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+    </div>
+  </div>
+</section>
+
+<!-- 2. The flow: every place a customer starts, drawn as a river that ends at your business. -->
+<section class="flow sheet" id="flow" aria-labelledby="flow-h">
+  <div class="wrap">
+    <p class="no reveal"><span class="rule"></span><span class="rn">I</span> · <span data-i18n="flow_eyebrow">The flow</span></p>
+    <h2 id="flow-h" class="reveal" data-i18n="flow_h">Customers don't start on your website. <em>They start everywhere.</em></h2>
+    <p class="sub reveal" data-i18n="flow_p">A customer asks a friend on WhatsApp, checks Instagram, opens Google Maps, or asks ChatGPT "where should we go tonight?". Every one of those paths should end at you. We build each one and connect them.</p>
+    <div class="river reveal" id="river">
+      <svg class="river-svg river-wide" viewBox="0 0 1100 520" aria-hidden="true">
+        <defs>
+          <radialGradient id="glow"><stop offset="0" stop-color="#F5E4C8" stop-opacity=".9"/><stop offset="1" stop-color="#F5E4C8" stop-opacity="0"/></radialGradient>
+        </defs>
+        <g class="paths">
+          <path id="rp1" d="M265,70 C520,70 580,260 900,260"/>
+          <path id="rp2" d="M265,165 C520,165 580,260 900,260"/>
+          <path id="rp3" d="M265,260 L900,260"/>
+          <path id="rp4" d="M265,355 C520,355 580,260 900,260"/>
+          <path id="rp5" d="M265,450 C520,450 580,260 900,260"/>
+        </g>
+        <g class="drops">
+          <circle r="4"><animateMotion dur="5s" begin="0s" repeatCount="indefinite"><mpath href="#rp1"/></animateMotion></circle>
+          <circle r="4"><animateMotion dur="5s" begin="1s" repeatCount="indefinite"><mpath href="#rp2"/></animateMotion></circle>
+          <circle r="4"><animateMotion dur="5s" begin="2s" repeatCount="indefinite"><mpath href="#rp3"/></animateMotion></circle>
+          <circle r="4"><animateMotion dur="5s" begin="3s" repeatCount="indefinite"><mpath href="#rp4"/></animateMotion></circle>
+          <circle r="4"><animateMotion dur="5s" begin="4s" repeatCount="indefinite"><mpath href="#rp5"/></animateMotion></circle>
+        </g>
+        <circle class="halo" cx="900" cy="260" r="90" fill="url(#glow)"/>
+        <circle class="node" cx="900" cy="260" r="34"/>
+      </svg>
+      <svg class="river-svg river-tall" viewBox="0 0 400 760" aria-hidden="true">
+        <g class="paths">
+          <path id="tp1" d="M335,60 C430,60 200,500 200,660"/>
+          <path id="tp2" d="M335,170 C420,170 200,520 200,660"/>
+          <path id="tp3" d="M335,280 C405,280 200,540 200,660"/>
+          <path id="tp4" d="M335,390 C390,390 200,565 200,660"/>
+          <path id="tp5" d="M335,500 C375,500 200,595 200,660"/>
+        </g>
+        <g class="drops">
+          <circle r="4"><animateMotion dur="5s" begin="0s" repeatCount="indefinite"><mpath href="#tp1"/></animateMotion></circle>
+          <circle r="4"><animateMotion dur="5s" begin="1s" repeatCount="indefinite"><mpath href="#tp2"/></animateMotion></circle>
+          <circle r="4"><animateMotion dur="5s" begin="2s" repeatCount="indefinite"><mpath href="#tp3"/></animateMotion></circle>
+          <circle r="4"><animateMotion dur="5s" begin="3s" repeatCount="indefinite"><mpath href="#tp4"/></animateMotion></circle>
+          <circle r="4"><animateMotion dur="5s" begin="4s" repeatCount="indefinite"><mpath href="#tp5"/></animateMotion></circle>
+        </g>
+        <circle class="halo" cx="200" cy="660" r="80" fill="url(#glow)"/>
+        <circle class="node" cx="200" cy="660" r="34"/>
+      </svg>
+      <ul class="sources">
+        <li class="src s1"><span class="src-ico">G</span><span data-i18n="src1">Google Maps</span></li>
+        <li class="src s2"><span class="src-ico">◎</span><span data-i18n="src2">Instagram</span></li>
+        <li class="src s3"><span class="src-ico">✉</span><span data-i18n="src3">A friend on WhatsApp</span></li>
+        <li class="src s4"><span class="src-ico">★</span><span data-i18n="src4">Reviews</span></li>
+        <li class="src s5"><span class="src-ico">✦</span><span data-i18n="src5">ChatGPT and Gemini</span></li>
+      </ul>
+      <div class="dest"><img src="assets/img/logo/mark-cream.png" alt="" width="244" height="302"><span data-i18n="dest">Your business</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. Our work: a quiet gallery, two across. -->
+<section class="work navy" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="work-head">
+      <div>
+        <p class="no reveal"><span class="rule"></span><span class="rn">II</span> · <span data-i18n="work_eyebrow">Our work</span></p>
+        <h2 id="work-h" class="reveal" data-i18n="work_h">Selected <em>work.</em></h2>
+      </div>
+      <p class="sub reveal" data-i18n="work_p">Sites we designed and built for businesses in Amman. Each one is shaped around what that business sells and how its customers decide.</p>
+    </div>
+    <div class="gallery">
+      <article class="card reveal" style="--i:0">
+        <a href="https://labsuncut.github.io/site-apollo-gym-amman/" target="_blank" rel="noopener">
+          <div class="frame"><img src="assets/img/work/apollo-d.jpg" alt="Apollo Training Facility website" width="1200" height="750" loading="lazy"></div>
+          <div class="card-meta"><span class="num">01</span><h3>Apollo Training Facility<small data-i18n="w_gym">Gym</small></h3><span class="go"><span data-i18n="view">View site</span> <i>→</i></span></div>
+        </a>
+      </article>
+      <article class="card reveal" style="--i:1">
+        <a href="https://labsuncut.github.io/site-levorchy-amman/" target="_blank" rel="noopener">
+          <div class="frame"><img src="assets/img/work/levorchy-d.jpg" alt="Levorchy website" width="1200" height="750" loading="lazy"></div>
+          <div class="card-meta"><span class="num">02</span><h3>Levorchy<small data-i18n="w_couture">Couture</small></h3><span class="go"><span data-i18n="view">View site</span> <i>→</i></span></div>
+        </a>
+      </article>
+      <article class="card reveal" style="--i:2">
+        <a href="https://labsuncut.github.io/site-coffee-chamber-amman/" target="_blank" rel="noopener">
+          <div class="frame"><img src="assets/img/work/coffee-d.jpg" alt="The Coffee Chamber website" width="1200" height="750" loading="lazy"></div>
+          <div class="card-meta"><span class="num">03</span><h3>The Coffee Chamber<small data-i18n="w_cafe">Café</small></h3><span class="go"><span data-i18n="view">View site</span> <i>→</i></span></div>
+        </a>
+      </article>
+      <article class="card reveal" style="--i:3">
+        <a href="https://labsuncut.github.io/site-fuel-food-truck-amman/v4/" target="_blank" rel="noopener">
+          <div class="frame"><img src="assets/img/work/fuel-d.jpg" alt="Fuel food truck website" width="1200" height="750" loading="lazy"></div>
+          <div class="card-meta"><span class="num">04</span><h3>Fuel<small data-i18n="w_food">Burgers</small></h3><span class="go"><span data-i18n="view">View site</span> <i>→</i></span></div>
+        </a>
+      </article>
+      <p class="soon reveal"><span class="num">05</span><b>Stoic</b><span data-i18n="w_clothing">Clothing</span><i data-i18n="w5_p">Coming soon.</i></p>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Services: one foundation, three floors. -->
+<section class="services sheet" id="services" aria-labelledby="svc-h">
+  <div class="wrap">
+    <p class="no reveal"><span class="rule"></span><span class="rn">III</span> · <span data-i18n="svc_eyebrow">Services</span></p>
+    <h2 id="svc-h" class="reveal" data-i18n="svc_h">Build once. <em>Grow every month.</em></h2>
+    <div class="svc-grid">
+      <article class="svc-build reveal">
+        <img class="watermark" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+        <span class="kicker" data-i18n="build_k">One time</span>
+        <h3 data-i18n="build_h">Build</h3>
+        <p data-i18n="build_p">Your website and everything behind it: your colours, Arabic and English, and a structure search engines understand.</p>
+        <p data-i18n="build_p2">On launch day we also do your Presence Setup: Google Business Profile, Bing and Apple Maps, Search Console, an FAQ, and a QR card for reviews.</p>
+        <p class="fine" data-i18n="build_fine">Four levels, from a one-page site to a signature build with custom motion and video.</p>
+      </article>
+      <div class="grow">
+        <span class="kicker" data-i18n="grow_k">Monthly</span>
+        <article class="tier reveal" style="--i:0"><span class="tier-n">i</span><div><h3 data-i18n="care_h">Care</h3><p data-i18n="care_p">Hosting, security, an uptime watch, and small updates when you need them.</p></div></article>
+        <article class="tier tier-key reveal" style="--i:1"><span class="tier-n">ii</span><div><h3><span data-i18n="vis_h">Visibility</span> <small data-i18n="vis_badge">Most chosen</small></h3><p data-i18n="vis_p">We run your Google profile, grow real reviews, keep your listings consistent, write one new answer a month, and check what AI assistants say about you. One clear report every month.</p></div></article>
+        <article class="tier reveal" style="--i:2"><span class="tier-n">iii</span><div><h3 data-i18n="gp_h">Growth Partner</h3><p data-i18n="gp_p">Your whole digital team: everything in Visibility, plus an Instagram plan, a monthly campaign, ads run for you, and a monthly call.</p></div></article>
+      </div>
+    </div>
+    <p class="note reveal" data-i18n="svc_note">Prices depend on your business. Start with the free audit and we'll recommend the right plan, with a clear price.</p>
+  </div>
+</section>
+
+<!-- 5. How we work: a line draws itself through four rings as you scroll. -->
+<section class="process navy" id="process" aria-labelledby="proc-h">
+  <div class="wrap">
+    <p class="no reveal"><span class="rule"></span><span class="rn">IV</span> · <span data-i18n="proc_eyebrow">How we work</span></p>
+    <h2 id="proc-h" class="reveal" data-i18n="proc_h">Four steps. <em>No surprises.</em></h2>
+    <ol class="steps" id="steps">
+      <li><span class="ring-n">I</span><h3 data-i18n="s1_h">Audit</h3><p data-i18n="s1_p">We search your business on Google, Maps and AI assistants, and show you on one page where you're invisible.</p></li>
+      <li><span class="ring-n">II</span><h3 data-i18n="s2_h">Build</h3><p data-i18n="s2_p">We design your site and set up every listing from one true record of your business.</p></li>
+      <li><span class="ring-n">III</span><h3 data-i18n="s3_h">Launch</h3><p data-i18n="s3_p">We check every link, every button and every phone size before anything goes live.</p></li>
+      <li><span class="ring-n">IV</span><h3 data-i18n="s4_h">Grow</h3><p data-i18n="s4_p">Every month we improve one thing, measure what changed, and tell you honestly.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 6. The guarantee: a certificate on ivory with a turning seal, signed by the three founders. -->
+<section class="promise" id="promise" aria-labelledby="prom-h">
+  <div class="wrap">
+    <div class="certificate reveal">
+      <svg class="seal" viewBox="0 0 200 200" aria-hidden="true">
+        <defs><path id="sealpath" d="M100,100 m-74,0 a74,74 0 1,1 148,0 a74,74 0 1,1 -148,0"/></defs>
+        <circle cx="100" cy="100" r="96" class="s-outer"/>
+        <circle cx="100" cy="100" r="60" class="s-inner"/>
+        <g class="s-spin"><text><textPath href="#sealpath" textLength="464">THE FELLOWFLOW GUARANTEE · AMMAN · 2026 ·</textPath></text></g>
+        <image href="assets/img/logo/mark-cream.png" x="76" y="70" width="48" height="60"/>
+      </svg>
+      <p class="no" data-i18n="prom_eyebrow"><span class="rn">V</span> · Our guarantee</p>
+      <h2 id="prom-h" data-i18n="prom_h">What you can <em>count on.</em></h2>
+      <ol class="vows">
+        <li><span class="vn">1</span><div><h3 data-i18n="p1_h">You own everything.</h3><p data-i18n="p1_p">Your domain, your profiles and your content stay in your name. Always.</p></div></li>
+        <li><span class="vn">2</span><div><h3 data-i18n="p2_h">Honest numbers.</h3><p data-i18n="p2_p">Every month you see calls, direction requests, reviews and AI mentions. We report what changed, never more.</p></div></li>
+        <li><span class="vn">3</span><div><h3 data-i18n="p5_h">On time, or the first month is free.</h3><p data-i18n="p5_p">We agree a launch date together. If we miss it, your first monthly plan is on us.</p></div></li>
+        <li><span class="vn">4</span><div><h3 data-i18n="p3_h">Nothing invented.</h3><p data-i18n="p3_p">No fake reviews and no made-up awards. Only real facts about your business.</p></div></li>
+        <li><span class="vn">5</span><div><h3 data-i18n="p4_h">Stay because it works.</h3><p data-i18n="p4_p">Monthly plans start with three months, then continue month to month.</p></div></li>
+      </ol>
+      <p class="quote" data-i18n="prom_quote">No one can honestly promise first place on Google. We promise to do every piece that makes it likely, every month.</p>
+      <p class="sign"><span>Abdullah Kishtaini</span><span>Ali Elbusaifi</span><span>Mahmoud Abu Hijleh</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- 7. The team: portraits that turn to colour and lean toward you. -->
+<section class="team navy" id="team" aria-labelledby="team-h">
+  <div class="wrap">
+    <p class="no reveal"><span class="rule"></span><span class="rn">VI</span> · <span data-i18n="team_eyebrow">The team</span></p>
+    <h2 id="team-h" class="reveal" data-i18n="team_h">The people <em>behind the flow.</em></h2>
+    <div class="people">
+      <figure class="person reveal tilt"><div class="portrait"><img src="assets/img/team/wishta.jpg" alt="Abdullah Kishtaini" width="720" height="900" loading="lazy"></div><figcaption><b data-i18n="n_wishta">Abdullah Kishtaini</b><span data-i18n="role_cof">Co-founder</span></figcaption></figure>
+      <figure class="person reveal tilt"><div class="portrait"><img src="assets/img/team/weezy.jpg" alt="Ali Elbusaifi" width="720" height="900" loading="lazy"></div><figcaption><b data-i18n="n_weezy">Ali Elbusaifi</b><span data-i18n="role_cof">Co-founder</span></figcaption></figure>
+      <figure class="person reveal tilt"><div class="portrait"><img src="assets/img/team/mahmoud.jpg" alt="Mahmoud Abu Hijleh" width="720" height="900" loading="lazy"></div><figcaption><b data-i18n="n_mahmoud">Mahmoud Abu Hijleh</b><span data-i18n="role_cof">Co-founder</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 8. Free audit: the WhatsApp message writes itself as you type. -->
+<section class="audit sheet" id="audit" aria-labelledby="audit-h">
+  <div class="wrap audit-in">
+    <div>
+      <p class="no reveal"><span class="rule"></span><span class="rn">VII</span> · <span data-i18n="audit_eyebrow">Free Presence Audit</span></p>
+      <h2 id="audit-h" class="reveal" data-i18n="audit_h">See your business the way <em>customers do.</em></h2>
+      <p class="reveal body" data-i18n="audit_p">Tell us your business. We'll search it on Google, Maps and AI assistants, and send you one page: where you're strong, where you're invisible, and what fixes it.</p>
+      <p class="free reveal" data-i18n="audit_free">Free, with no obligation.</p>
+      <div class="bubble reveal" aria-hidden="true">
+        <span class="bubble-who">FellowFlow · WhatsApp</span>
+        <p id="bubble-text"></p>
+      </div>
+    </div>
+    <form class="form reveal" id="audit-form" novalidate>
+      <label><span data-i18n="f_biz">Business name</span><input name="biz" required autocomplete="organization"></label>
+      <label><span data-i18n="f_type">Type of business</span>
+        <select name="type">
+          <option data-i18n="t_cafe">Café or restaurant</option>
+          <option data-i18n="t_gym">Gym or studio</option>
+          <option data-i18n="t_fashion">Clothing or fashion</option>
+          <option data-i18n="t_salon">Salon or clinic</option>
+          <option data-i18n="t_other">Something else</option>
+        </select>
+      </label>
+      <label><span data-i18n="f_link">Instagram or Google Maps link (optional)</span><input name="link" inputmode="url"></label>
+      <label><span data-i18n="f_name">Your name</span><input name="name" required autocomplete="name"></label>
+      <button class="btn btn-gold" type="submit" data-i18n="f_send">Send on WhatsApp</button>
+      <p class="fine" data-i18n="f_fine">This opens WhatsApp with your details filled in. Nothing is stored on this site.</p>
+      <p class="err" id="form-err" role="alert" hidden data-i18n="f_err">Please add your business name and your name.</p>
+    </form>
+  </div>
+</section>
+
+<!-- 9. Questions -->
+<section class="faq sheet" id="faq" aria-labelledby="faq-h">
+  <div class="wrap">
+    <p class="no reveal"><span class="rule"></span><span class="rn">VIII</span> · <span data-i18n="faq_eyebrow">Questions</span></p>
+    <h2 id="faq-h" class="reveal" data-i18n="faq_h">Straight <em>answers.</em></h2>
+    <div class="qa">
+      <details class="reveal"><summary data-i18n="q1">Can you guarantee first place on Google?</summary><p data-i18n="a1">No one honestly can. Google decides rankings. We do every piece that makes a business more likely to appear, and we show you the real numbers every month.</p></details>
+      <details class="reveal"><summary data-i18n="q2">What is GEO?</summary><p data-i18n="a2">Generative engine optimisation: making sure AI assistants like ChatGPT and Gemini have clear, correct facts about your business, so they can recommend you.</p></details>
+      <details class="reveal"><summary data-i18n="q3">Who owns the website?</summary><p data-i18n="a3">You do. The domain, the content and your profiles are in your name.</p></details>
+      <details class="reveal"><summary data-i18n="q4">Do you build in Arabic?</summary><p data-i18n="a4">Yes. Every site we build works in Arabic and English, with Arabic reading right to left.</p></details>
+      <details class="reveal"><summary data-i18n="q5">Where are you based?</summary><p data-i18n="a5">In Amman, Jordan. We work with local businesses across the city.</p></details>
+      <details class="reveal"><summary data-i18n="q6">How much does it cost?</summary><p data-i18n="a6">It depends on what your business needs. Start with the free audit, and we'll recommend a plan with a clear price.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Last word -->
+<section class="final navy">
+  <svg class="streams" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="sg" x1="0" x2="1"><stop offset="0" stop-color="#F5E4C8" stop-opacity="0"/><stop offset=".5" stop-color="#F5E4C8" stop-opacity=".9"/><stop offset="1" stop-color="#C9A45C" stop-opacity="0"/></linearGradient>
+    </defs>
+    <g class="stream-set">
+      <path d="M-100,120 C300,140 500,420 720,450"/>
+      <path d="M-100,800 C360,820 540,600 720,450"/>
+      <path d="M1540,60 C1100,120 960,380 720,450"/>
+      <path d="M1540,900 C1140,840 920,600 720,450"/>
+    </g>
+  </svg>
+  <div class="wrap final-in">
+    <img class="final-mark" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
+    <h2 class="reveal" data-i18n="final_h">Ready to be <em>found?</em></h2>
+    <div class="cta-row reveal">
+      <a class="btn btn-gold" href="https://wa.me/962796237444" target="_blank" rel="noopener" data-i18n="final_wa">Message us on WhatsApp</a>
+      <a class="btn btn-line" href="mailto:labsuncut@gmail.com">labsuncut@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap foot-in">
+    <a class="logo" href="#top"><img class="logo-mark" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302"><img class="logo-word" src="assets/img/logo/wordmark-cream.png" alt="FellowFlow" width="479" height="79"></a>
+    <p data-i18n="foot_where">Digital identity studio · Amman, Jordan</p>
+    <p><a href="tel:+962796237444" dir="ltr">+962 79 623 7444</a> · <a href="mailto:labsuncut@gmail.com">labsuncut@gmail.com</a></p>
+    <p class="fine">© 2026 FellowFlow</p>
+  </div>
+</footer>
+
+<div class="callbar" aria-label="Quick contact">
+  <a href="https://wa.me/962796237444" target="_blank" rel="noopener" data-i18n="bar_wa">WhatsApp</a>
+  <a href="#audit" class="primary" data-i18n="bar_audit">Free audit</a>
+</div>
+
+<script src="assets/js/intro.js" defer></script>
+<script src="assets/js/site.js" defer></script>
+</body>
+</html>
