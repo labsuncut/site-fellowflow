@@ -137,6 +137,8 @@ h1 { font-size: clamp(3rem, 6.6vw, 6.1rem); margin-bottom: 28px; font-weight: 50
 html[lang="ar"] h1 { font-size: clamp(2.5rem, 5.6vw, 5rem); }
 .words .w { display: inline-block; opacity: 0; transform: translateY(.5em); transition: opacity 1s var(--ease), transform 1.1s var(--ease); transition-delay: calc(var(--i) * 110ms); }
 .words.in .w { opacity: 1; transform: none; }
+/* Safari: background-clip: text does not reach inline-block children, so each word inside <em> carries the gradient itself. */
+.words em .w { background: var(--gold-grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
 .lede { font-size: clamp(1.05rem, 1.5vw, 1.2rem); color: var(--muted-navy); max-width: 32em; margin-bottom: 38px; }
 .cta-row { display: flex; flex-wrap: wrap; gap: 14px; }
 /* The first screen: the mark in flight. The mark was drawn from a butterfly, so it moves like one:
