@@ -303,6 +303,7 @@ html[dir="rtl"] .card a:hover .go i { transform: scaleX(-1) translateX(6px); }
 .stage-ico { width: 44px; height: 44px; color: var(--gold-text); margin-bottom: 18px; stroke-width: 1.2; }
 .stage h3 { font-size: 2.4rem; margin-bottom: 8px; }
 .stage .lead { font: italic 500 1.25rem var(--serif); color: var(--gold-text); margin-bottom: 18px; }
+.pk-note { margin: 34px auto 0; max-width: 40em; text-align: center; color: var(--ink-2); font-size: .95rem; }
 html[lang="ar"] .stage .lead { font-style: normal; }
 .incl { list-style: none; margin: 0; padding: 0; text-align: start; width: 100%; border-top: 1px solid var(--line); }
 .incl li { padding: 10px 0 10px 26px; border-bottom: 1px solid var(--line); color: var(--ink-2); font-size: .95rem; position: relative; }
