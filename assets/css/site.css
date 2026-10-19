@@ -327,8 +327,10 @@ html[dir="rtl"] .watermark { right: auto; left: -50px; transform: scaleX(-1); }
 .ring-n svg { width: 30px; height: 30px; stroke-width: 1.3; }
 .steps li.lit .ring-n { border-color: var(--accent); color: var(--gold-hi); box-shadow: 0 0 0 8px var(--brand), 0 0 30px rgba(201,164,92,.35); transform: scale(1.06); }
 .steps h3 { font-size: 2rem; margin-bottom: 10px; color: #FBF5EA; opacity: .5; transition: opacity .5s; }
-.steps p { color: var(--muted-navy); font-size: .98rem; opacity: .5; transition: opacity .5s; }
-.steps li.lit h3, .steps li.lit p { opacity: 1; }
+/* Unlit steps dim by colour, not opacity, so the text keeps readable contrast before it lights up. */
+.steps p { color: #8691A6; font-size: .98rem; transition: color .5s; }
+.steps li.lit h3 { opacity: 1; }
+.steps li.lit p { color: var(--muted-navy); }
 
 /* 6. Promise */
 .promise { background: transparent; }
