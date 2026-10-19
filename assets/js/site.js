@@ -199,6 +199,7 @@
   var jsteps = journey.querySelectorAll(".jstep");
   var steps = document.getElementById("steps");
   var stepItems = steps.querySelectorAll("li");
+  var stagesBox = document.querySelector(".stages"), stageItems = stagesBox.querySelectorAll(".stage");
 
   function light(list, box, span) {
     var r = box.getBoundingClientRect(), vh = window.innerHeight;
@@ -206,10 +207,24 @@
     list.forEach(function (li, i) { li.classList.toggle("lit", q >= (i + 0.6) / list.length); });
     return q;
   }
+  function flowEach(list) {
+    var vh = window.innerHeight;
+    list.forEach(function (li) {
+      var r = li.getBoundingClientRect();
+      li.classList.toggle("lit", r.top < vh * 0.62);
+      if (r.bottom < vh * 0.9) li.classList.add("flows");
+    });
+  }
   function onScroll() {
     top.classList.toggle("scrolled", window.scrollY > 8);
-    light(jsteps, journey, window.innerWidth < 1000 ? 1.2 : 0.6);
-    steps.style.setProperty("--p", light(stepItems, steps, 0.6).toFixed(3));
+    if (window.innerWidth > 1000) {
+      light(jsteps, journey, 0.6);
+      steps.style.setProperty("--p", light(stepItems, steps, 0.6).toFixed(3));
+    } else {
+      // Stacked on a phone or tablet: each step lights up as it reaches the middle of the screen, and the
+      // gold thread under it draws once its end is in view, leading the eye down to the next one.
+      [jsteps, stepItems, stageItems].forEach(function (list) { flowEach(list); });
+    }
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);

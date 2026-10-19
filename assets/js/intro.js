@@ -20,11 +20,17 @@ window.FFIntro = (function () {
 
   function start(canvas, img) {
     var dpr = Math.min(window.devicePixelRatio || 1, 2);
-    var W = canvas.width = Math.round(innerWidth * dpr), H = canvas.height = Math.round(innerHeight * dpr);
+    // Size the drawing to the canvas's own box and pin that size, so a phone browser's toolbar
+    // growing or shrinking can't stretch the picture away from where the real mark appears.
+    var box = canvas.getBoundingClientRect();
+    var W = canvas.width = Math.round(box.width * dpr), H = canvas.height = Math.round(box.height * dpr);
+    canvas.style.width = box.width + "px"; canvas.style.height = box.height + "px"; canvas.style.bottom = "auto"; canvas.style.right = "auto";
     var ctx = canvas.getContext("2d");
-    var rect = img.getBoundingClientRect();
-    var small = innerWidth < 700;
-    var pts = targets(img, rect, dpr, small ? 3 : 3);
+    var anchor = img.parentNode, a0 = anchor.getBoundingClientRect();
+    var r0 = img.getBoundingClientRect();
+    var rect = { left: r0.left - box.left, top: r0.top - box.top, width: r0.width, height: r0.height };
+    var small = box.width < 700;
+    var pts = targets(img, rect, dpr, 3);
     var N = Math.min(pts.length, small ? 1500 : 2800);
     var cx = (rect.left + rect.width / 2) * dpr, cy = (rect.top + rect.height / 2) * dpr;
     var P = [];
@@ -51,6 +57,9 @@ window.FFIntro = (function () {
       if (stopped) return;
       if (t0 === null) t0 = now;
       var t = now - t0;
+      // If the screen shifted since the start (a toolbar moved), follow the mark to where it is now.
+      var a1 = anchor.getBoundingClientRect(), b1 = canvas.getBoundingClientRect();
+      var ox = ((a1.left - b1.left) - (a0.left - box.left)) * dpr, oy = ((a1.top - b1.top) - (a0.top - box.top)) * dpr;
       var inFlow = t > tCity && t < tFlow;
       // A translucent wash of navy each frame leaves soft trails behind moving lights.
       ctx.globalCompositeOperation = "source-over";
@@ -59,7 +68,7 @@ window.FFIntro = (function () {
       // A faint pool of light where the mark will form, growing as the lights arrive.
       var arrive = Math.min(1, Math.max(0, (t - tCity - 600) / 1800));
       if (arrive > 0) {
-        var g = ctx.createRadialGradient(cx, cy, 0, cx, cy, rect.width * dpr * 1.6);
+        var g = ctx.createRadialGradient(cx + ox, cy + oy, 0, cx + ox, cy + oy, rect.width * dpr * 1.6);
         g.addColorStop(0, "rgba(201,164,92," + (0.07 * arrive) + ")"); g.addColorStop(1, "rgba(201,164,92,0)");
         ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
       }
@@ -75,8 +84,8 @@ window.FFIntro = (function () {
         } else {
           var e = Math.min(1, Math.max(0, (t - tCity - p.delay * T.flow) / (T.flow * (1 - p.delay))));
           var u = ease(e);
-          x = p.sx + (p.tx - p.sx) * u + p.nx * p.k * Math.sin(Math.PI * u);
-          y = p.sy + (p.ty - p.sy) * u + p.ny * p.k * Math.sin(Math.PI * u);
+          x = p.sx + (p.tx + ox - p.sx) * u + p.nx * p.k * Math.sin(Math.PI * u);
+          y = p.sy + (p.ty + oy - p.sy) * u + p.ny * p.k * Math.sin(Math.PI * u);
           // Brighter as they travel and settle; a gentle shimmer once in place.
           a = .35 + .55 * u + (e >= 1 ? .1 * Math.sin(t * .004 + p.ph) : 0);
           if (t > tFlow) { x += Math.sin(t * .003 + p.ph) * .4 * dpr; y += Math.cos(t * .0025 + p.ph) * .4 * dpr; }
