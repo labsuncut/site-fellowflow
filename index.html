@@ -22,7 +22,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Manrope:wght@400;500;600;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="assets/css/site.css?v=16">
+<link rel="stylesheet" href="assets/css/site.css?v=17">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -73,15 +73,15 @@
 <!-- Opening, once per visit: a city of small lights at night drifts, then streams into the centre
      and settles into the mark (assets/js/intro.js). The name is written, then both travel up into
      the header and the dark lifts. Click or Escape to skip. -->
-<div class="intro" id="intro" aria-hidden="true">
-  <div class="intro-bg"></div>
-  <canvas class="intro-canvas" id="intro-canvas"></canvas>
-  <div class="intro-bloom"></div>
-  <div class="intro-lock">
+<div class="intro" id="intro">
+  <div class="intro-bg" aria-hidden="true"></div>
+  <canvas class="intro-canvas" id="intro-canvas" aria-hidden="true"></canvas>
+  <div class="intro-bloom" aria-hidden="true"></div>
+  <div class="intro-lock" aria-hidden="true">
     <img class="intro-mark" id="intro-mark" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302">
     <img class="intro-word" id="intro-word" src="assets/img/logo/wordmark-cream.png" alt="" width="960" height="153">
   </div>
-  <p class="intro-tag" data-i18n="intro_tag">Helping businesses flow better.</p>
+  <p class="intro-tag" data-i18n="intro_tag" aria-hidden="true">Helping businesses flow better.</p>
   <button class="intro-skip" type="button" id="intro-skip" data-i18n="intro_skip">Skip</button>
 </div>
 
@@ -397,10 +397,10 @@
   </div>
 </footer>
 
-<div class="callbar" aria-label="Quick contact">
+<nav class="callbar" aria-label="Quick contact">
   <a href="https://wa.me/962796237444" target="_blank" rel="noopener" data-i18n="bar_wa">WhatsApp</a>
   <a href="#audit" class="primary" data-i18n="bar_audit">Free first look</a>
-</div>
+</nav>
 
 <script src="assets/js/intro.js?v=13" defer></script>
 <script src="assets/js/site.js?v=14" defer></script>

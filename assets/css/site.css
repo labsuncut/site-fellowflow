@@ -242,8 +242,13 @@ html[dir="rtl"] .pulse { right: auto; left: 14px; }
 .jn { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); font: italic 600 1.1rem "Cormorant Garamond", serif; color: var(--gold-text); margin-bottom: 14px; transition: background .5s, color .5s, border-color .5s; }
 .jtext h3 { font-size: 1.7rem; margin-bottom: 8px; }
 .jtext p { color: var(--ink-2); font-size: .98rem; margin: 0; }
-.jstep .phone, .jstep .jtext { opacity: .55; transition: opacity .6s; }
-.jstep.lit .phone, .jstep.lit .jtext { opacity: 1; }
+/* Unlit steps: the phone fades, the words dim by colour so they keep readable contrast. */
+.jstep .phone { opacity: .55; transition: opacity .6s; }
+.jstep .jtext h3 { color: #707A8F; transition: color .6s; }
+.jstep .jtext p { color: #5E6880; transition: color .6s; }
+.jstep.lit .phone { opacity: 1; }
+.jstep.lit .jtext h3 { color: var(--ink); }
+.jstep.lit .jtext p { color: var(--ink-2); }
 .jstep.lit .phone { transform: translateY(-8px); box-shadow: 0 40px 70px -30px rgba(1,22,49,.55), 0 0 0 1px rgba(201,164,92,.5), inset 0 0 0 1px rgba(245,228,200,.25); }
 .jstep.lit .jn { background: var(--brand); color: var(--gold-hi); border-color: var(--brand); }
 .jstep.lit .s-map .pin { opacity: 1; transform: none; }
@@ -429,7 +434,8 @@ html[dir="rtl"] .form select { background-position: left 14px center; }
   .js .intro.play { display: none; }
   .js .top .logo { opacity: 1; }
   .stage-line path, .deco { stroke-dashoffset: 0; }
-  .jstep .phone, .jstep .jtext { opacity: 1; }
+  .jstep .phone { opacity: 1; }
+  .jstep .jtext h3 { color: var(--ink); } .jstep .jtext p { color: var(--ink-2); }
   .jstep::before, .stage::before, .steps li::before { clip-path: none !important; }
   .jstep::after, .stage::after, .steps li::after { animation: none !important; }
 }
