@@ -1,7 +1,7 @@
 {
   "_note": "Facts about our own brand (we are client zero). Empty = not decided yet.",
   "name": "FellowFlow",
-  "name_note": "Decided 2026-10-18; domain fellowflow.ai owned by the team (on GoDaddy), not connected yet",
+  "name_note": "Decided 2026-10-18; domain fellowflow.ai owned by the team (GoDaddy DNS), connected to GitHub Pages 2026-10-19",
   "category": "Digital identity studio: websites, Google Business Profile, local SEO, GEO, reviews, social",
   "phone": "+962796237444",
   "whatsapp": "962796237444",
@@ -12,5 +12,5 @@
   "offer": "Build (one time) + Grow (monthly: Care, Visibility, Growth Partner); free Presence Audit. Prices kept off the site until the team decides.",
   "team": [],
   "links": { "instagram": "", "google": "", "linkedin": "" },
-  "domain": "fellowflow.ai (not connected yet)"
+  "domain": "fellowflow.ai"
 }
