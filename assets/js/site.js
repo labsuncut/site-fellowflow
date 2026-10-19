@@ -1,75 +1,74 @@
-// FellowFlow brand site: language switch, opening, hero words, river, film strip, process line, audit form.
+// FellowFlow brand site: language switch, opening, hero words and dust, the customer journey,
+// work recordings on hover, packages path, process line, promise tiles, first-look form.
 (function () {
   var WHATSAPP = "962796237444";
   var root = document.documentElement;
   root.classList.add("js");
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var coarse = window.matchMedia("(pointer: coarse)").matches;
 
   // Arabic text. English lives in the HTML so the page works without JavaScript.
   var AR = {
     skip: "انتقل إلى المحتوى",
     intro_tag: "نساعد الأعمال على التدفّق بشكل أفضل.", intro_skip: "تخطّي",
-    nav_work: "أعمالنا", nav_services: "خدماتنا", nav_promise: "وعدنا", nav_team: "الفريق", nav_faq: "أسئلة",
+    nav_work: "أعمالنا", nav_services: "باقاتنا", nav_process: "طريقتنا", nav_promise: "وعدنا", nav_team: "الفريق",
     nav_cta: "نظرة أولى مجانية",
     hero_eyebrow: "مواقع إلكترونية للأعمال · عمّان",
-    hero_h1: "نساعد الأعمال على <em>التدفّق بشكل أفضل.</em>",
-    hero_lede: "نبدأ بفهم نشاطك التجاري. ثم نصمّم ونبني الموقع الذي يحتاجه فعلًا، بالعربية والإنجليزية، ونتحمّل مسؤولية ما نسلّمه.",
+    hero_h1: "الطريق من البحث إلى بابك، <em>بلا عوائق.</em>",
+    hero_lede: "نفهم نشاطك التجاري أولًا. ثم نصمّم ونبني الموقع الذي يحتاجه، بالعربية والإنجليزية، ونقف خلف ما نسلّمه.",
     hero_cta1: "احجز نظرة أولى مجانية", hero_cta2: "شاهد أعمالنا",
-    src1: "خرائط Google", src2: "Instagram", src3: "صديق على واتساب", src4: "التقييمات", src5: "ChatGPT وGemini",
-    dest: "نشاطك التجاري",
-    flow_eyebrow: "معنى التدفّق",
-    flow_h: "عوائق أقل. <em>وتركيز أكبر على ما يهم.</em>",
-    flow_p: "قبل أن يتصل بك العميل، يبحث عن الأساسيات: أين أنت، ومتى تفتح، وماذا تقدّم، وكيف يصل إليك. وهو يأتي من كل مكان. نحن نجد ما يبطئه، ونزيل ما لا حاجة إليه، ونوضّح الباقي، ليصل الطريق إلى بابك.",
-    work_eyebrow: "أعمالنا", work_h: "أعمالنا، <em>بمسمّياتها الصادقة.</em>",
-    work_p: "مواقع صمّمناها لأنشطة تجارية في عمّان. كل موقع مبني حول ما يبيعه صاحبه وكيف يقرّر عملاؤه، وكل موقع يوضّح أين يقف اليوم.",
-    w_gym: "نادٍ رياضي", w_couture: "أزياء راقية", w_food: "برغر", w_clothing: "ملابس",
-    st_trial: "تجربة حيّة", st_preview: "معاينة موقع", st_founder: "تجربة حيّة (يملكها المؤسسون)",
+    flow_eyebrow: "ما الذي يتغيّر",
+    flow_h: "من البحث <em>إلى الوصول إليك.</em>",
+    flow_p: "قبل أن يتصل بك أحد أو يزورك، يبحث عنك على هاتفه. هذا هو الطريق الذي نبنيه لعملائك، خطوة بخطوة.",
+    sc_search: "بالقرب مني", sc_biz: "نشاطك التجاري", sc_open: "مفتوح الآن · على بُعد 5 دقائق",
+    sc_offer: "ماذا نقدّم", sc_hours: "ساعات العمل", sc_where: "أين تجدنا",
+    sc_call: "اتصال", sc_wa: "واتساب", sc_dir: "الاتجاهات",
+    j1_h: "يبحثون", j1_p: "على Google أو الخرائط أو Instagram أو مساعد ذكاء اصطناعي. يظهر نشاطك بوضوح، بالاسم الصحيح والمكان وساعات العمل.",
+    j2_h: "يفهمونك في ثوانٍ", j2_p: "ماذا تقدّم، وأين أنت، ومتى تفتح. واضح بالعربية والإنجليزية، وسريع على الهاتف.",
+    j3_h: "يصلون إليك بلمسة واحدة", j3_p: "اتصال أو واتساب أو اتجاهات، كلٌّ منها بلمسة واحدة. لا نماذج، ولا بحث عن رقم.",
+    gain_k: "ما تكسبه", gain1: "يجدونك", gain2: "يفهمونك", gain3: "يصلون إليك", gain_p: "لا يضيع أحد في الطريق.",
+    work_eyebrow: "أعمالنا", work_h: "صُمّمت <em>لأعمال حقيقية.</em>",
+    work_p: "أنشطة تجارية في عمّان صمّمنا لها. مرّر المؤشر فوق أي موقع لتراه يتحرّك.",
+    w_gym: "نادٍ رياضي", w_couture: "أزياء راقية", w_food: "برغر",
+    st_trial: "تجربة حيّة", st_preview: "معاينة",
     view: "زيارة الموقع", view_prev: "مشاهدة المعاينة",
-    legend: "<b>تجربة حيّة:</b> نشاط تجاري حقيقي يستخدم الموقع بينما يمرّ بفحوصات الإطلاق لدينا. Apollo هو أول مشروع تجريبي لنا، في قطاع النوادي الرياضية. <b>معاينة موقع:</b> تصميم أعددناه لنُري نشاطًا تجاريًا كيف يمكن أن يبدو موقعه، وليس عملًا منجزًا لعميل.",
-    svc_eyebrow: "خدماتنا", svc_h: "ما نقدّمه <em>اليوم.</em>",
-    build_k: "خدمتنا الأساسية", build_h: "بناء موقع",
-    build_p: "موقع جديد، أو إعادة بناء موقع لا يخدمك. مصمَّم حول ما يبيعه نشاطك وكيف يقرّر عملاؤك.",
-    build_p2: "بالعربية والإنجليزية، والعربية تُقرأ من اليمين إلى اليسار. الاتصال وواتساب والاتجاهات بلمسة واحدة. سريع على الهاتف، مع أساسيات البحث مُنجزة كما يجب.",
-    build_fine: "نفحص كل موقع وفق قائمة الإطلاق لدينا قبل نشره، ويراجع العربيةَ متحدّثٌ أصلي بها.",
-    now_k: "ونقدّم اليوم أيضًا",
-    imp_h: "تحسينات", imp_p: "تعديلات واضحة ومحدّدة على موقع بنيناه لك. نتفق مسبقًا على ما سيتغيّر وكيف نعرف أنه اكتمل.",
-    look_h: "نظرة أولى مجانية", look_p: "نظرة قصيرة وصادقة على موقعك وعلى طريق عملائك إليك. نخبرك بما نراه، حتى لو كان الجواب الصحيح ألّا تغيّر شيئًا.",
-    later_k: "لاحقًا", soon_badge: "ليس بعد",
-    seo_h: "الظهور في البحث والذكاء الاصطناعي", seo_p: "تحسين محركات البحث (SEO)، ورعاية ملفك على Google، والظهور في مساعدات الذكاء الاصطناعي مثل ChatGPT.",
-    growth_h: "رعاية ونمو شهري", growth_p: "صيانة مستمرة، وتقارير، وخطط نمو.",
-    svc_note: "لن نقدّم هذه الخدمات إلا بعد أن تثبت مواقعنا نجاحها ونعرف التكلفة الكاملة لتقديمها بإتقان. الأسعار تعتمد على نشاطك: تحصل على نطاق عمل مكتوب وسعر واضح قبل أن نبدأ.",
+    legend: "<b>تجربة حيّة:</b> نشاط تجاري حقيقي يستخدم الموقع بينما يمرّ بفحوصات الإطلاق لدينا. <b>معاينة:</b> تصميم أعددناه لنُري نشاطًا تجاريًا كيف يمكن أن يبدو موقعه.",
+    svc_eyebrow: "باقاتنا", svc_h: "ثلاث مراحل. <em>طريق واحد.</em>",
+    svc_p: "كل نشاط يبدأ بنظرة أولى مجانية. ومن هناك، هكذا نعمل معك.",
+    st1_k: "المرحلة الأولى", st1_h: "الأساس", st1_l: "موقعك، مبني كما يجب.",
+    st1_1: "بالعربية والإنجليزية", st1_2: "اتصال وواتساب واتجاهات بلمسة واحدة", st1_3: "سريع على الهاتف", st1_4: "أساسيات البحث مُنجزة كما يجب", st1_5: "مفحوص وفق قائمة الإطلاق لدينا",
+    st2_k: "المرحلة الثانية", st2_h: "التحسين", st2_l: "تحسينات محدّدة ومتفق عليها.",
+    st2_1: "صفحات وعروض جديدة مع تطوّر نشاطك", st2_2: "تعديل ما يراه العملاء أولًا", st2_3: "كل تعديل متفق عليه كتابيًا قبل البدء", st2_4: "تعرف دائمًا متى اكتمل العمل",
+    st3_k: "المرحلة الثالثة", st3_h: "النمو", st3_l: "المرحلة التالية، نخطّطها معك بعد الإطلاق.",
+    st3_1: "الظهور في البحث (SEO)", st3_2: "رعاية ملفك على Google", st3_3: "الظهور في مساعدات الذكاء الاصطناعي", st3_4: "رعاية شهرية وتقارير",
+    start_h: "كل شيء يبدأ بنظرة أولى مجانية.",
+    start_p: "ننظر إلى نشاطك وإلى طريقة وصول العملاء إليك، ثم نخبرك بما يستحق العمل. تحصل على نطاق عمل مكتوب وسعر واضح قبل أن يبدأ أي شيء.",
+    start_cta: "احجز نظرة أولى مجانية",
     proc_eyebrow: "طريقة عملنا", proc_h: "نفهم أولًا. <em>ثم نبني.</em>",
-    s1_h: "الفهم", s1_p: "نستمع إليك، وننظر إلى موقعك وإلى طريقة وصول العملاء إليك، ونفصل بين ما رأيناه وما نفترضه.",
-    s2_h: "التوصية", s2_p: "نخبرك بما يستحق العمل وما لا يستحق. وتحصل على نطاق عمل مكتوب وسعر واضح قبل أن نبدأ.",
-    s3_h: "البناء", s3_p: "نصمّم ونبني بالعربية والإنجليزية، حول الطريقة التي يقرّر بها عملاؤك فعلًا.",
-    s4_h: "الفحص والإطلاق", s4_p: "نفحص كل رابط وكل زر وكل مقاس هاتف قبل النشر، ونبقى مسؤولين عمّا سلّمناه.",
-    prom_eyebrow: "<span class=\"rn\">V</span> · وعدنا", prom_h: "وعدنا، <em>بتوقيعنا.</em>",
+    s1_h: "الفهم", s1_p: "نستمع إليك، وننظر إلى كيف يجدك العملاء اليوم.",
+    s2_h: "التوصية", s2_p: "نخبرك بما يستحق العمل. نطاق مكتوب وسعر واضح أولًا.",
+    s3_h: "البناء", s3_p: "نصمّم ونبني بالعربية والإنجليزية، حول الطريقة التي يقرّر بها عملاؤك.",
+    s4_h: "الفحص والإطلاق", s4_p: "كل رابط وكل زر وكل مقاس هاتف مفحوص قبل النشر.",
+    prom_eyebrow: "<span class=\"rn\">V</span> · وعدنا", prom_h: "خمسة أشياء <em>نعدك بها.</em>",
+    prom_hint: "مرّر المؤشر فوق كل وعد لتقرأه.",
     p1_h: "نفهم قبل أن نوصي.", p1_p: "نستمع أولًا وننظر إلى الأدلة. إن كنت تحتاج تعديلًا صغيرًا، أو لا شيء على الإطلاق، سنقول لك ذلك.",
     p2_h: "نبني لغاية واضحة.", p2_p: "التصميم والسرعة والحركة موجودة لخدمة عملائك، لا للاستعراض.",
-    p3_h: "نتحمّل مسؤولية ما نسلّمه.", p3_p: "نطاق العمل، ومعنى الإنجاز، والتعديلات، والتسليم، كلها مكتوبة قبل أن نبدأ. ما بنيناه نحن مسؤولون عنه.",
-    p4_h: "لا شيء مختلَق.", p4_p: "لا تقييمات مزيّفة، ولا جوائز مخترعة، ولا نتائج مستعارة. وأعمالنا نفسها موصوفة بما هي عليه بالضبط.",
+    p3_h: "نتحمّل المسؤولية.", p3_p: "نطاق العمل، ومعنى الإنجاز، والتعديلات، والتسليم، كلها مكتوبة قبل أن نبدأ. ما بنيناه نحن مسؤولون عنه.",
+    p4_h: "لا شيء مختلَق.", p4_p: "لا تقييمات مزيّفة، ولا جوائز مخترعة، ولا نتائج مستعارة. وأعمالنا نفسها معروضة بما هي عليه بالضبط.",
     p5_h: "نطاقك يبقى ملكك.", p5_p: "يُسجَّل نطاقك باسمك، ومحتواك ملكك. لا نقيّدك بنا.",
     prom_quote: "اختبارنا في كل مشروع: هل ستقول إننا فهمنا ما يهم، وسهّلنا الأمور، وسلّمنا ما وعدنا به؟",
     team_eyebrow: "الفريق", team_h: "الأشخاص <em>وراء التدفّق.</em>",
     n_wishta: "عبدالله كشتيني", n_weezy: "علي البوصيفي", n_mahmoud: "محمود أبو حجلة", role_cof: "شريك مؤسس",
-    audit_eyebrow: "نظرة أولى مجانية", audit_h: "أخبرنا عن <em>نشاطك.</em>",
-    audit_p: "سننظر إلى موقعك وإلى طريقة وصول العملاء إليك، ثم نخبرك بوضوح بما نراه، وما الذي يستحق العمل إن وُجد. إنها محادثة، لا عرض مبيعات.",
+    audit_eyebrow: "نظرة أولى مجانية", audit_h: "لنلقِ نظرة على <em>نشاطك.</em>",
+    audit_p: "أخبرنا من أنت. ننظر إلى موقعك وإلى طريقة وصول العملاء إليك، ثم نخبرك بوضوح بما يستحق العمل. محادثة، لا عرض مبيعات.",
     audit_free: "مجانًا، ودون أي التزام.",
     f_biz: "اسم النشاط التجاري", f_type: "نوع النشاط",
     t_cafe: "مقهى أو مطعم", t_gym: "نادٍ رياضي أو استوديو", t_fashion: "ملابس أو أزياء", t_salon: "صالون أو عيادة", t_other: "شيء آخر",
-    f_link: "رابط موقعك أو Instagram أو خرائط Google (اختياري)", f_name: "اسمك",
+    f_link: "رابط الموقع أو Instagram أو خرائط Google (اختياري)", f_name: "اسمك",
     f_send: "أرسل عبر واتساب",
     f_fine: "يفتح هذا واتساب مع تعبئة بياناتك. لا يُحفظ أي شيء على هذا الموقع.",
     f_err: "يرجى إضافة اسم النشاط واسمك.",
-    faq_eyebrow: "أسئلة", faq_h: "إجابات <em>مباشرة.</em>",
-    q1: "هل تضمنون المركز الأول على Google؟", a1: "لا أحد يستطيع ذلك بصدق، فـGoogle هو من يقرّر الترتيب. كل موقع نبنيه تُنجز فيه أساسيات البحث كما يجب. أما تحسين محركات البحث بشكل مستمر، فلن نقدّمه إلا حين نتقنه.",
-    q2: "هل تقدّمون SEO أو إدارة التواصل الاجتماعي أو الإعلانات؟", a2: "ليس بعد. نحن اليوم نصمّم المواقع ونبنيها ونحسّنها. الظهور في البحث والذكاء الاصطناعي وخطط النمو الشهرية تأتي لاحقًا، بعد أن تثبت مواقعنا نجاحها.",
-    q3: "لمن يعود الموقع؟", a3: "يُسجَّل نطاقك باسمك، ومحتواك ملكك. ونتفق كتابيًا على الاستضافة والتسليم قبل أن نبدأ.",
-    q4: "هل تبنون مواقع بالعربية؟", a4: "نعم. كل موقع نبنيه يعمل بالعربية والإنجليزية، والعربية تُقرأ من اليمين إلى اليسار، ويراجعها متحدّث أصلي قبل الإطلاق.",
-    q5: "أين مقرّكم؟", a5: "في عمّان، الأردن. نعمل حاليًا مع الأنشطة التجارية في عمّان، وسنقبل عملاء من خارجها بعد أن يثبت عملنا هنا.",
-    q6: "كم التكلفة؟", a6: "تعتمد على ما يحتاجه نشاطك، لذلك لا ننشر أسعارًا. بعد النظرة الأولى، تحصل على نطاق عمل مكتوب وسعر واضح قبل أن نبدأ.",
-    q7: "هل أنتم شركة جديدة؟", a7: "نعم. أول مواقعنا معروضة في هذه الصفحة بمسمّياتها الصادقة: تجارب حيّة ومعاينات. إن عملت معنا الآن، فستكون من أوائل عملائنا، وسنعاملك على هذا الأساس.",
-    final_h: "لنرَ ما الذي <em>يعترض طريقك.</em>", final_wa: "راسلنا على واتساب",
+    final_h: "عملاؤك يبحثون الآن. <em>دعهم يجدونك.</em>", final_cta: "احجز نظرة أولى مجانية", final_wa: "راسلنا على واتساب",
     foot_where: "مواقع إلكترونية للأعمال · عمّان، الأردن",
     bar_wa: "واتساب", bar_audit: "نظرة أولى مجانية"
   };
@@ -77,10 +76,14 @@
     en: { hello: "Hello FellowFlow, I'd like a free first look at my business.", biz: "Business: ", type: "Type: ", link: "Link: ", name: "My name: ", ph_biz: "your business", ph_name: "your name" },
     ar: { hello: "مرحبًا FellowFlow، أودّ نظرة أولى مجانية على نشاطي التجاري.", biz: "النشاط: ", type: "النوع: ", link: "الرابط: ", name: "اسمي: ", ph_biz: "اسم نشاطك", ph_name: "اسمك" }
   };
+  // On a phone there is nothing to hover, so these two lines say "tap" instead.
+  var TOUCH = { en: { work_p: "Businesses in Amman we have designed for. Tap a site to see it come alive.", prom_hint: "Tap each one to read it." },
+                ar: { work_p: "أنشطة تجارية في عمّان صمّمنا لها. المس أي موقع لتراه يتحرّك.", prom_hint: "المس كل وعد لتقرأه." } };
 
   var nodes = document.querySelectorAll("[data-i18n]");
   var EN = {};
   nodes.forEach(function (n) { EN[n.getAttribute("data-i18n")] = n.innerHTML; });
+  if (coarse) { AR.work_p = TOUCH.ar.work_p; AR.prom_hint = TOUCH.ar.prom_hint; EN.work_p = TOUCH.en.work_p; EN.prom_hint = TOUCH.en.prom_hint; }
   var langBtn = document.getElementById("lang");
   var h1 = document.querySelector(".words");
 
@@ -167,56 +170,74 @@
   // Header line once the page scrolls.
   var top = document.querySelector(".top");
 
-  // Reveal sections as they enter the screen.
+  // Reveal sections as they enter the screen. The packages path draws itself the same way.
   var io = new IntersectionObserver(function (entries) {
     entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { rootMargin: "0px 0px -8% 0px" });
-  document.querySelectorAll(".reveal, .sheet").forEach(function (el) { io.observe(el); });
+  document.querySelectorAll(".reveal, .sheet, .path-wrap").forEach(function (el) { io.observe(el); });
+  var stagePath = document.querySelector(".stage-line path");
+  if (stagePath) stagePath.style.setProperty("--len", stagePath.getTotalLength());
 
-  // The first screen: a handful of bubbles with random size and timing float up around the mark.
-  var art = document.getElementById("orbit"), bubbles = document.getElementById("bubbles");
-  if (art && bubbles) {
-    var count = window.innerWidth < 640 ? 10 : 16;
+  // The first screen: gold dust, a handful of specks with random size and timing, rising around the mark.
+  var sky = document.getElementById("sky"), dust = document.getElementById("dust");
+  if (sky && dust) {
+    var count = window.innerWidth < 640 ? 14 : 24;
     for (var bi = 0; bi < count; bi++) {
       var d = document.createElement("span"); d.className = "bubble-dot";
       d.style.setProperty("--x", (4 + Math.random() * 92) + "%");
-      d.style.setProperty("--s", Math.round(6 + Math.random() * 30) + "px");
-      d.style.setProperty("--d", (14 + Math.random() * 14).toFixed(1) + "s");
-      d.style.setProperty("--delay", (-Math.random() * 28).toFixed(1) + "s");
-      d.style.setProperty("--sway", Math.round((Math.random() - .5) * 90) + "px");
-      bubbles.appendChild(d);
+      d.style.setProperty("--s", (2 + Math.random() * 5).toFixed(1) + "px");
+      d.style.setProperty("--d", (16 + Math.random() * 16).toFixed(1) + "s");
+      d.style.setProperty("--delay", (-Math.random() * 32).toFixed(1) + "s");
+      d.style.setProperty("--sway", Math.round((Math.random() - .5) * 120) + "px");
+      dust.appendChild(d);
     }
-    var sizeArt = function () { art.style.setProperty("--h", (art.offsetHeight + 140) + "px"); };
-    sizeArt(); window.addEventListener("resize", sizeArt);
+    var sizeSky = function () { sky.style.setProperty("--h", (sky.offsetHeight + 100) + "px"); };
+    sizeSky(); window.addEventListener("resize", sizeSky);
   }
 
-  // The river: paths draw as the section scrolls into view.
-  var river = document.getElementById("river");
-  var paths = river.querySelectorAll(".paths path");
-  paths.forEach(function (p) { p.style.setProperty("--len", p.getTotalLength()); });
-
+  // The customer journey and the process line both light up step by step as they scroll into view.
+  var journey = document.getElementById("journey");
+  var jsteps = journey.querySelectorAll(".jstep");
   var steps = document.getElementById("steps");
   var stepItems = steps.querySelectorAll("li");
 
+  function light(list, box, span) {
+    var r = box.getBoundingClientRect(), vh = window.innerHeight;
+    var q = Math.min(1, Math.max(0, (vh * 0.85 - r.top) / (vh * span)));
+    list.forEach(function (li, i) { li.classList.toggle("lit", q >= (i + 0.6) / list.length); });
+    return q;
+  }
   function onScroll() {
-    var y = window.scrollY;
-    top.classList.toggle("scrolled", y > 8);
-
-    // river
-    var rr = river.getBoundingClientRect();
-    var vh = window.innerHeight;
-    var p = Math.min(1, Math.max(0, (vh * 0.85 - rr.top) / (rr.height * 0.9)));
-    river.style.setProperty("--p", p.toFixed(3));
-    river.classList.toggle("lit", p > 0.7);
-
-    // process line
-    var sr = steps.getBoundingClientRect();
-    var q = Math.min(1, Math.max(0, (vh * 0.8 - sr.top) / (vh * 0.6)));
-    steps.style.setProperty("--p", q.toFixed(3));
-    stepItems.forEach(function (li, i) { li.classList.toggle("lit", q >= (i + 0.5) / stepItems.length); });
+    top.classList.toggle("scrolled", window.scrollY > 8);
+    light(jsteps, journey, window.innerWidth < 1000 ? 1.2 : 0.6);
+    steps.style.setProperty("--p", light(stepItems, steps, 0.6).toFixed(3));
   }
   window.addEventListener("scroll", onScroll, { passive: true });
   window.addEventListener("resize", onScroll);
+
+  // Our work: each card's recording plays while the pointer is over it (or, on a phone, while the
+  // card is mostly on screen). The still picture stays underneath, so nothing is downloaded until needed.
+  var cards = document.querySelectorAll(".card");
+  function play(card) { var v = card.querySelector("video"); if (!v || reduce) return; card.classList.add("playing"); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  function stop(card) { var v = card.querySelector("video"); if (!v) return; card.classList.remove("playing"); v.pause(); }
+  if (coarse) {
+    var vio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.intersectionRatio >= 0.7) play(e.target); else stop(e.target); });
+    }, { threshold: [0, 0.7] });
+    cards.forEach(function (c) { vio.observe(c); });
+  } else {
+    cards.forEach(function (c) {
+      c.addEventListener("mouseenter", function () { play(c); });
+      c.addEventListener("mouseleave", function () { stop(c); });
+      c.addEventListener("focusin", function () { play(c); });
+      c.addEventListener("focusout", function () { stop(c); });
+    });
+  }
+
+  // Promise tiles: on a phone a tap opens one (the text is always shown there anyway, see CSS).
+  document.querySelectorAll(".vow").forEach(function (v) {
+    v.addEventListener("click", function () { v.classList.toggle("open"); });
+  });
 
   // Team portraits lean toward the pointer.
   if (window.matchMedia("(pointer: fine)").matches && !reduce) {
@@ -231,7 +252,7 @@
     });
   }
 
-  // Audit form: the WhatsApp message writes itself as you type. Nothing goes to a server.
+  // First-look form: the WhatsApp message writes itself as you type. Nothing goes to a server.
   var form = document.getElementById("audit-form");
   var err = document.getElementById("form-err");
   var bubble = document.getElementById("bubble-text");
