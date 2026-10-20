@@ -65,7 +65,8 @@
     t_cafe: "مقهى أو مطعم", t_gym: "نادٍ رياضي أو استوديو", t_fashion: "ملابس أو أزياء", t_salon: "صالون أو عيادة", t_other: "شيء آخر",
     f_link: "رابط الموقع أو Instagram أو خرائط Google (اختياري)", f_name: "اسمك",
     f_send: "أرسل عبر واتساب",
-    f_fine: "يفتح هذا واتساب مع تعبئة بياناتك. لا يُحفظ أي شيء على هذا الموقع.",
+    f_fine: "يفتح هذا واتساب مع تعبئة بياناتك. لا يُحفظ أي شيء على هذا الموقع. نردّ خلال 24 ساعة.",
+    f_sent: "يُفتح واتساب الآن مع رسالتك. اضغط إرسال هناك، وسنردّ خلال 24 ساعة. لم يُفتح؟ <a href=\"https://wa.me/962796237444\" target=\"_blank\" rel=\"noopener\">راسلنا مباشرة</a> أو اتصل على <a href=\"tel:+962796237444\" dir=\"ltr\">+962 79 623 7444</a>.",
     f_err: "يرجى إضافة اسم النشاط واسمك.",
     final_h: "عملاؤك يبحثون الآن. <em>دعهم يجدونك.</em>", final_cta: "احجز نظرة أولى مجانية", final_wa: "راسلنا على واتساب",
     foot_where: "الهوية الرقمية للأعمال · عمّان، الأردن",
@@ -280,6 +281,7 @@
   // First-look form: the WhatsApp message writes itself as you type. Nothing goes to a server.
   var form = document.getElementById("audit-form");
   var err = document.getElementById("form-err");
+  var sent = document.getElementById("form-sent");
   var bubble = document.getElementById("bubble-text");
   function message(preview) {
     var m = MSG[lang()];
@@ -297,8 +299,9 @@
     ev.preventDefault();
     // Take the visitor to the first empty field; the message sits at the top of the form, just above it.
     var missing = !form.biz.value.trim() ? form.biz : !form.name.value.trim() ? form.name : null;
-    if (missing) { err.hidden = false; err.scrollIntoView({ block: "center" }); missing.focus({ preventScroll: true }); return; }
+    if (missing) { err.hidden = false; sent.hidden = true; err.scrollIntoView({ block: "center" }); missing.focus({ preventScroll: true }); return; }
     err.hidden = true;
+    sent.hidden = false;
     window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message(false)), "_blank", "noopener");
   });
 

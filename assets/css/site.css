@@ -715,6 +715,8 @@ html[dir="rtl"] .form select { background-position: left 14px center; }
 .form .btn { width: 100%; margin-top: 8px; position: relative; }
 .form .fine { margin: 0; font-size: .85rem; color: var(--ink-2); position: relative; }
 .err { color: #B23B3B; font-size: .9rem; margin: 0; position: relative; }
+.sent { margin: 0; padding: 14px 16px; border: 1px solid var(--accent); background: rgba(201,164,92,.08); color: var(--ink); font-size: .92rem; line-height: 1.6; position: relative; }
+.sent a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 
 /* 9. Final */
 .final { background: radial-gradient(700px 400px at 50% 50%, rgba(201,164,92,.09), transparent 70%); text-align: center; overflow: hidden; min-height: 80vh; display: grid; align-items: center; }
