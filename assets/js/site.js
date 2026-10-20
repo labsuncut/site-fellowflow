@@ -109,12 +109,17 @@
     requestAnimationFrame(function () { requestAnimationFrame(function () { h1.classList.add("in"); }); });
   }
 
+  var metaDesc = document.querySelector('meta[name="description"]');
+  var META = { title: document.title, desc: metaDesc ? metaDesc.getAttribute("content") : "" };
   function lang() { return root.lang === "ar" ? "ar" : "en"; }
   function setLang(l) {
     var dict = l === "ar" ? AR : EN;
     nodes.forEach(function (n) { var k = n.getAttribute("data-i18n"); if (dict[k] != null) n.innerHTML = dict[k]; });
     root.lang = l;
     root.dir = l === "ar" ? "rtl" : "ltr";
+    // Tab title and description follow the language (Arabic reuses the proofread hero lines).
+    document.title = l === "ar" ? "FellowFlow | " + AR.hero_eyebrow : META.title;
+    if (metaDesc) metaDesc.setAttribute("content", l === "ar" ? AR.hero_lede : META.desc);
     langBtn.textContent = l === "ar" ? "English" : "عربي";
     langBtn.lang = l === "ar" ? "en" : "ar";
     splitWords();
