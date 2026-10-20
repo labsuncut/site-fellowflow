@@ -140,6 +140,7 @@
     clearTimeout(introTimer);
     try { sessionStorage.setItem("ff-intro", "1"); } catch (e) {}
     intro.classList.add("done");
+    document.documentElement.classList.remove("intro-on");
     flyTo(document.getElementById("intro-mark"), document.querySelector(".top .logo-mark"));
     flyTo(document.getElementById("intro-word"), document.querySelector(".top .logo-word"));
     setTimeout(function () { topLogo.classList.add("show"); }, 700);
@@ -148,6 +149,7 @@
   // The intro plays even with Reduce Motion on (founders' call, 2026-10-20): it is short, skippable and part of the brand.
   if (!seen && window.FFIntro) {
     intro.classList.add("play");
+    document.documentElement.classList.add("intro-on");     // hide the page under it (Safari's see-through toolbar shows what is behind)
     document.body.style.overflow = "hidden";
     // The scene needs the mark's picture loaded to know its shape; the CSS timings wait for nothing,
     // so start the clock only once the picture is ready (or at once if it never loads).

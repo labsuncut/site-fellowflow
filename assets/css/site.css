@@ -75,6 +75,9 @@ body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-in
    is written beneath it; then the lockup travels up into the header and the dark lifts away. */
 .intro { position: fixed; inset: 0; z-index: 90; display: none; overflow: hidden; background: transparent; cursor: pointer; }
 .js .intro.play { display: block; }
+/* While the intro plays, the page behind it is hidden: on iPhone, Safari's floating toolbar is see-through and sits outside the fixed intro. */
+html.intro-on { background: var(--brand); }
+html.intro-on body > :not(.intro) { visibility: hidden; }
 .intro-bg { position: absolute; inset: 0; background: var(--brand); transition: opacity 1.1s ease; }
 .intro-canvas { position: absolute; inset: 0; width: 100%; height: 100%; transition: opacity 1s ease; }
 /* The timed parts start only when the scene starts rolling (class "rolling", set by site.js once the mark's picture is ready). */
