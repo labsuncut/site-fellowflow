@@ -267,6 +267,8 @@ html[lang="ar"] .gain-p { font-style: normal; }
 .work-head h2 { margin-bottom: 0; }
 .work-head .sub { margin: 0 0 10px; }
 .gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px 44px; }
+/* One site on show: a single wider card, centred. */
+.gallery.solo { grid-template-columns: minmax(0, 820px); justify-content: center; }
 .card { margin: 0; }
 .js .card.reveal { transition-delay: calc(var(--i) * 120ms); }
 .card a { display: block; text-decoration: none; position: relative; }
