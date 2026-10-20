@@ -1,16 +1,31 @@
 {
   "_note": "Facts about our own brand (we are client zero). Empty = not decided yet.",
   "name": "FellowFlow",
-  "name_note": "Decided 2026-10-18; domain fellowflow.ai owned by the team (GoDaddy DNS), connected to GitHub Pages 2026-10-19",
+  "name_note": "Decided 2026-10-18. Domain fellowflow.ai owned by the team (registrar GoDaddy, DNS on Cloudflare); served by the Cloudflare Worker site-fellowflow since 2026-10-20.",
   "category": "Digital identity studio: websites, Google Business Profile, local SEO, GEO, reviews, social",
   "phone": "+962796237444",
   "whatsapp": "962796237444",
   "email": "labsuncut@gmail.com",
-  "address": { "city": "Amman", "country": "JO" },
-  "languages": ["en", "ar"],
-  "colors": { "ink": "#12141A", "ivory": "#F5F1E8", "bronze": "#8A6A3E" },
+  "address": {
+    "city": "Amman",
+    "country": "JO"
+  },
+  "languages": [
+    "en",
+    "ar"
+  ],
+  "colors": {
+    "ink": "#12141A",
+    "ivory": "#F5F1E8",
+    "bronze": "#8A6A3E"
+  },
   "offer": "Build (one time) + Grow (monthly: Care, Visibility, Growth Partner); free Presence Audit. Prices kept off the site until the team decides.",
   "team": [],
-  "links": { "instagram": "", "google": "", "linkedin": "" },
-  "domain": "fellowflow.ai"
+  "links": {
+    "instagram": "",
+    "google": "",
+    "linkedin": ""
+  },
+  "domain": "fellowflow.ai",
+  "google_business_profile": "Created 2026-10-20 (service area Amman, address hidden); must show the same name and phone as this file."
 }
