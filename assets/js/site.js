@@ -145,7 +145,8 @@
     setTimeout(function () { topLogo.classList.add("show"); }, 700);
     setTimeout(function () { intro.classList.remove("play"); document.body.style.overflow = ""; if (scene) scene.stop(); }, 1250);
   }
-  if (!seen && !reduce && window.FFIntro) {
+  // The intro plays even with Reduce Motion on (founders' call, 2026-10-20): it is short, skippable and part of the brand.
+  if (!seen && window.FFIntro) {
     intro.classList.add("play");
     document.body.style.overflow = "hidden";
     // The scene needs the mark's picture loaded to know its shape; the CSS timings wait for nothing,

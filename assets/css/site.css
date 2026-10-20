@@ -433,8 +433,6 @@ html[dir="rtl"] .form select { background-position: left 14px center; }
   .js .reveal, .words .w, .js .sheet { opacity: 1; transform: none; transition: none; }
   .spin, .s-spin, .streams path, .bubble p::after, .orb, .drift img, .glow, .flight, .flutter, .bubble-dot, .pulse { animation: none; }
   .bubble-dot { opacity: .6; bottom: auto; top: calc(var(--x) * .6); }
-  .js .intro.play { display: none; }
-  .js .top .logo { opacity: 1; }
   .stage-line path, .deco { stroke-dashoffset: 0; }
   .jstep .phone { opacity: 1; }
   .jstep .jtext h3 { color: var(--ink); } .jstep .jtext p { color: var(--ink-2); }
