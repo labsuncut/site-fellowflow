@@ -69,8 +69,10 @@
     f_err: "يرجى إضافة اسم النشاط واسمك.",
     final_h: "عملاؤك يبحثون الآن. <em>دعهم يجدونك.</em>", final_cta: "احجز نظرة أولى مجانية", final_wa: "راسلنا على واتساب",
     foot_where: "الهوية الرقمية للأعمال · عمّان، الأردن",
-    bar_wa: "واتساب", bar_audit: "نظرة أولى مجانية"
+    bar_wa: "واتساب", bar_audit: "نظرة أولى مجانية",
+    menu_open: "القائمة", menu_close: "إغلاق القائمة"
   };
+  var MENU_LABEL = { en: { menu_open: "Menu", menu_close: "Close menu" } };
   var MSG = {
     en: { hello: "Hello FellowFlow, I'd like a free first look at my business.", biz: "Business: ", type: "Type: ", link: "Link: ", name: "My name: ", ph_biz: "your business", ph_name: "your name" },
     ar: { hello: "مرحبًا FellowFlow، أودّ نظرة أولى مجانية على نشاطي التجاري.", biz: "النشاط: ", type: "النوع: ", link: "الرابط: ", name: "اسمي: ", ph_biz: "اسم نشاطك", ph_name: "اسمك" }
@@ -117,6 +119,7 @@
     langBtn.lang = l === "ar" ? "en" : "ar";
     splitWords();
     updateBubble();
+    labelMenu();
     try { localStorage.setItem("ff-lang", l); } catch (e) {}
   }
   langBtn.addEventListener("click", function () { setLang(lang() === "ar" ? "en" : "ar"); });
@@ -287,15 +290,44 @@
   form.addEventListener("input", updateBubble);
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
-    if (!form.biz.value.trim() || !form.name.value.trim()) { err.hidden = false; return; }
+    // Take the visitor to the first empty field; the message sits at the top of the form, just above it.
+    var missing = !form.biz.value.trim() ? form.biz : !form.name.value.trim() ? form.name : null;
+    if (missing) { err.hidden = false; err.scrollIntoView({ block: "center" }); missing.focus({ preventScroll: true }); return; }
     err.hidden = true;
     window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message(false)), "_blank", "noopener");
   });
 
+  // Phone and tablet menu. Opens from the header button, closes on the button, on a link, on Escape,
+  // and whenever the window grows past the tablet width, so it can never be left open on a desktop.
+  var menuBtn = document.getElementById("menu-btn");
+  var menu = document.getElementById("menu");
+  var menuOpen = false;
+  function labelMenu() {
+    var d = lang() === "ar" ? AR : MENU_LABEL.en;
+    menuBtn.setAttribute("aria-label", menuOpen ? d.menu_close : d.menu_open);
+  }
+  function setMenu(open) {
+    if (open === menuOpen) return;
+    menuOpen = open;
+    menu.classList.toggle("open", open);
+    menu.setAttribute("aria-hidden", open ? "false" : "true");
+    menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+    root.classList.toggle("menu-open", open);
+    labelMenu();
+  }
+  menuBtn.addEventListener("click", function () { setMenu(!menuOpen); });
+  menu.addEventListener("click", function (ev) {
+    // A tap on a link closes the panel first; the browser then scrolls to the section as usual.
+    if (ev.target.closest("a")) setMenu(false);
+  });
+  document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && menuOpen) { setMenu(false); menuBtn.focus(); } });
+  window.addEventListener("resize", function () { if (menuOpen && window.innerWidth > 1000) setMenu(false); });
+  window.addEventListener("pageshow", function () { setMenu(false); });
+
   // Start
   var saved = null;
   try { saved = localStorage.getItem("ff-lang"); } catch (e) {}
-  if (saved === "ar" || /[?&]lang=ar\b/.test(location.search)) setLang("ar"); else { splitWords(); updateBubble(); }
+  if (saved === "ar" || /[?&]lang=ar\b/.test(location.search)) setLang("ar"); else { splitWords(); updateBubble(); labelMenu(); }
   onScroll();
   window.addEventListener("load", onScroll);
 })();

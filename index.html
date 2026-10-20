@@ -23,7 +23,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="FellowFlow logo: To help your business flow better.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/css/site.css?v=22">
+<link rel="stylesheet" href="assets/css/site.css?v=23">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -111,9 +111,25 @@
     <div class="top-actions">
       <button class="lang" type="button" id="lang" lang="ar">عربي</button>
       <a class="btn btn-gold btn-sm" href="#audit" data-i18n="nav_cta">Free first look</a>
+      <!-- Phone and tablet only: two cream lines that turn into a cross when the menu is open. -->
+      <button class="menu-btn" type="button" id="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="menu">
+        <span class="menu-lines" aria-hidden="true"><i></i><i></i></span>
+      </button>
     </div>
   </div>
 </header>
+
+<!-- Phone and tablet menu: a navy panel under the header with the same five links, one by one. -->
+<div class="menu" id="menu" aria-hidden="true">
+  <nav class="wrap menu-in" aria-label="Main">
+    <a href="#work" style="--i:0"><small>I</small><span data-i18n="nav_work">Work</span></a>
+    <a href="#services" style="--i:1"><small>II</small><span data-i18n="nav_services">Packages</span></a>
+    <a href="#process" style="--i:2"><small>III</small><span data-i18n="nav_process">Process</span></a>
+    <a href="#promise" style="--i:3"><small>IV</small><span data-i18n="nav_promise">Promise</span></a>
+    <a href="#team" style="--i:4"><small>V</small><span data-i18n="nav_team">Team</span></a>
+    <a class="btn btn-gold menu-cta" href="#audit" style="--i:5" data-i18n="nav_cta">Free first look</a>
+  </nav>
+</div>
 
 <main id="main">
 
@@ -339,6 +355,7 @@
       </div>
     </div>
     <form class="form reveal" id="audit-form" novalidate>
+      <p class="err" id="form-err" role="alert" hidden data-i18n="f_err">Please add your business name and your name.</p>
       <label><span data-i18n="f_biz">Business name</span><input name="biz" required autocomplete="organization"></label>
       <label><span data-i18n="f_type">Type of business</span>
         <select name="type">
@@ -353,7 +370,6 @@
       <label><span data-i18n="f_name">Your name</span><input name="name" required autocomplete="name"></label>
       <button class="btn btn-gold" type="submit" data-i18n="f_send">Send on WhatsApp</button>
       <p class="fine" data-i18n="f_fine">This opens WhatsApp with your details filled in. Nothing is stored on this site.</p>
-      <p class="err" id="form-err" role="alert" hidden data-i18n="f_err">Please add your business name and your name.</p>
     </form>
   </div>
 </section>
@@ -398,6 +414,6 @@
 </nav>
 
 <script src="assets/js/intro.js?v=13" defer></script>
-<script src="assets/js/site.js?v=16" defer></script>
+<script src="assets/js/site.js?v=17" defer></script>
 </body>
 </html>
