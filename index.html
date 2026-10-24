@@ -6,6 +6,9 @@
 <title>FellowFlow | Online identity for businesses in Amman</title>
 <meta name="description" content="FellowFlow builds the online identity of businesses in Amman, in Arabic and English: the website, and how customers find it on Google and AI assistants.">
 <link rel="canonical" href="https://fellowflow.ai/">
+<link rel="alternate" hreflang="en" href="https://fellowflow.ai/">
+<link rel="alternate" hreflang="ar" href="https://fellowflow.ai/ar/">
+<link rel="alternate" hreflang="x-default" href="https://fellowflow.ai/">
 <meta name="theme-color" content="#050C1A">
 <!-- GitHub Pages can't send security headers, so the parts browsers accept as meta tags live here. -->
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests">
@@ -19,28 +22,32 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fellowflow.ai/">
 <meta property="og:site_name" content="FellowFlow">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="ar_JO">
 <meta property="og:image" content="https://fellowflow.ai/assets/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="FellowFlow logo: To help your business flow better.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="assets/css/site.css?v=25">
+<link rel="stylesheet" href="assets/css/site.css?v=26">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
+  "@id": "https://fellowflow.ai/#organization",
   "name": "FellowFlow",
   "url": "https://fellowflow.ai/",
   "logo": "https://fellowflow.ai/assets/img/icon-192.png",
   "image": "https://fellowflow.ai/assets/img/og.jpg",
   "description": "The online identity of businesses in Amman, in Arabic and English: website, SEO, GEO, online ordering and automation. We understand the business first, then build what it needs.",
+  "disambiguatingDescription": "FellowFlow at fellowflow.ai is a web design and online identity studio for businesses in Amman, Jordan, founded by Abdullah Kishtaini, Ali Elbusaifi and Mahmoud Abu Hijleh.",
   "slogan": "To help businesses flow better.",
   "email": "labsuncut@gmail.com",
   "telephone": "+962796237444",
   "address": { "@type": "PostalAddress", "addressLocality": "Amman", "addressCountry": "JO" },
   "areaServed": { "@type": "City", "name": "Amman" },
   "knowsLanguage": ["en", "ar"],
-  "knowsAbout": ["Web design", "Website development", "Arabic and English websites"],
+  "knowsAbout": ["Web design", "Website development", "Arabic and English websites", "Search engine optimization", "Google Business Profile"],
   "founder": [
     { "@type": "Person", "name": "Abdullah Kishtaini" },
     { "@type": "Person", "name": "Ali Elbusaifi" },
@@ -49,7 +56,7 @@
 }
 </script>
 <script type="application/ld+json">
-{ "@context": "https://schema.org", "@type": "WebSite", "name": "FellowFlow", "alternateName": "fellowflow.ai", "url": "https://fellowflow.ai/" }
+{ "@context": "https://schema.org", "@type": "WebSite", "@id": "https://fellowflow.ai/#website", "name": "FellowFlow", "alternateName": "fellowflow.ai", "url": "https://fellowflow.ai/", "inLanguage": ["en", "ar"], "publisher": { "@id": "https://fellowflow.ai/#organization" } }
 </script>
 </head>
 <body>
@@ -113,7 +120,7 @@
       <a href="#team" data-i18n="nav_team">Team</a>
     </nav>
     <div class="top-actions">
-      <button class="lang" type="button" id="lang" lang="ar">عربي</button>
+      <a class="lang" id="lang" href="ar/" hreflang="ar" lang="ar">عربي</a>
       <a class="btn btn-gold btn-sm" href="#audit" data-i18n="nav_cta">Free first look</a>
       <!-- Phone and tablet only: two cream lines that turn into a cross when the menu is open. -->
       <button class="menu-btn" type="button" id="menu-btn" aria-label="Menu" aria-expanded="false" aria-controls="menu">
@@ -409,6 +416,7 @@
     <a class="logo" href="#top"><img class="logo-mark" src="assets/img/logo/mark-cream.png" alt="" width="244" height="302" loading="lazy"><img class="logo-word" src="assets/img/logo/wordmark-cream.png" alt="FellowFlow" width="960" height="153" loading="lazy"></a>
     <p data-i18n="foot_where">Online identity for businesses · Amman, Jordan</p>
     <p><a href="tel:+962796237444" dir="ltr">+962 79 623 7444</a> · <a href="mailto:labsuncut@gmail.com">labsuncut@gmail.com</a></p>
+    <p><a href="privacy/" data-i18n="foot_privacy">Privacy policy</a></p>
     <p class="fine">© 2026 FellowFlow</p>
   </div>
 </footer>
@@ -419,6 +427,6 @@
 </nav>
 
 <script src="assets/js/intro.js?v=13" defer></script>
-<script src="assets/js/site.js?v=19" defer></script>
+<script src="assets/js/site.js?v=20" defer></script>
 </body>
 </html>

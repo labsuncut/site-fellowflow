@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://fellowflow.ai/</loc>
-    <lastmod>2026-10-19</lastmod>
+    <lastmod>2026-10-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fellowflow.ai/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://fellowflow.ai/ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fellowflow.ai/"/>
+  </url>
+  <url>
+    <loc>https://fellowflow.ai/ar/</loc>
+    <lastmod>2026-10-24</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://fellowflow.ai/"/>
+    <xhtml:link rel="alternate" hreflang="ar" href="https://fellowflow.ai/ar/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://fellowflow.ai/"/>
+  </url>
+  <url>
+    <loc>https://fellowflow.ai/privacy/</loc>
+    <lastmod>2026-10-24</lastmod>
   </url>
 </urlset>

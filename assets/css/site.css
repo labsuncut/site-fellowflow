@@ -396,8 +396,8 @@ html[lang="ar"] .intro-skip { letter-spacing: 0; font-size: .9rem; }
 .nav a:hover { color: var(--cream); }
 .nav a:hover::after { transform: scaleX(1); }
 .top-actions { display: flex; align-items: center; gap: 12px; }
-.lang { background: none; border: 1px solid var(--line-navy); color: var(--cream); height: 42px; padding: 0 16px; font: 500 .9rem var(--sans); cursor: pointer; transition: border-color .3s; }
-.lang:hover { border-color: var(--cream); }
+.lang, .back { display: inline-flex; align-items: center; text-decoration: none; background: none; border: 1px solid var(--line-navy); color: var(--cream); height: 42px; padding: 0 16px; font: 500 .9rem var(--sans); cursor: pointer; transition: border-color .3s; }
+.lang:hover, .back:hover { border-color: var(--cream); }
 html[lang="ar"] .lang { font-family: "Manrope", sans-serif; }
 
 /* Phone and tablet menu (shown under 1000px, see the Tablet block). The button is two thin cream
@@ -726,6 +726,24 @@ html[dir="rtl"] .form select { background-position: left 14px center; }
 .final h2 { font-size: clamp(2.6rem, 6.4vw, 5.6rem); color: #FBF5EA; max-width: 12em; }
 .final .cta-row { justify-content: center; }
 
+/* Privacy page: one cream sheet of plain text under the fixed header (no scripts on that page). */
+.legal { position: relative; z-index: 2; width: min(880px, calc(100% - 24px)); margin: 120px auto 90px; padding: clamp(34px, 6vw, 76px) clamp(22px, 6vw, 84px); background: var(--paper); color: var(--ink); border-radius: var(--r); box-shadow: 0 40px 90px -50px rgba(0,0,0,.8); }
+.legal .no { color: var(--gold-text); }
+.legal .rule { background: var(--gold-text); }
+.legal h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 14px; color: var(--ink); max-width: 12em; }
+.legal em { background: var(--gold-ink); -webkit-background-clip: text; background-clip: text; }
+.legal h2 { font-size: clamp(1.55rem, 3vw, 2.1rem); margin: 42px 0 12px; max-width: none; }
+.legal p, .legal li { color: var(--ink-2); max-width: 40em; }
+.legal ul { margin: 0 0 14px; padding-inline-start: 1.2em; }
+.legal li { margin-bottom: 8px; }
+.legal li::marker { color: var(--gold-text); }
+.legal b { color: var(--ink); font-weight: 600; }
+.legal a { color: var(--gold-text); text-underline-offset: 3px; }
+.legal .updated { font-size: .9rem; margin-bottom: 26px; }
+.legal .short { margin: 34px 0 10px; padding: 6px 0 4px; padding-inline-start: 22px; border-inline-start: 2px solid var(--accent); }
+.legal .short h2 { margin-top: 0; }
+html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
+
 .foot { background: #03070F; color: var(--muted-navy); border-top: 1px solid var(--line-navy); padding: 50px 0 120px; font-size: .9rem; position: relative; z-index: 2; }
 .foot-in { display: grid; gap: 6px; }
 .foot .logo { margin-bottom: 12px; }
@@ -833,7 +851,7 @@ html[dir="rtl"] .form select { background-position: left 14px center; }
   .vow p { opacity: 1; transform: none; }
   .hint { display: none; }
   .btn { width: 100%; }
-  .top .btn, .lang { width: auto; }
+  .top .btn, .lang, .back { width: auto; }
   .final { min-height: auto; }
   .menu-in { padding-top: 90px; }
   .menu-cta { align-self: stretch; }

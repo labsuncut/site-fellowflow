@@ -7,7 +7,14 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var coarse = window.matchMedia("(pointer: coarse)").matches;
 
-  // Arabic text. English lives in the HTML so the page works without JavaScript.
+  // Each language has its own page so search engines can read both: English is index.html, Arabic is
+  // ar/index.html, built from index.html and the AR list below by tools/build-ar.mjs. After changing any
+  // words in either file, run `node tools/build-ar.mjs` and commit both pages.
+  var page = root.lang === "ar" ? "ar" : "en";
+  // Old shared links used ?lang=ar on the English page: send them to the Arabic page.
+  if (page === "en" && /[?&]lang=ar\b/.test(location.search)) { location.replace("ar/" + location.hash); return; }
+
+  // Arabic text (the source for ar/index.html). English lives in index.html.
   var AR = {
     skip: "انتقل إلى المحتوى",
     intro_tag: "نساعد الأعمال على التدفّق بشكل أفضل.", intro_skip: "تخطّي",
@@ -70,7 +77,7 @@
     f_err: "يرجى إضافة اسم النشاط واسمك.",
     final_h: "عملاؤك يبحثون الآن. <em>دعهم يجدونك.</em>", final_cta: "احجز نظرة أولى مجانية", final_wa: "راسلنا على واتساب",
     foot_where: "الهوية الرقمية للأعمال · عمّان، الأردن",
-    bar_wa: "واتساب", bar_audit: "نظرة أولى مجانية",
+    bar_wa: "واتساب", bar_audit: "نظرة أولى مجانية", foot_privacy: "سياسة الخصوصية",
     menu_open: "القائمة", menu_close: "إغلاق القائمة"
   };
   var MENU_LABEL = { en: { menu_open: "Menu", menu_close: "Close menu" } };
@@ -82,11 +89,9 @@
   var TOUCH = { en: { work_p: "Businesses in Amman we have designed for. Tap a site to see it come alive.", prom_hint: "Tap each one to read it." },
                 ar: { work_p: "أنشطة تجارية في عمّان صمّمنا لها. المس أي موقع لتراه يتحرّك.", prom_hint: "المس كل وعد لتقرأه." } };
 
-  var nodes = document.querySelectorAll("[data-i18n]");
-  var EN = {};
-  nodes.forEach(function (n) { EN[n.getAttribute("data-i18n")] = n.innerHTML; });
-  if (coarse) { AR.work_p = TOUCH.ar.work_p; AR.prom_hint = TOUCH.ar.prom_hint; EN.work_p = TOUCH.en.work_p; EN.prom_hint = TOUCH.en.prom_hint; }
-  var langBtn = document.getElementById("lang");
+  if (coarse) {
+    document.querySelectorAll("[data-i18n]").forEach(function (n) { var t = TOUCH[page][n.getAttribute("data-i18n")]; if (t) n.innerHTML = t; });
+  }
   var h1 = document.querySelector(".words");
 
   function splitWords() {
@@ -110,25 +115,14 @@
     requestAnimationFrame(function () { requestAnimationFrame(function () { h1.classList.add("in"); }); });
   }
 
-  var metaDesc = document.querySelector('meta[name="description"]');
-  var META = { title: document.title, desc: metaDesc ? metaDesc.getAttribute("content") : "" };
-  function lang() { return root.lang === "ar" ? "ar" : "en"; }
-  function setLang(l) {
-    var dict = l === "ar" ? AR : EN;
-    nodes.forEach(function (n) { var k = n.getAttribute("data-i18n"); if (dict[k] != null) n.innerHTML = dict[k]; });
-    root.lang = l;
-    root.dir = l === "ar" ? "rtl" : "ltr";
-    // Tab title and description follow the language (Arabic reuses the proofread hero lines).
-    document.title = l === "ar" ? "FellowFlow | " + AR.hero_eyebrow : META.title;
-    if (metaDesc) metaDesc.setAttribute("content", l === "ar" ? AR.hero_lede : META.desc);
-    langBtn.textContent = l === "ar" ? "English" : "عربي";
-    langBtn.lang = l === "ar" ? "en" : "ar";
-    splitWords();
-    updateBubble();
-    labelMenu();
-    try { localStorage.setItem("ff-lang", l); } catch (e) {}
-  }
-  langBtn.addEventListener("click", function () { setLang(lang() === "ar" ? "en" : "ar"); });
+  function lang() { return page; }
+  // The language link opens the other page at the section that is on screen now, not back at the top.
+  var langLink = document.getElementById("lang");
+  langLink.addEventListener("click", function () {
+    var here = "";
+    document.querySelectorAll("main section[id]").forEach(function (s) { if (s.getBoundingClientRect().top < window.innerHeight * 0.4) here = s.id; });
+    langLink.href = langLink.getAttribute("href").split("#")[0] + (here ? "#" + here : "");
+  });
 
   // Opening, once per visit. The streams, mark and name are timed in CSS; here we only decide
   // whether to play it, and at the end we fly the mark and the name to their places in the header.
@@ -333,9 +327,7 @@
   window.addEventListener("pageshow", function () { setMenu(false); });
 
   // Start
-  var saved = null;
-  try { saved = localStorage.getItem("ff-lang"); } catch (e) {}
-  if (saved === "ar" || /[?&]lang=ar\b/.test(location.search)) setLang("ar"); else { splitWords(); updateBubble(); labelMenu(); }
+  splitWords(); updateBubble(); labelMenu();
   onScroll();
   window.addEventListener("load", onScroll);
 })();
