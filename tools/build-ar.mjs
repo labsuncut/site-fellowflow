@@ -89,7 +89,9 @@ function build() {
   swap('alt="Apollo Training Facility website"', 'alt="Apollo Training Facility website" lang="en"');
 
   // Files sit one folder up from ar/. Leave in-page anchors, full addresses, mail, phone and data: alone.
-  html = html.replace(/(\s(?:src|href|poster))="(?!#|[a-z][a-z0-9+.-]*:|\/|\.\.\/)([^"]*)"/gi, (m, a, url) => `${a}="../${url}"`);
+  const up = (url) => (/^(#|[a-z][a-z0-9+.-]*:|\/|\.\.\/)/i.test(url) ? url : '../' + url);
+  html = html.replace(/(\s(?:src|href|poster))="([^"]*)"/gi, (m, a, url) => `${a}="${up(url)}"`);
+  html = html.replace(/(\ssrcset)="([^"]*)"/gi, (m, a, list) => `${a}="${list.split(',').map((s) => s.trim()).map((s) => up(s)).join(', ')}"`);
   // The language link goes back to English; the privacy link stays in Arabic once ar/privacy/ exists.
   swap('<a class="lang" id="lang" href="../ar/" hreflang="ar" lang="ar">عربي</a>', '<a class="lang" id="lang" href="../" hreflang="en" lang="en">English</a>', 'language link');
   // Until it does, the link says it leads to an English page.
@@ -102,8 +104,10 @@ function build() {
   if (wrong.length) fail('these keys did not end up in Arabic: ' + wrong.join(', '));
   const stray = html.match(/\s(?:src|href|poster)="assets\/[^"]*"/g);
   if (stray) fail('paths not moved up a folder: ' + stray.join(' '));
-  // This script only moves src, href and poster. Anything else that points at a file needs adding above.
-  const other = html.match(/\ssrcset="[^"]*"|url\((?!["']?(?:data:|https?:|#|\/))[^)]*\)/g);
+  const straySet = (html.match(/\ssrcset="[^"]*"/g) || []).filter((s) => /(?:"|,\s*)assets\//.test(s));
+  if (straySet.length) fail('srcset paths not moved up a folder: ' + straySet.join(' '));
+  // This script only moves src, href, poster and srcset. Anything else that points at a file needs adding above.
+  const other = html.match(/url\((?!["']?(?:data:|https?:|#|\/))[^)]*\)/g);
   if (other) fail('file paths this script does not move yet: ' + other.join(' '));
   if (/\sdata-i18n="[^"]*"[^>]*>\s*<\//.test(html)) fail('an element with data-i18n is empty');
   return { html, keys: els.length };

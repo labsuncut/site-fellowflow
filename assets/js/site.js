@@ -243,8 +243,15 @@
 
   // Our work: each card's recording plays while the pointer is over it (or, on a phone, while the
   // card is mostly on screen). The still picture stays underneath, so nothing is downloaded until needed.
+  // The video borrows the still picture, at whatever size the browser already picked, as its poster.
   var cards = document.querySelectorAll(".card");
-  function play(card) { var v = card.querySelector("video"); if (!v || reduce) return; card.classList.add("playing"); var p = v.play(); if (p && p.catch) p.catch(function () {}); }
+  function play(card) {
+    var v = card.querySelector("video"), still = card.querySelector(".frame img");
+    if (!v || reduce) return;
+    if (!v.getAttribute("poster") && still && still.currentSrc) v.poster = still.currentSrc;
+    card.classList.add("playing");
+    var p = v.play(); if (p && p.catch) p.catch(function () {});
+  }
   function stop(card) { var v = card.querySelector("video"); if (!v) return; card.classList.remove("playing"); v.pause(); }
   if (coarse) {
     var vio = new IntersectionObserver(function (entries) {
