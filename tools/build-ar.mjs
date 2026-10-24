@@ -25,9 +25,9 @@ function arabic() {
   for (; i < js.length; i++) {
     const c = js[i];
     if (quote) { if (c === '\\') i++; else if (c === quote) quote = null; continue; }
-    if (c === '/' && js[i + 1] === '/') { i = js.indexOf('\n', i); continue; } // comments may hold quotes
-    if (c === '/' && js[i + 1] === '*') { i = js.indexOf('*/', i) + 1; continue; }
-    if (c === '"' || c === "'") quote = c;
+    if (c === '/' && js[i + 1] === '/') { const nl = js.indexOf('\n', i); i = nl < 0 ? js.length : nl; continue; } // comments may hold quotes
+    if (c === '/' && js[i + 1] === '*') { const end = js.indexOf('*/', i + 2); if (end < 0) fail('unclosed /* comment in site.js'); i = end + 1; continue; }
+    if (c === '"' || c === "'" || c === '`') quote = c;
     else if (c === '{') depth++;
     else if (c === '}' && --depth === 0) break;
   }

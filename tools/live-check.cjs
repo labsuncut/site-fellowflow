@@ -29,16 +29,18 @@ const clean = (html) => html
 const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i++; return `at character ${i}:\n      live: ${JSON.stringify(a.slice(Math.max(0, i - 60), i + 80))}\n      repo: ${JSON.stringify(b.slice(Math.max(0, i - 60), i + 80))}`; };
 
 (async () => {
-  // After a push, wait (up to WAIT seconds) until Cloudflare serves this commit's homepage.
+  // After a push, wait (up to WAIT seconds) until Cloudflare serves this commit: every page, plus the
+  // shared script and style files (a change may leave index.html as it was).
   const wait = Number(process.env.WAIT || 0);
   if (wait) {
-    const want = clean(readFileSync(join(root, 'index.html'), 'utf8'));
+    const files = [...Object.entries(PAGES), ...['assets/js/site.js', 'assets/js/intro.js', 'assets/css/site.css'].map((f) => ['/' + f, f])];
     const until = Date.now() + wait * 1000;
     for (;;) {
-      let live = '';
-      try { live = clean(await (await fetch(SITE + '/', { cache: 'no-store' })).text()); } catch (e) {}
-      if (live === want) { say('Cloudflare is serving this commit.\n'); break; }
-      if (Date.now() > until) { say(`Still not serving this commit after ${wait} s; checking anyway.\n`); break; }
+      const same = await Promise.all(files.map(async ([p, f]) => {
+        try { return clean(await (await fetch(SITE + p, { cache: 'no-store' })).text()) === clean(readFileSync(join(root, f), 'utf8')); } catch (e) { return false; }
+      }));
+      if (same.every(Boolean)) { say('Cloudflare is serving this commit.\n'); break; }
+      if (Date.now() > until) { say(`Still not serving this commit after ${wait} s (${files.filter((x, i) => !same[i]).map((x) => x[0]).join(', ')}); checking anyway.\n`); break; }
       await new Promise((r) => setTimeout(r, 20000));
     }
   }

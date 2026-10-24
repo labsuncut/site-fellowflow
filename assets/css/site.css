@@ -344,7 +344,7 @@ body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-in
 .btn-gold:hover { background-position: 100% 0; transform: translateY(-2px); box-shadow: 0 14px 30px -14px rgba(201,164,92,.7); }
 .btn-line { border-color: rgba(245,228,200,.45); color: var(--cream); }
 .btn-line:hover { border-color: var(--cream); background: rgba(245,228,200,.07); }
-.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; } /* only without JavaScript (the form button) */
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; } /* only until site.js runs (the form button) */
 
 /* Opening */
 /* Streams of light draw in from the edges and meet. Where they meet, the mark surfaces; the name
@@ -717,6 +717,7 @@ html[dir="rtl"] .form select { background-position: left 14px center; }
 .form input:focus, .form select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(201,164,92,.22); }
 .form .btn { width: 100%; margin-top: 8px; position: relative; }
 .form .fine { margin: 0; font-size: .85rem; color: var(--ink-2); position: relative; }
+.form-ready .form-fallback { display: none; } /* the plain WhatsApp link, for when site.js can't run */
 .err { color: #B23B3B; font-size: .9rem; margin: 0; position: relative; }
 .sent { margin: 0; padding: 14px 16px; border: 1px solid var(--accent); background: rgba(201,164,92,.08); color: var(--ink); font-size: .92rem; line-height: 1.6; position: relative; }
 .sent a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }

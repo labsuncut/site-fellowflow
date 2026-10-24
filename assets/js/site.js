@@ -283,9 +283,10 @@
   var err = document.getElementById("form-err");
   var sent = document.getElementById("form-sent");
   var bubble = document.getElementById("bubble-text");
-  // The button starts disabled in the HTML, so without this script the form can't send the answers
-  // anywhere (a <noscript> WhatsApp link stands in for it).
+  // The button starts disabled in the HTML, so if this script never runs the form can't put the answers
+  // in a page address; a plain WhatsApp link shows instead until the form is ready.
   form.querySelector("button[type=submit]").disabled = false;
+  form.classList.add("form-ready");
   function message(preview) {
     var m = MSG[lang()];
     var biz = form.biz.value.trim(), name = form.name.value.trim(), link = form.link.value.trim();

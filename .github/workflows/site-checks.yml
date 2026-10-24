@@ -10,9 +10,10 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-# A newer push replaces a run that is still waiting for the older one to go live.
+# A newer push replaces a run that is still waiting for the older one to go live; a run started by
+# hand never cancels one started by a push.
 concurrency:
-  group: site-checks
+  group: site-checks-${{ github.event_name }}
   cancel-in-progress: true
 jobs:
   arabic-page:
