@@ -344,6 +344,7 @@ body::after { content: ""; position: fixed; inset: 0; pointer-events: none; z-in
 .btn-gold:hover { background-position: 100% 0; transform: translateY(-2px); box-shadow: 0 14px 30px -14px rgba(201,164,92,.7); }
 .btn-line { border-color: rgba(245,228,200,.45); color: var(--cream); }
 .btn-line:hover { border-color: var(--cream); background: rgba(245,228,200,.07); }
+.btn:disabled { opacity: .5; cursor: not-allowed; transform: none; box-shadow: none; } /* only without JavaScript (the form button) */
 
 /* Opening */
 /* Streams of light draw in from the edges and meet. Where they meet, the mark surfaces; the name
@@ -399,6 +400,8 @@ html[lang="ar"] .intro-skip { letter-spacing: 0; font-size: .9rem; }
 .lang, .back { display: inline-flex; align-items: center; text-decoration: none; background: none; border: 1px solid var(--line-navy); color: var(--cream); height: 42px; padding: 0 16px; font: 500 .9rem var(--sans); cursor: pointer; transition: border-color .3s; }
 .lang:hover, .back:hover { border-color: var(--cream); }
 html[lang="ar"] .lang { font-family: "Manrope", sans-serif; }
+/* Privacy page header: on the narrowest phones the logo alone leads home. */
+@media (max-width: 360px) { .top-actions .back { display: none; } }
 
 /* Phone and tablet menu (shown under 1000px, see the Tablet block). The button is two thin cream
    lines that turn into a cross; the panel is navy, sits under the header, and lists the five

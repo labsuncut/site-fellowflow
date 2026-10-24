@@ -1,6 +1,6 @@
 # Runs on every push to main, and on demand (Actions > Site checks > Run workflow).
 # 1. The Arabic page (ar/index.html) was rebuilt from the latest words.
-# 2. A few minutes later, once Cloudflare has published main, the live site at https://fellowflow.ai:
+# 2. Once Cloudflare has published main (it waits for that), the live site at https://fellowflow.ai:
 #    every page and link answers, the live HTML matches this repository, no console errors on phone
 #    or desktop, plus the DNS records of fellowflow.ai and fellowflow.si (read the log for those).
 name: Site checks
@@ -8,9 +8,15 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+permissions:
+  contents: read
+# A newer push replaces a run that is still waiting for the older one to go live.
+concurrency:
+  group: site-checks
+  cancel-in-progress: true
 jobs:
   arabic-page:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -19,18 +25,15 @@ jobs:
       - name: ar/index.html matches index.html and the AR list in site.js
         run: node tools/build-ar.mjs --check
   live:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Wait for Cloudflare to publish this commit
-        if: github.event_name == 'push'
-        run: sleep 150
       - name: Install a headless browser
         run: |
           npm install --no-save --prefix /tmp/pw playwright@1.49.1
           /tmp/pw/node_modules/.bin/playwright install --with-deps chromium
-      - name: Check the live site
-        run: NODE_PATH=/tmp/pw/node_modules node tools/live-check.cjs
+      - name: Check the live site (after a push, first waits up to 10 minutes for Cloudflare to publish it)
+        run: NODE_PATH=/tmp/pw/node_modules WAIT=${{ github.event_name == 'push' && 600 || 0 }} node tools/live-check.cjs

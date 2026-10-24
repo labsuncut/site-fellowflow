@@ -3,7 +3,15 @@
 (function () {
   var WHATSAPP = "962796237444";
   var root = document.documentElement;
+  // Old shared links used ?lang=ar on the English page: send them to the Arabic page, keeping any other
+  // parameters. This runs before anything else, so the English page never starts to draw.
+  if (root.lang !== "ar" && /[?&]lang=ar\b/.test(location.search)) {
+    location.replace("ar/" + location.search.replace(/([?&])lang=ar\b&?/, "$1").replace(/[?&]$/, "") + location.hash);
+    return;
+  }
   root.classList.add("js");
+  // The old language switch saved the choice in the browser; each language has its own page now.
+  try { localStorage.removeItem("ff-lang"); } catch (e) {}
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var coarse = window.matchMedia("(pointer: coarse)").matches;
 
@@ -11,8 +19,6 @@
   // ar/index.html, built from index.html and the AR list below by tools/build-ar.mjs. After changing any
   // words in either file, run `node tools/build-ar.mjs` and commit both pages.
   var page = root.lang === "ar" ? "ar" : "en";
-  // Old shared links used ?lang=ar on the English page: send them to the Arabic page.
-  if (page === "en" && /[?&]lang=ar\b/.test(location.search)) { location.replace("ar/" + location.hash); return; }
 
   // Arabic text (the source for ar/index.html). English lives in index.html.
   var AR = {
@@ -277,6 +283,9 @@
   var err = document.getElementById("form-err");
   var sent = document.getElementById("form-sent");
   var bubble = document.getElementById("bubble-text");
+  // The button starts disabled in the HTML, so without this script the form can't send the answers
+  // anywhere (a <noscript> WhatsApp link stands in for it).
+  form.querySelector("button[type=submit]").disabled = false;
   function message(preview) {
     var m = MSG[lang()];
     var biz = form.biz.value.trim(), name = form.name.value.trim(), link = form.link.value.trim();

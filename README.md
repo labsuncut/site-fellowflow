@@ -4,7 +4,7 @@ Our own brand website, built and run the same way we build for clients. Plain HT
 
 - Words: English in `index.html`, Arabic in `assets/js/site.js` (the `AR` list, same keys as `data-i18n`).
 - Arabic page: `ar/index.html` is built from those two files so Google can read the Arabic (`https://fellowflow.ai/ar/`). After changing any words, run `node tools/build-ar.mjs` and commit both pages. Never edit `ar/index.html` by hand. The language button is a link between `/` and `/ar/`, and both pages carry `hreflang` links to each other.
-- Privacy policy: `privacy/index.html` (linked in every footer). If the site ever adds a form service, cookie, tracker or other outside service, update that page and its date in the same change.
+- Privacy policy: `privacy/index.html` (linked in every footer). If the site ever adds a form service, cookie, tracker or other outside service, or the team starts keeping client details in a new tool, update that page and its date in the same change (and the Arabic page once it exists).
 - Checks: every push to `main` runs `.github/workflows/site-checks.yml` on GitHub. It checks that the Arabic page is up to date, then waits for Cloudflare to publish and checks the live site (pages, links, console errors, and that the live HTML matches this repository). See the Actions tab.
 - Colours: top of `assets/css/site.css` (navy and cream from the logo, gold highlights).
 - Logo: `assets/img/logo/` (cut from the 640px JPEG; replace with the vector when we have it).

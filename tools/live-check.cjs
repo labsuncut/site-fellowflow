@@ -13,11 +13,36 @@ const problems = [];
 const say = (...a) => console.log(...a);
 const problem = (msg) => { problems.push(msg); say('  PROBLEM: ' + msg); };
 
-// What Cloudflare may add to a page on the way out: its analytics beacon and e-mail protection.
-const injected = (html) => (html.match(/<script[^>]*(cloudflareinsights|cdn-cgi)[^>]*>(?:<\/script>)?/g) || []);
-const clean = (html) => html.replace(/<script[^>]*(cloudflareinsights|cdn-cgi)[^>]*>(?:\s*<\/script>)?/g, '').replace(/\s+$/, '');
+// Cloudflare's visit counter. Our security rule blocks it until the founders decide whether to allow it
+// (the "visit counter" question in the FellowFlow website thread); until then its errors are noted, not failed.
+const KNOWN = /static\.cloudflareinsights\.com/;
+// What Cloudflare may add to a page on the way out: its analytics beacon and e-mail protection, which
+// hides addresses as /cdn-cgi/l/email-protection#<hex> and <span data-cfemail="<hex>">. Undo both to compare.
+const injected = (html) => (html.match(/<script[^>]*(cloudflareinsights|cdn-cgi)[^>]*>(?:<\/script>)?|data-cfemail="[0-9a-f]+"/g) || []);
+const unhide = (hex) => { const k = parseInt(hex.slice(0, 2), 16); let out = ''; for (let i = 2; i < hex.length; i += 2) out += String.fromCharCode(parseInt(hex.slice(i, i + 2), 16) ^ k); return out; };
+const clean = (html) => html
+  .replace(/<!-- Cloudflare Pages Analytics -->/g, '')
+  .replace(/<script[^>]*(cloudflareinsights|cdn-cgi)[^>]*>(?:\s*<\/script>)?/g, '')
+  .replace(/\/cdn-cgi\/l\/email-protection#([0-9a-f]+)/g, (m, hex) => 'mailto:' + unhide(hex))
+  .replace(/<span class="__cf_email__" data-cfemail="([0-9a-f]+)">[^<]*<\/span>/g, (m, hex) => unhide(hex))
+  .replace(/\r\n/g, '\n').replace(/\s+$/, '');
+const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i++; return `at character ${i}:\n      live: ${JSON.stringify(a.slice(Math.max(0, i - 60), i + 80))}\n      repo: ${JSON.stringify(b.slice(Math.max(0, i - 60), i + 80))}`; };
 
 (async () => {
+  // After a push, wait (up to WAIT seconds) until Cloudflare serves this commit's homepage.
+  const wait = Number(process.env.WAIT || 0);
+  if (wait) {
+    const want = clean(readFileSync(join(root, 'index.html'), 'utf8'));
+    const until = Date.now() + wait * 1000;
+    for (;;) {
+      let live = '';
+      try { live = clean(await (await fetch(SITE + '/', { cache: 'no-store' })).text()); } catch (e) {}
+      if (live === want) { say('Cloudflare is serving this commit.\n'); break; }
+      if (Date.now() > until) { say(`Still not serving this commit after ${wait} s; checking anyway.\n`); break; }
+      await new Promise((r) => setTimeout(r, 20000));
+    }
+  }
+
   say(`== Addresses (${SITE})`);
   const urls = ['/', '/ar/', '/ar', '/privacy/', '/privacy', '/?lang=ar', '/sitemap.xml', '/robots.txt', '/favicon.ico', '/no-such-page', '/tools/build-ar.mjs', '/README.md', '/.github/workflows/site-checks.yml'];
   const expect = { '/no-such-page': 404, '/tools/build-ar.mjs': 404, '/README.md': 404, '/.github/workflows/site-checks.yml': 404 };
@@ -40,7 +65,8 @@ const clean = (html) => html.replace(/<script[^>]*(cloudflareinsights|cdn-cgi)[^
     const extra = injected(html);
     say(`  ${path}: ${r.status}, ${html.length} bytes, content-type ${r.headers.get('content-type')}`);
     say(`    added by Cloudflare: ${extra.length ? extra.join(' ') : 'nothing'}`);
-    if (clean(html) === clean(local)) say('    same as the repository'); else problem(`${path} differs from ${file} (Cloudflare has not published this commit yet, or something rewrote the page)`);
+    if (clean(html) === clean(local)) say('    same as the repository');
+    else { problem(`${path} differs from ${file} (Cloudflare has not published this commit yet, or something rewrote the page)`); say('    ' + firstDiff(clean(html), clean(local))); }
     const lang = (html.match(/<html[^>]*>/) || [''])[0];
     const canon = (html.match(/<link rel="canonical" href="([^"]+)"/) || [])[1];
     const alts = (html.match(/<link rel="alternate" hreflang="[^"]+" href="[^"]+"/g) || []).map((l) => l.replace(/.*hreflang="([^"]+)" href="([^"]+)"/, '$1=$2'));
@@ -74,8 +100,13 @@ const clean = (html) => html.replace(/<script[^>]*(cloudflareinsights|cdn-cgi)[^
       if (info.bad) problem(`${path} ${size.name}: "${info.bad}" shows on the page`);
       if (info.images.length) problem(`${path} ${size.name}: images not loaded: ${info.images.join(', ')}`);
       if (info.overflow) problem(`${path} ${size.name}: the page scrolls sideways`);
-      errs.forEach((e) => problem(`${path} ${size.name}: console error: ${e}`));
-      failed.forEach((f) => problem(`${path} ${size.name}: request failed: ${f}`));
+      const report = (what) => (e) => (KNOWN.test(e) ? say(`    known, waiting on the visit-counter decision: ${what} ${e}`) : problem(`${path} ${size.name}: ${what} ${e}`));
+      errs.forEach(report('console error:'));
+      failed.forEach(report('request failed:'));
+      // The privacy page says the site sets no cookies of its own; Cloudflare's security cookies are the only ones allowed.
+      const cookies = (await ctx.cookies()).map((c) => c.name);
+      say(`    cookies: ${cookies.join(', ') || 'none'}`);
+      cookies.filter((n) => !/^(__cf_bm|cf_clearance|_cfuvid|__cflb)$/.test(n)).forEach((n) => problem(`${path} ${size.name}: cookie "${n}" is set, which the privacy page does not mention`));
       for (const l of new Set(info.links.map((h) => h.split('#')[0]))) {
         const r = await ctx.request.get(l);
         if (r.status() !== 200) problem(`${path}: link ${l} answered ${r.status()}`);

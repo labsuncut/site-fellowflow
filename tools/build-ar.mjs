@@ -11,7 +11,7 @@ import vm from 'node:vm';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://fellowflow.ai';
-const read = (f) => readFileSync(join(root, f), 'utf8');
+const read = (f) => readFileSync(join(root, f), 'utf8').replace(/\r\n/g, '\n'); // Windows line endings too
 const fail = (msg) => { console.error('build-ar: ' + msg); process.exit(1); };
 const attr = (s) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const text = (html) => html.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
@@ -25,6 +25,8 @@ function arabic() {
   for (; i < js.length; i++) {
     const c = js[i];
     if (quote) { if (c === '\\') i++; else if (c === quote) quote = null; continue; }
+    if (c === '/' && js[i + 1] === '/') { i = js.indexOf('\n', i); continue; } // comments may hold quotes
+    if (c === '/' && js[i + 1] === '*') { i = js.indexOf('*/', i) + 1; continue; }
     if (c === '"' || c === "'") quote = c;
     else if (c === '{') depth++;
     else if (c === '}' && --depth === 0) break;
@@ -90,7 +92,9 @@ function build() {
   html = html.replace(/(\s(?:src|href|poster))="(?!#|[a-z][a-z0-9+.-]*:|\/|\.\.\/)([^"]*)"/gi, (m, a, url) => `${a}="../${url}"`);
   // The language link goes back to English; the privacy link stays in Arabic once ar/privacy/ exists.
   swap('<a class="lang" id="lang" href="../ar/" hreflang="ar" lang="ar">عربي</a>', '<a class="lang" id="lang" href="../" hreflang="en" lang="en">English</a>', 'language link');
+  // Until it does, the link says it leads to an English page.
   if (existsSync(join(root, 'ar/privacy/index.html'))) swap('href="../privacy/" data-i18n="foot_privacy"', 'href="privacy/" data-i18n="foot_privacy"');
+  else swap('href="../privacy/" data-i18n="foot_privacy"', 'href="../privacy/" hreflang="en" data-i18n="foot_privacy"');
 
   // Checks before writing.
   const after = i18nElements(html);
@@ -98,13 +102,16 @@ function build() {
   if (wrong.length) fail('these keys did not end up in Arabic: ' + wrong.join(', '));
   const stray = html.match(/\s(?:src|href|poster)="assets\/[^"]*"/g);
   if (stray) fail('paths not moved up a folder: ' + stray.join(' '));
+  // This script only moves src, href and poster. Anything else that points at a file needs adding above.
+  const other = html.match(/\ssrcset="[^"]*"|url\((?!["']?(?:data:|https?:|#|\/))[^)]*\)/g);
+  if (other) fail('file paths this script does not move yet: ' + other.join(' '));
   if (/\sdata-i18n="[^"]*"[^>]*>\s*<\//.test(html)) fail('an element with data-i18n is empty');
   return { html, keys: els.length };
 }
 
 const { html, keys } = build();
 const target = join(root, 'ar/index.html');
-const current = existsSync(target) ? readFileSync(target, 'utf8') : '';
+const current = existsSync(target) ? readFileSync(target, 'utf8').replace(/\r\n/g, '\n') : '';
 if (process.argv.includes('--check')) {
   if (current !== html) { console.error('build-ar: ar/index.html is out of date. Run: node tools/build-ar.mjs'); process.exit(1); }
   console.log(`ar/index.html is up to date (${keys} Arabic texts).`);
