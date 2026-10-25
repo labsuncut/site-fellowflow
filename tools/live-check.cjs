@@ -80,11 +80,12 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
       const ctx = await browser.newContext({ viewport: { width: size.width, height: size.height }, isMobile: !!size.isMobile, hasTouch: !!size.hasTouch });
       const page = await ctx.newPage();
       const errs = [], failed = [], counted = [];
-      page.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); });
-      page.on('pageerror', (e) => errs.push('page error: ' + e.message));
       // Cloudflare's visit counter (allowed by the founders on 25 Oct 2026) reports each visit to /cdn-cgi/rum.
-      // Its answers are Cloudflare's business, so they are listed below rather than failing the check.
+      // Its answers are Cloudflare's business, so they are listed below rather than failing the check. A blocked
+      // or broken counter script still fails it.
       const rum = (u) => /\/cdn-cgi\/rum/.test(u);
+      page.on('console', (m) => { if (m.type() !== 'error') return; if (rum((m.location() || {}).url || '')) counted.push('console: ' + m.text()); else errs.push(m.text()); });
+      page.on('pageerror', (e) => errs.push('page error: ' + e.message));
       page.on('requestfailed', (q) => (rum(q.url()) ? counted : failed).push((rum(q.url()) ? '' : q.url() + ' ') + ((q.failure() || {}).errorText || 'failed')));
       page.on('response', (q) => { if (rum(q.url())) counted.push(q.status()); else if (q.status() >= 400) failed.push(q.status() + ' ' + q.url()); });
       await page.goto(SITE + path, { waitUntil: 'networkidle' });

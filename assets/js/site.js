@@ -15,8 +15,16 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var coarse = window.matchMedia("(pointer: coarse)").matches;
   // Smooth scrolling (site.css) is for clicks and taps. While someone moves with the Tab key, the page jumps
-  // straight to each link, so what has focus is always on screen.
-  document.addEventListener("keydown", function (ev) { if (ev.key === "Tab") root.classList.add("keys"); }, true);
+  // straight to each link, so what has focus is always on screen. A Tab pressed while the page is still gliding
+  // leaves the glide on: the browser then steers it to the new link, where an instant jump would not stop it.
+  // A page opened at a #section glides there shortly after it loads, so that counts as gliding until it ends.
+  var scrolledAt = 0, settled = !location.hash;
+  if (!settled) {
+    window.addEventListener("scrollend", function () { settled = true; }, { once: true });
+    setTimeout(function () { settled = true; }, 3000);
+  }
+  window.addEventListener("scroll", function () { scrolledAt = Date.now(); }, { passive: true });
+  document.addEventListener("keydown", function (ev) { if (ev.key === "Tab" && settled && Date.now() - scrolledAt > 150) root.classList.add("keys"); }, true);
   document.addEventListener("pointerdown", function () { root.classList.remove("keys"); }, true);
 
   // Each language has its own page so search engines can read both: English is index.html, Arabic is
@@ -177,6 +185,9 @@
     setTimeout(begin, 1500);                                     // never wait longer than this for the picture
     intro.addEventListener("click", endIntro);
     document.addEventListener("keydown", function (ev) { if (ev.key === "Escape") endIntro(); });
+    // Someone who keeps pressing Tab past the skip link and the intro's Skip button wants the page, which the
+    // intro still covers: end it, so what they reach is visible.
+    document.addEventListener("focusin", function (ev) { if (!intro.contains(ev.target) && !ev.target.classList.contains("skip")) endIntro(); });
     setTimeout(function () { if (!introDone) endIntro(); }, 9500); // safety net
   } else {
     topLogo.classList.add("show");
