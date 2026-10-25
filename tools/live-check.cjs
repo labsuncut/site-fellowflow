@@ -13,9 +13,6 @@ const problems = [];
 const say = (...a) => console.log(...a);
 const problem = (msg) => { problems.push(msg); say('  PROBLEM: ' + msg); };
 
-// Cloudflare's visit counter. Our security rule blocks it until the founders decide whether to allow it
-// (the "visit counter" question in the FellowFlow website thread); until then its errors are noted, not failed.
-const KNOWN = /static\.cloudflareinsights\.com/;
 // What Cloudflare may add to a page on the way out: its analytics beacon and e-mail protection, which
 // hides addresses as /cdn-cgi/l/email-protection#<hex> and <span data-cfemail="<hex>">. Undo both to compare.
 const injected = (html) => (html.match(/<script[^>]*(cloudflareinsights|cdn-cgi)[^>]*>(?:<\/script>)?|data-cfemail="[0-9a-f]+"/g) || []);
@@ -82,11 +79,14 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
     for (const path of Object.keys(PAGES)) {
       const ctx = await browser.newContext({ viewport: { width: size.width, height: size.height }, isMobile: !!size.isMobile, hasTouch: !!size.hasTouch });
       const page = await ctx.newPage();
-      const errs = [], failed = [];
+      const errs = [], failed = [], counted = [];
       page.on('console', (m) => { if (m.type() === 'error') errs.push(m.text()); });
       page.on('pageerror', (e) => errs.push('page error: ' + e.message));
-      page.on('requestfailed', (q) => failed.push(q.url() + ' ' + ((q.failure() || {}).errorText || '')));
-      page.on('response', (q) => { if (q.status() >= 400) failed.push(q.status() + ' ' + q.url()); });
+      // Cloudflare's visit counter (allowed by the founders on 25 Oct 2026) reports each visit to /cdn-cgi/rum.
+      // Its answers are Cloudflare's business, so they are listed below rather than failing the check.
+      const rum = (u) => /\/cdn-cgi\/rum/.test(u);
+      page.on('requestfailed', (q) => (rum(q.url()) ? counted : failed).push((rum(q.url()) ? '' : q.url() + ' ') + ((q.failure() || {}).errorText || 'failed')));
+      page.on('response', (q) => { if (rum(q.url())) counted.push(q.status()); else if (q.status() >= 400) failed.push(q.status() + ' ' + q.url()); });
       await page.goto(SITE + path, { waitUntil: 'networkidle' });
       await page.waitForTimeout(7000); // let the opening play out and late scripts report
       await page.evaluate(async () => { for (let y = 0; y < document.documentElement.scrollHeight; y += 300) { window.scrollTo(0, y); await new Promise((r) => setTimeout(r, 80)); } });
@@ -102,9 +102,9 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
       if (info.bad) problem(`${path} ${size.name}: "${info.bad}" shows on the page`);
       if (info.images.length) problem(`${path} ${size.name}: images not loaded: ${info.images.join(', ')}`);
       if (info.overflow) problem(`${path} ${size.name}: the page scrolls sideways`);
-      const report = (what) => (e) => (KNOWN.test(e) ? say(`    known, waiting on the visit-counter decision: ${what} ${e}`) : problem(`${path} ${size.name}: ${what} ${e}`));
-      errs.forEach(report('console error:'));
-      failed.forEach(report('request failed:'));
+      errs.forEach((e) => problem(`${path} ${size.name}: console error: ${e}`));
+      failed.forEach((e) => problem(`${path} ${size.name}: request failed: ${e}`));
+      say(`    visit counter: ${counted.length ? 'reported (' + counted.join(', ') + ')' : 'no report seen'}`);
       // The privacy page says the site sets no cookies of its own; Cloudflare's security cookies are the only ones allowed.
       const cookies = (await ctx.cookies()).map((c) => c.name);
       say(`    cookies: ${cookies.join(', ') || 'none'}`);
