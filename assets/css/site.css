@@ -299,7 +299,10 @@
 }
 html[lang="ar"] { --serif: "Amiri", serif; --sans: "IBM Plex Sans Arabic", system-ui, sans-serif; }
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+html { scroll-padding-top: 90px; }
+/* Links within the page glide there on a click or tap. Someone moving with the Tab key jumps straight to each
+   link instead (site.js adds .keys), so the focus ring is never left off screen while the page glides. */
+@media (prefers-reduced-motion: no-preference) { html.js:not(.keys) { scroll-behavior: smooth; } }
 body { margin: 0; background: var(--brand); color: var(--on-navy); font: 400 17px/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 main { position: relative; }
 
@@ -754,6 +757,8 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
 .foot a { text-decoration: none; }
 .foot a:hover { color: var(--cream); }
 .foot p { margin: 0; }
+/* A link alone on its line gets a 24px-tall tap area; the negative margin keeps the footer spacing as it was. */
+.foot p > a:only-child { display: inline-block; padding: 4px 0; margin: -4px 0; }
 .fine { font-size: .85rem; }
 
 .callbar { display: none; }
@@ -764,7 +769,6 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
 /* Keyboard users: anything that takes focus shows at once, without waiting for its scroll reveal. */
 .js .reveal:focus-within, .js .reveal:focus, .js .sheet:focus-within { opacity: 1; transform: none; transition-duration: .15s; transition-delay: 0s; }
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   .js .reveal, .words .w, .js .sheet { opacity: 1; transform: none; transition: none; }
   .spin, .s-spin, .streams path, .bubble p::after, .orb, .drift img, .glow, .flight, .flutter, .bubble-dot, .pulse { animation: none; }
   .bubble-dot { opacity: .6; bottom: auto; top: calc(var(--x) * .6); }

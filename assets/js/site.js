@@ -14,6 +14,10 @@
   try { localStorage.removeItem("ff-lang"); } catch (e) {}
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var coarse = window.matchMedia("(pointer: coarse)").matches;
+  // Smooth scrolling (site.css) is for clicks and taps. While someone moves with the Tab key, the page jumps
+  // straight to each link, so what has focus is always on screen.
+  document.addEventListener("keydown", function (ev) { if (ev.key === "Tab") root.classList.add("keys"); }, true);
+  document.addEventListener("pointerdown", function () { root.classList.remove("keys"); }, true);
 
   // Each language has its own page so search engines can read both: English is index.html, Arabic is
   // ar/index.html, built from index.html and the AR list below by tools/build-ar.mjs. After changing any
