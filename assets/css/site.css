@@ -787,8 +787,8 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
   .top-actions { gap: 10px; }
   /* The bottom bar (WhatsApp + first look) shows on tablets as well as phones. The footer's
      bottom padding already leaves room for it, and the scroll padding keeps
-     anything reached with Tab from stopping underneath it. */
-  html { scroll-padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
+     anything reached with Tab (on the page or in the open menu) from stopping underneath it. */
+  html, .menu { scroll-padding-bottom: calc(80px + env(safe-area-inset-bottom)); }
   .callbar { display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: rgba(5,12,26,.96); border-top: 1px solid var(--line-navy); padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); gap: 10px; }
   .callbar a { display: grid; place-items: center; height: 50px; border: 1px solid rgba(245,228,200,.4); color: var(--cream); text-decoration: none; font-weight: 600; letter-spacing: .04em; }
   .callbar a.primary { background: var(--gold-grad); color: var(--brand); border-color: transparent; }

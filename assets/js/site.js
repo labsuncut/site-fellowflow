@@ -17,14 +17,23 @@
   // Smooth scrolling (site.css) is for clicks and taps. While someone moves with the Tab key, the page jumps
   // straight to each link, so what has focus is always on screen. A Tab pressed while the page is still gliding
   // leaves the glide on: the browser then steers it to the new link, where an instant jump would not stop it.
-  // A page opened at a #section glides there shortly after it loads, so that counts as gliding until it ends.
-  var scrolledAt = 0, settled = !location.hash;
+  // The same goes for a Tab just after the visitor scrolled with the wheel, Space, Page Down or the arrows, which
+  // the browser also animates. A page opened at a #section glides there after it loads, so that counts too.
+  var scrolledAt = 0, userScrolledAt = 0, settled = !location.hash;
   if (!settled) {
     window.addEventListener("scrollend", function () { settled = true; }, { once: true });
     setTimeout(function () { settled = true; }, 3000);
   }
+  function userScrolled() { userScrolledAt = Date.now(); }
   window.addEventListener("scroll", function () { scrolledAt = Date.now(); }, { passive: true });
-  document.addEventListener("keydown", function (ev) { if (ev.key === "Tab" && settled && Date.now() - scrolledAt > 150) root.classList.add("keys"); }, true);
+  window.addEventListener("wheel", userScrolled, { passive: true });
+  window.addEventListener("touchmove", userScrolled, { passive: true });
+  document.addEventListener("keydown", function (ev) {
+    var now = Date.now();
+    if (/^(PageUp|PageDown|Home|End|ArrowUp|ArrowDown| )$/.test(ev.key) && !(ev.target.closest && ev.target.closest("input, textarea, select, button"))) userScrolled();
+    // Tab's own jumps also scroll the page, so once Tab is in use only the visitor's scrolling turns the glide back on.
+    if (ev.key === "Tab") root.classList.toggle("keys", settled && now - userScrolledAt > 500 && (root.classList.contains("keys") || now - scrolledAt > 150));
+  }, true);
   document.addEventListener("pointerdown", function () { root.classList.remove("keys"); }, true);
 
   // Each language has its own page so search engines can read both: English is index.html, Arabic is
@@ -323,9 +332,16 @@
   form.addEventListener("input", updateBubble);
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
-    // Take the visitor to the first empty field; the message sits at the top of the form, just above it.
+    // Take the visitor to the first empty field. The message sits at the top of the form, just above the business
+    // name. The visitor's name is lower down, so for that one the page stops with the field at the bottom of the
+    // screen, which keeps the message in view above it.
     var missing = !form.biz.value.trim() ? form.biz : !form.name.value.trim() ? form.name : null;
-    if (missing) { err.hidden = false; sent.hidden = true; err.scrollIntoView({ block: "center" }); missing.focus({ preventScroll: true }); return; }
+    if (missing) {
+      err.hidden = false; sent.hidden = true;
+      if (missing === form.biz) err.scrollIntoView({ block: "center" }); else missing.scrollIntoView({ block: "end" });
+      missing.focus({ preventScroll: true });
+      return;
+    }
     err.hidden = true;
     sent.hidden = false;
     window.open("https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message(false)), "_blank", "noopener");
@@ -333,6 +349,8 @@
 
   // Phone and tablet menu. Opens from the header button, closes on the button, on a link, on Escape,
   // and whenever the window grows past the tablet width, so it can never be left open on a desktop.
+  // While it is open, the page and footer behind it are switched off (inert), so Tab stays on what can be
+  // seen: the header, the menu and the bottom bar.
   var menuBtn = document.getElementById("menu-btn");
   var menu = document.getElementById("menu");
   var menuOpen = false;
@@ -347,12 +365,15 @@
     menu.setAttribute("aria-hidden", open ? "false" : "true");
     menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
     root.classList.toggle("menu-open", open);
+    document.getElementById("main").inert = open;
+    document.querySelector(".foot").inert = open;
     labelMenu();
   }
   menuBtn.addEventListener("click", function () { setMenu(!menuOpen); });
-  menu.addEventListener("click", function (ev) {
-    // A tap on a link closes the panel first; the browser then scrolls to the section as usual.
-    if (ev.target.closest("a")) setMenu(false);
+  document.addEventListener("click", function (ev) {
+    // A tap on a link (in the menu, the header or the bottom bar) closes the panel first; the browser then
+    // scrolls to the section as usual.
+    if (menuOpen && ev.target.closest("a")) setMenu(false);
   });
   document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && menuOpen) { setMenu(false); menuBtn.focus(); } });
   window.addEventListener("resize", function () { if (menuOpen && window.innerWidth > 1000) setMenu(false); });
