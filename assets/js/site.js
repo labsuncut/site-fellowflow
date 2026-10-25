@@ -15,26 +15,40 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var coarse = window.matchMedia("(pointer: coarse)").matches;
   // Smooth scrolling (site.css) is for clicks and taps. While someone moves with the Tab key, the page jumps
-  // straight to each link, so what has focus is always on screen. A Tab pressed while the page is still gliding
-  // leaves the glide on: the browser then steers it to the new link, where an instant jump would not stop it.
-  // The same goes for a Tab just after the visitor scrolled with the wheel, Space, Page Down or the arrows, which
-  // the browser also animates. A page opened at a #section glides there after it loads, so that counts too.
-  var scrolledAt = 0, userScrolledAt = 0, settled = !location.hash;
+  // straight to each link, so what has focus is always on screen. A Tab pressed while the page is still moving
+  // glides instead: the browser then steers the glide to the new link, where an instant jump would not stop it.
+  // The page moves during a glide (after a tap on a link, or after opening the page at a #section) and while the
+  // browser animates the visitor's own wheel, swipe, Space, Page Down or arrow-key scroll.
+  var scrolledAt = 0, moving = false, ownScroll = false, ownScrollAt = 0, settled = !location.hash, stopTimer;
   if (!settled) {
     window.addEventListener("scrollend", function () { settled = true; }, { once: true });
     setTimeout(function () { settled = true; }, 3000);
   }
-  function userScrolled() { userScrolledAt = Date.now(); }
-  window.addEventListener("scroll", function () { scrolledAt = Date.now(); }, { passive: true });
-  window.addEventListener("wheel", userScrolled, { passive: true });
-  window.addEventListener("touchmove", userScrolled, { passive: true });
+  function stopped() { moving = false; ownScroll = false; }
+  function ownScrolled() { ownScroll = true; ownScrollAt = Date.now(); }
+  window.addEventListener("scroll", function () {
+    scrolledAt = Date.now(); moving = true;
+    // Browsers without the scrollend event: the page has stopped once no scroll arrives for a moment.
+    if (!("onscrollend" in window)) { clearTimeout(stopTimer); stopTimer = setTimeout(stopped, 100); }
+  }, { passive: true });
+  window.addEventListener("scrollend", stopped);
+  window.addEventListener("wheel", ownScrolled, { passive: true });
+  window.addEventListener("touchmove", ownScrolled, { passive: true });
   document.addEventListener("keydown", function (ev) {
     var now = Date.now();
-    if (/^(PageUp|PageDown|Home|End|ArrowUp|ArrowDown| )$/.test(ev.key) && !(ev.target.closest && ev.target.closest("input, textarea, select, button"))) userScrolled();
-    // Tab's own jumps also scroll the page, so once Tab is in use only the visitor's scrolling turns the glide back on.
-    if (ev.key === "Tab") root.classList.toggle("keys", settled && now - userScrolledAt > 500 && (root.classList.contains("keys") || now - scrolledAt > 150));
+    if (/^(PageUp|PageDown|Home|End|ArrowUp|ArrowDown| )$/.test(ev.key) && !(ev.target.closest && ev.target.closest("input, textarea, select, button"))) ownScrolled();
+    if (ev.key !== "Tab") return;
+    // The visitor's own scroll (or a tapped link's glide) is running or about to start: glide.
+    if (ownScroll && now - Math.max(ownScrollAt, scrolledAt) <= 500) root.classList.remove("keys");
+    // The page is still: jump. During any other glide (one from an earlier Tab, say) nothing changes, so a glide
+    // keeps gliding and quick Tabs keep jumping.
+    else if (settled && !(moving && now - scrolledAt < 300)) { ownScroll = false; root.classList.add("keys"); }
   }, true);
-  document.addEventListener("pointerdown", function () { root.classList.remove("keys"); }, true);
+  document.addEventListener("pointerdown", function (ev) {
+    root.classList.remove("keys");
+    // A tapped link to a section glides there, and the page may only start to move a moment later.
+    if (ev.target.closest && ev.target.closest('a[href^="#"]')) ownScrolled();
+  }, true);
 
   // Each language has its own page so search engines can read both: English is index.html, Arabic is
   // ar/index.html, built from index.html and the AR list below by tools/build-ar.mjs. After changing any
@@ -332,13 +346,13 @@
   form.addEventListener("input", updateBubble);
   form.addEventListener("submit", function (ev) {
     ev.preventDefault();
-    // Take the visitor to the first empty field. The message sits at the top of the form, just above the business
-    // name. The visitor's name is lower down, so for that one the page stops with the field at the bottom of the
-    // screen, which keeps the message in view above it.
+    // Take the visitor to the first empty field, with the message moved just above it. The page stops with the
+    // field at the bottom of the screen, which leaves the most room for the message, even on a phone held sideways.
     var missing = !form.biz.value.trim() ? form.biz : !form.name.value.trim() ? form.name : null;
     if (missing) {
       err.hidden = false; sent.hidden = true;
-      if (missing === form.biz) err.scrollIntoView({ block: "center" }); else missing.scrollIntoView({ block: "end" });
+      missing.closest("label").before(err);
+      missing.scrollIntoView({ block: "end" });
       missing.focus({ preventScroll: true });
       return;
     }
@@ -353,6 +367,8 @@
   // seen: the header, the menu and the bottom bar.
   var menuBtn = document.getElementById("menu-btn");
   var menu = document.getElementById("menu");
+  var main = document.getElementById("main"), foot = document.querySelector(".foot");
+  var tablet = window.matchMedia("(max-width: 1000px)"); // the width where site.css shows the menu
   var menuOpen = false;
   function labelMenu() {
     var d = lang() === "ar" ? AR : MENU_LABEL.en;
@@ -365,8 +381,10 @@
     menu.setAttribute("aria-hidden", open ? "false" : "true");
     menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
     root.classList.toggle("menu-open", open);
-    document.getElementById("main").inert = open;
-    document.querySelector(".foot").inert = open;
+    // Focus left on the page (some browsers don't move it to a tapped button) moves to the menu button first.
+    if (open && (main.contains(document.activeElement) || foot.contains(document.activeElement))) menuBtn.focus({ preventScroll: true });
+    main.inert = open;
+    foot.inert = open;
     labelMenu();
   }
   menuBtn.addEventListener("click", function () { setMenu(!menuOpen); });
@@ -376,7 +394,7 @@
     if (menuOpen && ev.target.closest("a")) setMenu(false);
   });
   document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && menuOpen) { setMenu(false); menuBtn.focus(); } });
-  window.addEventListener("resize", function () { if (menuOpen && window.innerWidth > 1000) setMenu(false); });
+  window.addEventListener("resize", function () { if (menuOpen && !tablet.matches) setMenu(false); });
   window.addEventListener("pageshow", function () { setMenu(false); });
 
   // Start

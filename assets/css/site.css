@@ -299,7 +299,7 @@
 }
 html[lang="ar"] { --serif: "Amiri", serif; --sans: "IBM Plex Sans Arabic", system-ui, sans-serif; }
 * { box-sizing: border-box; }
-html { scroll-padding-top: 90px; }
+html, .menu { scroll-padding-top: 90px; }
 /* Links within the page glide there on a click or tap. Someone moving with the Tab key jumps straight to each
    link instead (site.js adds .keys), so the focus ring is never left off screen while the page glides. */
 @media (prefers-reduced-motion: no-preference) { html.js:not(.keys) { scroll-behavior: smooth; } }
