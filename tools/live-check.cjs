@@ -57,8 +57,10 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
     try {
       const r = await fetch(SITE + f, { headers: { Range: 'bytes=0-1023' } });
       const type = r.headers.get('content-type') || '', total = (r.headers.get('content-range') || '').split('/')[1] || r.headers.get('content-length') || '?';
-      say(`  ${f} -> ${r.status} ${type}, ${total} bytes`);
-      if (r.status !== 206) problem(`${f} does not answer range requests (${r.status}), so the film cannot be scrubbed`);
+      // 206 = the server sends just the part asked for (best for seeking). 200 = it sends the whole file, which still
+      // plays and scrubs once downloaded (the files have their index at the front), so it is noted, not failed.
+      say(`  ${f} -> ${r.status} ${type}, ${total} bytes${r.status === 206 ? ' (range answered)' : r.status === 200 ? ' (whole file sent; seeking waits for the download)' : ''}`);
+      if (r.status !== 206 && r.status !== 200) problem(`${f} answered ${r.status}`);
       if (!/^(video|image)\//.test(type)) problem(`${f} has content-type "${type}"`);
     } catch (e) { problem(`${f} -> ${e.cause ? e.cause.code : e.message}`); }
   }
