@@ -30,7 +30,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="FellowFlow | لنساعد نشاطك التجاري على التدفّق بشكل أفضل.">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../assets/css/site.css?v=30">
+<link rel="stylesheet" href="../assets/css/site.css?v=31">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -147,27 +147,34 @@
 
 <!-- 1. Hero. Beside the headline the mark drifts like a butterfly: a slow wandering flight, a soft
      wing-like tilt, a faint trail behind it, two small ones further off, and gold dust rising. -->
-<section class="hero">
-  <div class="wrap hero-in">
-    <div class="hero-copy">
-      <p class="eyebrow reveal"><span class="rule"></span><span data-i18n="hero_eyebrow">الهوية الرقمية للأعمال · عمّان</span></p>
-      <h1 class="words" data-i18n="hero_h1">لنساعد نشاطك التجاري على <em>التدفّق بشكل أفضل.</em></h1>
-      <p class="lede reveal" data-i18n="hero_lede">نفهم نشاطك التجاري أولًا. ثم نبني هويته الرقمية: الموقع، وكيف يجده العملاء ويصلون إليه.</p>
-      <div class="cta-row reveal">
-        <a class="btn btn-gold" href="#audit" data-i18n="hero_cta1">احجز نظرة أولى مجانية</a>
-        <a class="btn btn-line" href="#work" data-i18n="hero_cta2">شاهد أعمالنا</a>
+<section class="hero" id="hero">
+  <!-- The hero film: a few seconds of film that play as the visitor scrolls, forwards and back (site.js sets
+       the frame from the scroll position). The tall section is the scroll distance; the stage stays pinned.
+       If the film cannot load, the still (poster) shows instead and the words still work. -->
+  <div class="stage-pin">
+    <div class="film" aria-hidden="true">
+      <video id="film" muted playsinline preload="auto" poster="../assets/img/hero-poster.jpg" tabindex="-1">
+        <source src="../assets/vid/hero.mp4" type="video/mp4">
+        <source src="../assets/vid/hero.webm" type="video/webm">
+      </video>
+      <img class="film-still" src="../assets/img/hero-poster.jpg" alt="" width="1280" height="720" fetchpriority="high">
+    </div>
+    <div class="wrap hero-in">
+      <div class="hero-copy beat" data-from="0" data-to="0.45">
+        <p class="eyebrow reveal"><span class="rule"></span><span data-i18n="hero_eyebrow">الهوية الرقمية للأعمال · عمّان</span></p>
+        <h1 class="words" data-i18n="hero_h1">لنساعد نشاطك التجاري على <em>التدفّق بشكل أفضل.</em></h1>
+        <p class="lede reveal" data-i18n="hero_lede">نفهم نشاطك التجاري أولًا. ثم نبني هويته الرقمية: الموقع، وكيف يجده العملاء ويصلون إليه.</p>
+        <div class="cta-row reveal">
+          <a class="btn btn-gold" href="#audit" data-i18n="hero_cta1">احجز نظرة أولى مجانية</a>
+          <a class="btn btn-line" href="#work" data-i18n="hero_cta2">شاهد أعمالنا</a>
+        </div>
+      </div>
+      <div class="hero-beat beat" data-from="0.5" data-to="1.01" aria-hidden="true">
+        <p class="hero-gain"><span data-i18n="gain1">يجدونك</span><i>·</i><span data-i18n="gain2">يفهمونك</span><i>·</i><em data-i18n="gain3">يصلون إليك</em></p>
+        <p class="lede" data-i18n="gain_p">لا يضيع أحد في الطريق.</p>
       </div>
     </div>
-    <div class="hero-art sky" id="sky" aria-hidden="true">
-      <div class="dust" id="dust"></div>
-      <div class="glow"></div>
-      <div class="flight ghost g3"><div class="flutter"><img src="../assets/img/logo/mark-cream.png" alt="" width="244" height="302" loading="lazy"></div></div>
-      <div class="flight ghost g2"><div class="flutter"><img src="../assets/img/logo/mark-cream.png" alt="" width="244" height="302" loading="lazy"></div></div>
-      <div class="flight ghost g1"><div class="flutter"><img src="../assets/img/logo/mark-cream.png" alt="" width="244" height="302" loading="lazy"></div></div>
-      <div class="flight lead"><div class="flutter"><img class="fly-mark" src="../assets/img/logo/mark-cream.png" alt="" width="244" height="302" fetchpriority="high"></div></div>
-      <div class="flight small s1"><div class="flutter"><img src="../assets/img/logo/mark-cream.png" alt="" width="244" height="302" loading="lazy"></div></div>
-      <div class="flight small s2"><div class="flutter"><img src="../assets/img/logo/mark-cream.png" alt="" width="244" height="302" loading="lazy"></div></div>
-    </div>
+    <div class="film-bar" aria-hidden="true"></div>
   </div>
 </section>
 
@@ -429,6 +436,6 @@
 </nav>
 
 <script src="../assets/js/intro.js?v=13" defer></script>
-<script src="../assets/js/site.js?v=25" defer></script>
+<script src="../assets/js/site.js?v=26" defer></script>
 </body>
 </html>
