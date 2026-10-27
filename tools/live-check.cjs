@@ -52,6 +52,16 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
     const want = expect[u];
     if (want ? r.status !== want : !(r.status === 200 || (r.status >= 301 && r.status <= 308))) problem(`${u} answered ${r.status}`);
   }
+  say('\n== Hero film files (range requests, as a browser seeks)');
+  for (const f of ['/assets/vid/hero.mp4', '/assets/vid/hero-m.mp4', '/assets/vid/hero.webm', '/assets/vid/hero-m.webm', '/assets/img/hero-poster.jpg']) {
+    try {
+      const r = await fetch(SITE + f, { headers: { Range: 'bytes=0-1023' } });
+      const type = r.headers.get('content-type') || '', total = (r.headers.get('content-range') || '').split('/')[1] || r.headers.get('content-length') || '?';
+      say(`  ${f} -> ${r.status} ${type}, ${total} bytes`);
+      if (r.status !== 206) problem(`${f} does not answer range requests (${r.status}), so the film cannot be scrubbed`);
+      if (!/^(video|image)\//.test(type)) problem(`${f} has content-type "${type}"`);
+    } catch (e) { problem(`${f} -> ${e.cause ? e.cause.code : e.message}`); }
+  }
   for (const u of ['https://www.fellowflow.ai/', 'http://fellowflow.ai/']) {
     try { const r = await fetch(u, { redirect: 'manual' }); say(`  ${u} -> ${r.status} ${r.headers.get('location') || ''}`); } catch (e) { say(`  ${u} -> ${e.cause ? e.cause.code : e.message}`); }
   }
@@ -86,7 +96,11 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
       const rum = (u) => /\/cdn-cgi\/rum/.test(u);
       page.on('console', (m) => { if (m.type() !== 'error') return; if (rum((m.location() || {}).url || '')) counted.push('console: ' + m.text()); else errs.push(m.text()); });
       page.on('pageerror', (e) => errs.push('page error: ' + e.message));
-      page.on('requestfailed', (q) => (rum(q.url()) ? counted : failed).push((rum(q.url()) ? '' : q.url() + ' ') + ((q.failure() || {}).errorText || 'failed')));
+      // A browser cancels its own video requests (net::ERR_ABORTED) once it has read enough, or when it moves on
+      // to the next <source>; that is how video loads, not a failure. Any other failed request still counts.
+      const media = [];
+      page.on('requestfailed', (q) => { const err = (q.failure() || {}).errorText || 'failed';
+        if (rum(q.url())) counted.push(err); else if (/\.(mp4|webm)(\?|$)/.test(q.url()) && err === 'net::ERR_ABORTED') media.push(q.url().split('/').pop()); else failed.push(q.url() + ' ' + err); });
       page.on('response', (q) => { if (rum(q.url())) counted.push(q.status()); else if (q.status() >= 400) failed.push(q.status() + ' ' + q.url()); });
       await page.goto(SITE + path, { waitUntil: 'networkidle' });
       await page.waitForTimeout(7000); // let the opening play out and late scripts report
@@ -98,6 +112,8 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
         images: Array.from(document.images).filter((i) => !i.complete || !i.naturalWidth).map((i) => i.getAttribute('src')),
         links: Array.from(document.querySelectorAll('a[href]')).map((a) => a.href).filter((h) => h.startsWith(location.origin)),
         overflow: document.documentElement.scrollWidth > window.innerWidth + 1,
+        film: (function () { var v = document.getElementById('film'); if (!v) return null; var h = document.getElementById('hero');
+          return { src: (v.currentSrc || '').split('/').pop(), ready: v.readyState, duration: Math.round((v.duration || 0) * 10) / 10, noVideo: !!(h && h.classList.contains('no-video')) }; })(),
       }));
       say(`  ${path} ${size.name}: lang=${info.lang} title="${info.title}"`);
       if (info.bad) problem(`${path} ${size.name}: "${info.bad}" shows on the page`);
@@ -105,6 +121,8 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
       if (info.overflow) problem(`${path} ${size.name}: the page scrolls sideways`);
       errs.forEach((e) => problem(`${path} ${size.name}: console error: ${e}`));
       failed.forEach((e) => problem(`${path} ${size.name}: request failed: ${e}`));
+      if (info.film) { say(`    hero film: ${info.film.noVideo ? 'could not play, poster shown' : (info.film.src || 'no source yet') + ', ready ' + info.film.ready + '/4, ' + info.film.duration + ' s'}${media.length ? ' (browser moved past ' + media.join(', ') + ')' : ''}`);
+        if (info.film.noVideo) problem(`${path} ${size.name}: the hero film could not play`); }
       say(`    visit counter: ${counted.length ? 'reported (' + counted.join(', ') + ')' : 'no report seen'}`);
       // The privacy page says the site sets no cookies of its own; Cloudflare's security cookies are the only ones allowed.
       const cookies = (await ctx.cookies()).map((c) => c.name);
