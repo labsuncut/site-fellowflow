@@ -152,7 +152,8 @@
        If the film cannot load, the still (poster) shows instead and the words still work. -->
   <div class="stage-pin">
     <div class="film" aria-hidden="true">
-      <video id="film" muted playsinline preload="auto" poster="assets/img/hero-poster.jpg" tabindex="-1">
+      <!-- preload="none": the script picks the phone or desktop copy first, then loads it. -->
+      <video id="film" muted playsinline preload="none" poster="assets/img/hero-poster.jpg" tabindex="-1">
         <source src="assets/vid/hero.mp4" type="video/mp4">
         <source src="assets/vid/hero.webm" type="video/webm">
       </video>
@@ -435,6 +436,6 @@
 </nav>
 
 <script src="assets/js/intro.js?v=13" defer></script>
-<script src="assets/js/site.js?v=26" defer></script>
+<script src="assets/js/site.js?v=27" defer></script>
 </body>
 </html>
