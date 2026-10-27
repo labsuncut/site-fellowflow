@@ -453,9 +453,14 @@ html[dir="rtl"] .film-bar { left: auto; right: 0; }
 /* A beat that is off is also hidden from the Tab key, once its fade has finished. */
 .hero-in > .beat { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(26px); transition: opacity .6s var(--ease), transform .8s var(--ease), visibility 0s linear .6s; pointer-events: none; }
 .hero-in > .beat.on { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition-delay: .1s; }
-.hero-copy { max-width: 760px; }
+.hero-in > .beat { isolation: isolate; }
+.hero-copy { max-width: 760px; position: relative; }
+/* A soft pool of navy behind the headline, so the gold threads passing behind it do not fight the words. */
+.hero-copy::before { content: ""; position: absolute; inset: -70px -160px -60px -160px; z-index: -1; background: radial-gradient(closest-side at 44% 50%, rgba(5,12,26,.88), rgba(5,12,26,.6) 55%, rgba(5,12,26,0) 100%); pointer-events: none; }
 .hero-copy .lede { text-shadow: 0 1px 12px rgba(5,12,26,.95); }
-.hero-beat { text-align: center; justify-self: center; width: 100%; max-width: 760px; padding: 44px 16px; background: radial-gradient(ellipse 65% 75% at center, rgba(5,12,26,.95), rgba(5,12,26,.8) 45%, rgba(5,12,26,0) 100%); }
+.hero-beat { text-align: center; justify-self: center; width: 100%; max-width: 760px; padding: 44px 16px; position: relative; }
+/* The same pool behind the three gains; closest-side so it fades out before any edge shows. */
+.hero-beat::before { content: ""; position: absolute; inset: -40px -200px; z-index: -1; background: radial-gradient(closest-side, rgba(5,12,26,.95), rgba(5,12,26,.82) 55%, rgba(5,12,26,0) 100%); pointer-events: none; }
 .hero-beat .lede { margin: 0 auto; font-family: var(--serif); font-style: italic; font-size: clamp(1.15rem, 1.8vw, 1.45rem); color: var(--cream); text-shadow: 0 1px 14px rgba(5,12,26,.9); }
 html[lang="ar"] .hero-beat .lede { font-style: normal; }
 .hero-gain { margin: 0 0 22px; font: 500 clamp(2.2rem, 5.4vw, 4.6rem)/1.15 var(--serif); color: #FBF5EA; letter-spacing: -0.01em; }
@@ -864,6 +869,9 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
   .logo-mark { width: 30px; } .logo-word { width: 126px; }
   .stage-pin { padding-top: 110px; }
   .hero-gain { font-size: min(7.4vw, 2.2rem); } /* the three gains stay on one line at 375px */
+  /* The whole width is text here, so the pool becomes a soft band from edge to edge. */
+  .hero-beat { width: auto; max-width: none; margin-inline: -20px; padding: 44px 32px; }
+  .hero-beat::before { inset: 0; background: linear-gradient(to bottom, rgba(5,12,26,0), rgba(5,12,26,.93) 16%, rgba(5,12,26,.93) 84%, rgba(5,12,26,0)); }
   h2 { max-width: none; }
   .gallery { grid-template-columns: 1fr; gap: 40px; }
   .drift img { width: 160px; }
