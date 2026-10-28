@@ -242,11 +242,6 @@
     film.querySelector("source:last-of-type").addEventListener("error", noFilm);
     film.addEventListener("loadedmetadata", function () { ready = true; place(); });
     // iPhone only decodes frames once the film has "played"; it is muted, so this is allowed without a tap.
-    // Phones get the lighter 1080-wide copy (hero-m); wider screens the 1920 copy. Then loading starts.
-    if (window.matchMedia && matchMedia("(max-width: 700px)").matches) {
-      film.querySelectorAll("source").forEach(function (src) { src.setAttribute("src", src.getAttribute("src").replace(/hero\.(mp4|webm)$/, "hero-m.$1")); });
-    }
-    film.preload = "auto"; film.load();
     var p = film.play(); if (p && p.then) p.then(function () { film.pause(); }, function () {});
     function progress() {
       var span = hero.offsetHeight - window.innerHeight;
