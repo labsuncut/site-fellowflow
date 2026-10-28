@@ -227,46 +227,7 @@
   var stagePath = document.querySelector(".stage-line path");
   if (stagePath) stagePath.style.setProperty("--len", stagePath.getTotalLength());
 
-  // The first screen: a short film that plays as the visitor scrolls. The scroll position through the tall hero
-  // section picks the moment in the film (0 = start, 1 = end); the shown moment eases toward it so a fast flick
-  // does not jump frames. Scrolling back plays it backwards. Each text beat shows for its stretch of the film.
-  // It is driven by the visitor's own scrolling, so it stays on with Reduce Motion. If the film cannot load,
-  // the still picture shows instead.
-  var hero = document.getElementById("hero"), film = document.getElementById("film");
-  if (hero && film) {
-    var pin = hero.querySelector(".stage-pin"), beats = hero.querySelectorAll(".beat");
-    var target = 0, shown = 0, ready = false, ticking = false;
-    var noFilm = function () { hero.classList.add("no-video"); };
-    // A browser tries the sources in turn: only the last one failing means no film at all.
-    film.addEventListener("error", noFilm);
-    film.querySelector("source:last-of-type").addEventListener("error", noFilm);
-    film.addEventListener("loadedmetadata", function () { ready = true; place(); });
-    // iPhone only decodes frames once the film has "played"; it is muted, so this is allowed without a tap.
-    var p = film.play(); if (p && p.then) p.then(function () { film.pause(); }, function () {});
-    function progress() {
-      var span = hero.offsetHeight - window.innerHeight;
-      return span > 0 ? Math.min(1, Math.max(0, -hero.getBoundingClientRect().top / span)) : 0;
-    }
-    function tick() {
-      shown += (target - shown) * 0.2;
-      if (Math.abs(target - shown) < 0.002) shown = target;
-      if (ready && film.duration && !film.seeking) film.currentTime = shown * Math.max(0, film.duration - 0.05);
-      if (shown === target) { ticking = false; return; }
-      requestAnimationFrame(tick);
-    }
-    function place() {
-      var q = progress();
-      pin.style.setProperty("--p", q);
-      beats.forEach(function (b) { b.classList.toggle("on", q >= +b.getAttribute("data-from") && q < +b.getAttribute("data-to")); });
-      target = q;
-      if (!ticking) { ticking = true; requestAnimationFrame(tick); }
-    }
-    window.addEventListener("scroll", place, { passive: true });
-    window.addEventListener("resize", place);
-    place();
-  }
-
-  // Gold dust rising around the mark (the earlier first screen; kept for pages that still use it).
+  // The first screen: gold dust, a handful of specks with random size and timing, rising around the mark.
   var sky = document.getElementById("sky"), dust = document.getElementById("dust");
   if (sky && dust) {
     var count = window.innerWidth < 640 ? 14 : 24;

@@ -435,38 +435,14 @@ html[dir="rtl"] .menu-in > a:not(.btn):hover span, html[dir="rtl"] .menu-in > a:
 html[lang="ar"] .menu-in > a:not(.btn) { font-size: clamp(2rem, 7vw, 3rem); }
 html.menu-open, html.menu-open body { overflow: hidden; }
 
-/* 1. Hero: a pinned stage inside a tall section. The section's height is the scroll distance of the film;
-   the stage stays on screen while the film plays, then the next section slides over it. */
-.hero { position: relative; z-index: 2; height: 300svh; padding: 0; } /* above the drifting layer: the film is the background here */
-.stage-pin { position: sticky; top: 0; height: 100svh; overflow: hidden; display: flex; flex-direction: column; padding: 150px 0 calc(var(--r) + 40px); }
-.film { position: absolute; inset: 0; background: var(--brand); }
-.film video, .film-still { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.film-still { display: none; }
-.no-video .film-still { display: block; }
-.no-video .film video { display: none; }
-/* A navy scrim so the words stay readable over the brightest frame. */
-.film::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,12,26,.88), rgba(5,12,26,.38) 55%, rgba(5,12,26,.5)); }
-.film-bar { position: absolute; left: 0; bottom: 0; height: 2px; width: calc(var(--p, 0) * 100%); background: var(--gold-grad); opacity: .8; }
-html[dir="rtl"] .film-bar { left: auto; right: 0; }
-/* The two text beats: the hero words first, then the three gains. Each shows for a stretch of the film. */
-.hero-in { position: relative; flex: 1; width: 100%; display: grid; grid-template-columns: minmax(0, 1fr); align-items: center; }
-/* A beat that is off is also hidden from the Tab key, once its fade has finished. */
-.hero-in > .beat { grid-area: 1 / 1; opacity: 0; visibility: hidden; transform: translateY(26px); transition: opacity .6s var(--ease), transform .8s var(--ease), visibility 0s linear .6s; pointer-events: none; }
-.hero-in > .beat.on { opacity: 1; visibility: visible; transform: none; pointer-events: auto; transition-delay: .1s; }
-.hero-copy { max-width: 760px; }
-.hero-copy .lede { text-shadow: 0 1px 12px rgba(5,12,26,.95); }
-.hero-beat { text-align: center; justify-self: center; width: 100%; max-width: 760px; padding: 44px 16px; background: radial-gradient(ellipse 65% 75% at center, rgba(5,12,26,.95), rgba(5,12,26,.8) 45%, rgba(5,12,26,0) 100%); }
-.hero-beat .lede { margin: 0 auto; font-family: var(--serif); font-style: italic; font-size: clamp(1.15rem, 1.8vw, 1.45rem); color: var(--cream); text-shadow: 0 1px 14px rgba(5,12,26,.9); }
-html[lang="ar"] .hero-beat .lede { font-style: normal; }
-.hero-gain { margin: 0 0 22px; font: 500 clamp(2.2rem, 5.4vw, 4.6rem)/1.15 var(--serif); color: #FBF5EA; letter-spacing: -0.01em; }
-.hero-gain span, .hero-gain i { text-shadow: 0 2px 16px rgba(5,12,26,.95); } /* no shadow on the gradient word: Safari paints it over the gold */
-.hero-gain i { font-style: normal; color: var(--accent); margin: 0 .3em; }
-/* A lighter gold here than the usual gradient: this word sits over the brightest part of the film. */
-.hero-gain em { font-style: normal; background: linear-gradient(100deg, #F0DDB4, #E2C27E 60%, #C9A45C); -webkit-background-clip: text; background-clip: text; color: transparent; }
+/* 1. Hero */
+.hero { position: relative; min-height: 100svh; padding: 150px 0 calc(var(--r) + 40px); overflow: hidden; display: flex; flex-direction: column;
+  background: radial-gradient(900px 600px at 72% 50%, rgba(201,164,92,.07), transparent 60%); }
 .streams { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .streams path { fill: none; stroke: url(#sg); stroke-width: 1.1; stroke-dasharray: 160 900; stroke-dashoffset: 1060; opacity: .38; animation: stream 10s linear infinite; }
 .streams path:nth-child(2) { animation-delay: -1.2s; } .streams path:nth-child(3) { animation-delay: -2.6s; } .streams path:nth-child(4) { animation-delay: -3.9s; } .streams path:nth-child(5) { animation-delay: -5.1s; } .streams path:nth-child(6) { animation-delay: -6.3s; }
 @keyframes stream { to { stroke-dashoffset: 0; } }
+.hero-in { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; flex: 1; }
 .eyebrow, .no { display: flex; align-items: center; gap: 14px; font: 600 .74rem var(--sans); letter-spacing: .28em; text-transform: uppercase; color: var(--accent); margin-bottom: 26px; }
 .rule { width: 46px; height: 1px; background: var(--accent); }
 .rn { font-family: "Manrope", sans-serif; }
@@ -816,9 +792,8 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
   .callbar { display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; background: rgba(5,12,26,.96); border-top: 1px solid var(--line-navy); padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); gap: 10px; }
   .callbar a { display: grid; place-items: center; height: 50px; border: 1px solid rgba(245,228,200,.4); color: var(--cream); text-decoration: none; font-weight: 600; letter-spacing: .04em; }
   .callbar a.primary { background: var(--gold-grad); color: var(--brand); border-color: transparent; }
-  .audit-in, .work-head { grid-template-columns: 1fr; }
-  /* The bottom bar covers the last 80px of the pinned stage. */
-  .stage-pin { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
+  .hero-in, .audit-in, .work-head { grid-template-columns: 1fr; }
+  .hero-art { height: 460px; max-width: 640px; width: 100%; margin: 0 auto; }
   .steps::before, .steps::after { display: none; }
   .work-head { margin-bottom: 44px; }
   .gallery { grid-template-columns: 1fr 1fr; gap: 44px 30px; }
@@ -862,8 +837,11 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
   .top-in { height: 68px; }
   .top-actions .btn { display: none; }
   .logo-mark { width: 30px; } .logo-word { width: 126px; }
-  .stage-pin { padding-top: 110px; }
-  .hero-gain { font-size: min(7.4vw, 2.2rem); } /* the three gains stay on one line at 375px */
+  .hero { padding-top: 110px; min-height: auto; }
+  .hero-art { height: 380px; margin-top: 10px; }
+  .glow { width: 300px; height: 300px; }
+  .flight img { width: 140px; }
+  .small img { width: 30px; } .s2 img { width: 20px; }
   h2 { max-width: none; }
   .gallery { grid-template-columns: 1fr; gap: 40px; }
   .drift img { width: 160px; }
