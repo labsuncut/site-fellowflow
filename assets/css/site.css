@@ -464,8 +464,8 @@ html[lang="ar"] .purpose { font-style: normal; }
    a slow wandering path (.flight), a soft wing-like tilt (.flutter), a faint trail of itself behind
    (.ghost copies lagging a little on the same path), two small ones further away, and gold dust rising.
    All CSS; the dust is a handful of spans site.js adds with random size and timing. */
-.hero-art { position: relative; height: 560px; display: grid; place-items: center; overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent); mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent); }
+.hero-art { position: relative; height: 560px; display: grid; place-items: center; }
+.hero-copy { position: relative; z-index: 1; }
 .hero-art > * { grid-area: 1 / 1; }
 .glow { width: 420px; height: 420px; border-radius: 50%; background: radial-gradient(circle, rgba(201,164,92,.18), rgba(201,164,92,.05) 42%, transparent 70%); animation: breathe 7s ease-in-out infinite; }
 .flight { perspective: 900px; animation: wander 28s ease-in-out infinite; will-change: transform; }
@@ -531,29 +531,7 @@ section { padding: clamp(80px, 11vw, 150px) 0; position: relative; }
 .kicker { display: block; font: 600 .72rem var(--sans); letter-spacing: .28em; text-transform: uppercase; color: var(--gold-text); margin-bottom: 14px; }
 html[lang="ar"] .kicker { letter-spacing: 0; font-size: .9rem; }
 
-/* 2. What we do: a navy lead card for the website, then six cream-white cards, three across. */
-.svc-lead { margin-top: 56px; background: var(--brand); color: var(--on-navy); padding: 48px; display: grid; grid-template-columns: 1.15fr .85fr; gap: 44px; align-items: center; position: relative; overflow: hidden; }
-.svc-lead::before { content: ""; position: absolute; inset: 12px; border: 1px solid var(--line-navy); pointer-events: none; }
-.svc-lead > * { position: relative; }
-.svc-lead .watermark { position: absolute; }
-.svc-lead .kicker { color: var(--gold-hi); }
-.svc-lead h3 { font-size: clamp(2rem, 3.4vw, 2.9rem); color: #FBF5EA; margin-bottom: 12px; }
-.svc-lead p { color: #C9D0DC; margin: 0; max-width: 34em; }
-.svc-lead .svc-ico { color: var(--gold-hi); }
-.svc-lead-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line-navy); }
-.svc-lead-list li { padding: 12px 0 12px 28px; border-bottom: 1px solid var(--line-navy); color: var(--on-navy); font-size: .95rem; position: relative; }
-html[dir="rtl"] .svc-lead-list li { padding: 12px 28px 12px 0; }
-.svc-lead-list li::before { content: ""; position: absolute; inset-inline-start: 2px; top: 19px; width: 12px; height: 7px; border-left: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent); transform: rotate(-45deg); }
-.svc-grid { list-style: none; margin: 24px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-.svc { background: #fff; border: 1px solid var(--line); padding: 32px 30px 34px; transition: box-shadow .5s, border-color .5s; }
-.js .svc.reveal { transition: opacity 1.2s ease, transform 1.3s var(--ease), box-shadow .5s, border-color .5s; transition-delay: calc(var(--i) * 90ms); }
-.svc:hover { box-shadow: 0 40px 70px -40px rgba(1,22,49,.35); border-color: rgba(201,164,92,.6); }
-.svc-ico { display: block; width: 40px; height: 40px; color: var(--gold-text); margin-bottom: 18px; fill: none; stroke: currentColor; stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
-.svc .kicker { margin-bottom: 10px; font-size: .66rem; }
-.svc h3 { font-size: 1.75rem; margin-bottom: 10px; }
-.svc p { color: var(--ink-2); font-size: .95rem; margin: 0; }
-
-/* 3. Why FellowFlow: three columns divided by thin lines, a numeral, the claim, and the proof under a rule. */
+/* 3. Why FellowFlow: one difference in the title, three supports in columns divided by thin lines, a numeral, the claim, and the proof under a rule. */
 .whys { list-style: none; margin: 60px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line-navy); }
 .why-item { padding: 44px 36px 0; border-inline-end: 1px solid var(--line-navy); display: flex; flex-direction: column; }
 .why-item:first-child { padding-inline-start: 0; }
@@ -566,12 +544,13 @@ html[dir="rtl"] .svc-lead-list li { padding: 12px 28px 12px 0; }
 .why-proof b { font: 600 .68rem var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--gold-hi); }
 html[lang="ar"] .why-proof b { letter-spacing: 0; font-size: .85rem; }
 
-/* 4. What changes: three phones in a row, a gold line running through them, each lit as you scroll. */
-.journey { list-style: none; margin: 60px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; position: relative; }
-.jline { position: absolute; left: 10%; right: 10%; top: 190px; height: 10px; width: 80%; overflow: visible; }
+/* 2. What we do: four phones in a row, a gold line running through them, each lit as you scroll, and the
+   services for each step as chips that step in once the phone lights. */
+.journey { list-style: none; margin: 60px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; position: relative; }
+.jline { position: absolute; left: 12.5%; top: 190px; height: 10px; width: 75%; overflow: visible; }
 .jline path { fill: none; stroke: var(--accent); stroke-width: 1.2; stroke-dasharray: 4 8; opacity: .7; }
 .jline circle { fill: var(--accent); filter: drop-shadow(0 0 6px rgba(201,164,92,.9)); }
-.jstep { display: grid; justify-items: center; text-align: center; position: relative; }
+.jstep { display: grid; justify-items: center; align-content: start; text-align: center; position: relative; }
 .phone { width: 196px; height: 380px; border-radius: 30px; background: var(--brand); padding: 12px; box-shadow: 0 30px 60px -30px rgba(1,22,49,.6), inset 0 0 0 1px rgba(245,228,200,.25); position: relative; transition: transform .8s var(--ease), box-shadow .8s; }
 .phone::before { content: ""; position: absolute; top: 12px; left: 50%; width: 58px; height: 16px; margin-left: -29px; background: var(--brand); border-radius: 0 0 10px 10px; z-index: 2; }
 .scr { height: 100%; border-radius: 20px; background: #FFFDF8; overflow: hidden; padding: 30px 14px 14px; display: grid; align-content: start; gap: 10px; color: var(--ink); font: 500 .8rem var(--sans); }
@@ -587,6 +566,7 @@ html[lang="ar"] .why-proof b { letter-spacing: 0; font-size: .85rem; }
 .s-hero img { width: 26px; }
 .s-hero b { font: 500 1rem var(--serif); }
 .s-row { display: flex; align-items: center; gap: 10px; padding: 9px 4px; border-bottom: 1px solid var(--line); color: var(--ink); }
+.s-row .ico { flex: none; }
 .s-row .ico { color: var(--gold-text); }
 .s-btn { position: relative; display: flex; align-items: center; justify-content: center; gap: 8px; height: 50px; border: 1px solid var(--brand); border-radius: 10px; margin-top: 6px; font-weight: 600; }
 .s-btn.tap { background: var(--brand); color: var(--cream); }
@@ -596,8 +576,29 @@ html[dir="rtl"] .pulse { right: auto; left: 14px; }
 .jn { display: inline-grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--line); font: italic 600 1.1rem "Cormorant Garamond", serif; color: var(--gold-text); margin-bottom: 14px; transition: background .5s, color .5s, border-color .5s; }
 .jtext h3 { font-size: 1.7rem; margin-bottom: 8px; }
 .jtext p { color: var(--ink-2); font-size: .98rem; margin: 0; }
-.jsvc { display: block; margin-top: 14px; font: 600 .66rem var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--gold-text); }
-html[lang="ar"] .jsvc { letter-spacing: 0; font-size: .82rem; }
+.svcs { list-style: none; margin: 18px 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.svcs li { display: inline-flex; align-items: center; gap: 7px; padding: 7px 12px; border: 1px solid var(--line); background: #fff; font: 600 .78rem var(--sans); color: var(--ink); opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .7s var(--ease), background .4s, color .4s; transition-delay: calc(var(--i) * 120ms); }
+.svcs .ico { width: 15px; height: 15px; color: var(--gold-text); }
+.svcs .lead { background: var(--brand); color: var(--cream); border-color: var(--brand); }
+.svcs .lead .ico { color: var(--gold-hi); }
+.jstep.lit .svcs li { opacity: 1; transform: none; }
+/* The screens act out their step once lit. */
+.typed { display: inline-block; white-space: nowrap; overflow: hidden; max-width: 0; border-inline-end: 1px solid transparent; }
+.jstep.lit .typed { animation: typed 1.4s steps(12, end) .3s forwards, caret .7s step-end 5; }
+@keyframes typed { to { max-width: 12em; } }
+@keyframes caret { 50% { border-color: var(--ink-2); } }
+.s-row { opacity: 0; transform: translateX(-10px); transition: opacity .5s ease, transform .6s var(--ease); transition-delay: calc(.25s + var(--i) * 180ms); }
+html[dir="rtl"] .s-row { transform: translateX(10px); }
+.jstep.lit .s-row { opacity: 1; transform: none; }
+.s-msg { margin-top: 12px; padding: 9px 12px; border-radius: 14px 14px 14px 3px; background: #E7F6E1; color: var(--ink); font-size: .74rem; line-height: 1.35; justify-self: start; max-width: 85%; opacity: 0; transform: translateY(8px) scale(.96); transition: opacity .5s ease .9s, transform .6s var(--ease) .9s; }
+html[dir="rtl"] .s-msg { border-radius: 14px 14px 3px 14px; }
+.jstep.lit .s-msg { opacity: 1; transform: none; }
+.s-report { border-radius: 12px; background: var(--brand); color: var(--cream); padding: 12px; display: grid; gap: 10px; }
+.s-report b { font: 500 .95rem var(--serif); }
+.s-bars { display: flex; align-items: flex-end; gap: 6px; height: 56px; }
+.s-bars i { flex: 1; height: var(--h); background: linear-gradient(to top, var(--accent), var(--gold-hi)); border-radius: 2px 2px 0 0; transform: scaleY(0); transform-origin: bottom; transition: transform .9s var(--ease); }
+.jstep.lit .s-bars i { transform: none; }
+.jstep.lit .s-bars i:nth-child(2) { transition-delay: .1s; } .jstep.lit .s-bars i:nth-child(3) { transition-delay: .2s; } .jstep.lit .s-bars i:nth-child(4) { transition-delay: .3s; } .jstep.lit .s-bars i:nth-child(5) { transition-delay: .4s; }
 /* Unlit steps: the phone fades, the words dim by colour so they keep readable contrast. */
 .jstep .phone { opacity: .55; transition: opacity .6s; }
 .jstep .jtext h3 { color: #707A8F; transition: color .6s; }
@@ -816,6 +817,9 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
   .bubble-dot { opacity: .6; bottom: auto; top: calc(var(--x) * .6); }
   .stage-line path, .deco { stroke-dashoffset: 0; }
   .jstep .phone { opacity: 1; }
+  .svcs li, .s-row, .s-msg { opacity: 1; transform: none; transition: none; }
+  .typed { max-width: none; animation: none; }
+  .s-bars i { transform: none; }
   .jstep .jtext h3 { color: var(--ink); } .jstep .jtext p { color: var(--ink-2); }
   .jstep::before, .stage::before, .steps li::before { clip-path: none !important; }
   .jstep::after, .stage::after, .steps li::after { animation: none !important; }
@@ -842,13 +846,12 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
   .journey { grid-template-columns: 1fr; gap: 50px; justify-items: center; }
   .jline { display: none; }
   .jstep { grid-template-columns: auto 1fr; gap: 30px; text-align: start; align-items: center; max-width: 640px; width: 100%; }
+  .jstep .svcs { justify-content: flex-start; }
   .jtext { margin-top: 0; }
   .stages { grid-template-columns: 1fr; gap: 40px; }
   .stage-line { display: none; }
   .stage { padding-inline: 0; }
   .start { grid-template-columns: 1fr; }
-  .svc-lead { grid-template-columns: 1fr; padding: 36px; gap: 30px; }
-  .svc-grid { grid-template-columns: 1fr 1fr; }
   .whys { grid-template-columns: 1fr; border-top: 0; }
   .why-item { padding: 34px 0; border-inline-end: 0; border-top: 1px solid var(--line-navy); }
   .why-item:last-child { padding-bottom: 0; }
@@ -903,9 +906,7 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
   .person b { font-size: 1.05rem; line-height: 1.15; }
   .person figcaption span { font-size: .56rem; letter-spacing: .14em; }
   .start, .form { padding: 30px 22px; }
-  .svc-lead { padding: 30px 22px; margin-top: 40px; }
-  .svc-grid { grid-template-columns: 1fr; gap: 14px; }
-  .svc { padding: 26px 22px 28px; }
+  .svcs { justify-content: center; }
   .purpose { margin-top: -4px; }
   .eyebrow { letter-spacing: .2em; }
   .start h3 { font-size: 1.9rem; }
