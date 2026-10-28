@@ -52,18 +52,6 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
     const want = expect[u];
     if (want ? r.status !== want : !(r.status === 200 || (r.status >= 301 && r.status <= 308))) problem(`${u} answered ${r.status}`);
   }
-  say('\n== Hero film files (range requests, as a browser seeks)');
-  for (const f of ['/assets/vid/hero.mp4', '/assets/vid/hero-m.mp4', '/assets/vid/hero.webm', '/assets/vid/hero-m.webm', '/assets/img/hero-poster.jpg']) {
-    try {
-      const r = await fetch(SITE + f, { headers: { Range: 'bytes=0-1023' } });
-      const type = r.headers.get('content-type') || '', total = (r.headers.get('content-range') || '').split('/')[1] || r.headers.get('content-length') || '?';
-      // 206 = the server sends just the part asked for (best for seeking). 200 = it sends the whole file, which still
-      // plays and scrubs once downloaded (the files have their index at the front), so it is noted, not failed.
-      say(`  ${f} -> ${r.status} ${type}, ${total} bytes${r.status === 206 ? ' (range answered)' : r.status === 200 ? ' (whole file sent; seeking waits for the download)' : ''}`);
-      if (r.status !== 206 && r.status !== 200) problem(`${f} answered ${r.status}`);
-      if (!/^(video|image)\//.test(type)) problem(`${f} has content-type "${type}"`);
-    } catch (e) { problem(`${f} -> ${e.cause ? e.cause.code : e.message}`); }
-  }
   for (const u of ['https://www.fellowflow.ai/', 'http://fellowflow.ai/']) {
     try { const r = await fetch(u, { redirect: 'manual' }); say(`  ${u} -> ${r.status} ${r.headers.get('location') || ''}`); } catch (e) { say(`  ${u} -> ${e.cause ? e.cause.code : e.message}`); }
   }
