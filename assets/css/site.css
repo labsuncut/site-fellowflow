@@ -368,6 +368,22 @@ html[lang="ar"] .purpose { font-style: normal; }
 .hero-art.formed .fly-mark { opacity: 1; animation: breathe 7s ease-in-out 1.2s infinite; }
 .hero-art.paused .fly-mark { animation-play-state: paused; }
 @keyframes breathe { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-9px) rotate(1.5deg); } }
+/* The opening ("The Butterfly Effect", intro.js): a navy veil, two gold lines that draw the mark, the filled mark
+   that opens its wings once, one ring, then the glide into the page. html.intro holds the first screen back. */
+.intro-veil { position: fixed; inset: 0; z-index: 70; background: var(--brand); display: grid; place-items: center; }
+.intro-veil .intro-mark { width: min(62vw, 330px); height: auto; overflow: visible; transform-origin: 50% 50%; will-change: transform; }
+.intro-line { fill: none; stroke: var(--gold-hi); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 6px rgba(201,164,92,.55)); }
+.intro-fill { opacity: 0; } .intro-fill path { fill: #F5E4C8; }
+.intro-ring { fill: none; stroke: var(--accent); stroke-width: .8; opacity: 0; transform-origin: 122px 151px; }
+.intro-skip { position: absolute; right: 24px; bottom: calc(24px + env(safe-area-inset-bottom)); background: none; border: 1px solid rgba(245,228,200,.3); color: rgba(245,228,200,.75); font: 600 .74rem var(--sans); letter-spacing: .2em; text-transform: uppercase; padding: 10px 16px; cursor: pointer; transition: opacity .3s, border-color .3s; }
+.intro-skip:hover, .intro-skip:focus-visible { border-color: var(--gold-hi); color: var(--gold-hi); }
+html[lang="ar"] .intro-skip { right: auto; left: 24px; letter-spacing: 0; font-size: .9rem; }
+html.intro .hero .reveal, html.intro .words .w, html.intro .hero-art { opacity: 0 !important; transform: translateY(24px); transition: none !important; }
+html.intro .words .w { transform: translateY(.5em); }
+html.intro-mark .logo-mark { opacity: 0; }
+.logo-mark { transition: opacity .4s ease; }
+.hero-art { opacity: 1; transition: opacity .9s ease; }
+
 /* Sections. Navy sections sit on the page's navy; cream sections are
    "sheets" with rounded corners laid over the navy, so one part hands over to the next softly. */
 section { padding: clamp(80px, 11vw, 150px) 0; position: relative; }
