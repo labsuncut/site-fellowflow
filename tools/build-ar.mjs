@@ -77,6 +77,13 @@ function build() {
   swapRe(/<title>[^<]*<\/title>/, `<title>${attr(title)}</title>`, '<title>');
   swapRe(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${attr(AR.hero_lede)}">`, 'meta description');
   swap(`<link rel="canonical" href="${SITE}/">`, `<link rel="canonical" href="${SITE}/ar/">`);
+  // Arabic text renders in a fallback font until Amiri and IBM Plex Sans Arabic arrive, which moves the first screen (layout shift).
+  // Preloading the faces the first screen uses (Amiri regular and bold, IBM Plex Sans Arabic regular) starts them with the HTML instead of after the stylesheet.
+  const css = read('assets/css/site.css');
+  const faces = [...css.matchAll(/@font-face\s*{([^}]*)}/g)].map((m) => m[1]).filter((f) => /-arabic-normal-/.test(f) && (/font-weight:\s*400;/.test(f) || (/Amiri/.test(f) && /font-weight:\s*700;/.test(f))));
+  const files = faces.map((f) => f.match(/url\(\.\.\/fonts\/([^)]+)\)/)[1]);
+  if (files.length !== 3) fail('expected three first-screen Arabic faces in site.css, found ' + files.length);
+  swap('<link rel="stylesheet" href="assets/css/site.css', files.map((f) => `<link rel="preload" href="assets/fonts/${f}" as="font" type="font/woff2" crossorigin>\n`).join('') + '<link rel="stylesheet" href="assets/css/site.css', 'stylesheet link');
   swapRe(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${attr(title)}">`, 'og:title');
   swapRe(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${attr(AR.hero_lede)}">`, 'og:description');
   swap(`<meta property="og:url" content="${SITE}/">`, `<meta property="og:url" content="${SITE}/ar/">`);

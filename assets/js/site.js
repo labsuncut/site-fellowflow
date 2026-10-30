@@ -1,4 +1,4 @@
-// FellowFlow brand site: language switch, opening, hero words and dust, the customer journey,
+// FellowFlow brand site: language switch, hero words, the customer journey, the standard rings,
 // work recordings on hover, packages path, process line, promise tiles, first-look form.
 (function () {
   var WHATSAPP = "962796237444";
@@ -58,14 +58,14 @@
   // Arabic text (the source for ar/index.html). English lives in index.html.
   var AR = {
     skip: "انتقل إلى المحتوى",
-    intro_tag: "نساعد الأعمال على التدفّق بشكل أفضل.", intro_skip: "تخطّي",
     nav_what: "خدماتنا", nav_why: "لماذا نحن", nav_work: "أعمالنا", nav_services: "باقاتنا", nav_process: "طريقتنا", nav_promise: "وعدنا", nav_team: "الفريق",
     nav_cta: "نظرة أولى مجانية",
-    hero_eyebrow: "حضور رقمي للأعمال",
+    hero_eyebrow: "مواقع وحضور رقمي للأعمال · عمّان، الأردن",
     hero_h1: "سهلٌ أن يجدوك. <em>سهلٌ أن يختاروك.</em>",
     hero_purpose: "لنساعد نشاطك التجاري على التدفّق بشكل أفضل.",
-    hero_lede: "نبني كل ما يحوّل البحث إلى عملاء على الإنترنت.",
-    hero_cta1: "احجز نظرة أولى مجانية", hero_cta2: "شاهد أعمالنا",
+    hero_lede: "نبني الموقع والحضور الرقمي اللذين يجلبان العملاء للأعمال في عمّان: يجدونك على Google والخرائط، ويفهمونك في ثوانٍ، ويصلون إليك بلمسة واحدة.",
+    hero_cta1: "ابدأ بنظرة أولى مجانية", hero_cta2: "راسلنا على واتساب",
+    mk1: "مفحوص قبل الإطلاق", mk2: "بالعربية والإنجليزية", mk3: "يردّ عليك أحد المؤسسين",
     hero_proof: "كل موقع يجتاز فحص الجودة لدينا قبل أن يُنشر.",
     what_eyebrow: "ماذا نقدّم", what_h: "طريق واحد إلى عملائك. <em>نبنيه كلّه.</em>",
     what_p: "كل عميل يمرّ بالخطوات الأربع نفسها. ونحن نبني كل واحدة منها.",
@@ -89,14 +89,25 @@
     j2_h: "يفتحون موقعك", j2_p: "كل ما يحتاج العميل إلى معرفته، واضح في ثوانٍ، بالعربية والإنجليزية.",
     j3_h: "يصلون إليك", j3_p: "لمسة واحدة للاتصال أو المراسلة أو الطلب.",
     gain_k: "ما تكسبه", gain1: "يجدونك", gain2: "يفهمونك", gain3: "يصلون إليك", gain_p: "لا يضيع أحد في الطريق.",
-    work_eyebrow: "أعمالنا", work_h: "صُمّمت <em>لأعمال حقيقية.</em>",
-    work_p: "مواقع بنيناها. مرّر المؤشر فوق أي موقع لتراه يتحرّك.",
+    std_eyebrow: "معيارنا", std_h: "هذا الموقع هو دراسة الحالة الأولى لنا. <em>مقاس، لا موعود.</em>",
+    std_p: "كل موقع نبنيه يجتاز الفحوصات نفسها قبل أن يُنشر. هذه نتائج هذه الصفحة نفسها، مع التاريخ. إنها قياسات مخبرية نعيدها بعد كل إصدار، وليست وعدًا بالعملاء.",
+    g1: "السرعة على الهاتف", g2: "السرعة على الحاسوب", g3: "الجاهزية للبحث", g_of: "من 100",
+    c1: "رؤوس أمان صارمة، HTTPS فقط، ولا نصوص برمجية من طرف ثالث",
+    c2: "كل رابط وزر يعمل، باللغتين، وعلى كل مقاس هاتف",
+    c3: "لا أخطاء، لا شيء مقطوع عند 375 بكسل، ولا مخالفات في سهولة الوصول",
+    c4: "تحرّك التخطيط على الهواتف قِيس 0.21 مقابل هدف أقل من 0.10: أُصلح في هذا الإصدار، وإعادة القياس قادمة",
+    c5: "الصفحة العربية كانت تزن 2.7 ضعف الإنجليزية: قلّصنا الخطوط في هذا الإصدار، وإعادة القياس قادمة",
+    std_foot: "قِيس في 30 تشرين الأول 2026 على fellowflow.ai بأداة Lighthouse 12.8 (ظروف مخبرية، إعدادات الهاتف والحاسوب) وبفحص ما قبل الإطلاق لدينا. ننشر القياس التالي بعد كل إصدار.",
+    work_eyebrow: "أعمالنا", work_h: "مواقع بنيناها، <em>معروضة كما هي.</em>",
+    work_p: "كل موقع بوضعه الحقيقي. مرّر المؤشر فوق أي موقع لتراه يتحرّك.",
+    w_own: "هذا الموقع", st_own: "منشور · موقعنا", see_std: "شاهد نتائجه", play: "شغّل المعاينة",
     w_rest: "مطعم", w_gym: "نادٍ رياضي", w_wear: "أزياء الشارع", w_couture: "أزياء راقية", w_food: "برغر",
     st_trial: "تجربة حيّة", st_founder: "تجربة حيّة · يملكها المؤسسون", st_preview: "معاينة",
     view: "زيارة الموقع", view_prev: "مشاهدة المعاينة",
-    legend: "<b>تجربة حيّة:</b> نشاط تجاري حقيقي يستخدم الموقع بينما يمرّ بفحوصات الإطلاق لدينا. <b>معاينة:</b> تصميم أعددناه لنُري نشاطًا تجاريًا كيف يمكن أن يبدو موقعه.",
+    legend: "<b>تجربة حيّة:</b> نشاط تجاري حقيقي يستخدم الموقع مجانًا بينما يمرّ بفحوصات الإطلاق لدينا. <b>معاينة:</b> تصميم أعددناه لنُري نشاطًا تجاريًا كيف يمكن أن يبدو موقعه؛ لم يُسلَّم شيء بعد. <b>منشور · موقعنا:</b> هذا الموقع، نديره كما ندير موقع أي عميل.",
     svc_eyebrow: "باقاتنا", svc_h: "نبني مرة. <em>ثم نبقى.</em>",
-    svc_p: "نظرة أولى مجانية أولًا. ثم مشروع واحد لبناء موقعك، وعلاقة شهرية لتبقى ظاهرًا وتنمو. كل خطوة بنطاق مكتوب وسعر واضح وتقرير.",
+    svc_p: "نظرة أولى مجانية أولًا. ثم مشروع واحد لبناء موقعك، وعلاقة شهرية لتبقى ظاهرًا وتنمو. كل خطوة تُحدَّد كتابيًا قبل تسعيرها، ويُبلَّغ عنها بعدها.",
+    st1_s: "منشور اليوم على موقعين تجريبيين", st2_s: "متاح الآن؛ تقاريرنا الشهرية الأولى تبدأ مع عملائنا الأوائل", st3_s: "متاح الآن؛ مقاس ومُبلَّغ عنه، ولا نضمنه أبدًا", incl_sum: "ما الذي تشمله",
     st1_k: "المرحلة الأولى", st1_h: "البناء", st1_l: "مشروع واحد، مكتوب بالكامل.",
     st1_1: "نظرة أولى مجانية، ثم نطاق مكتوب وسعر واضح", st1_2: "موقعك بالعربية والإنجليزية، مبني حول طريقة قرار عملائك", st1_3: "اتصال وواتساب واتجاهات وطلب بلمسة واحدة", st1_4: "مفحوص على نظام فحص ما قبل الإطلاق لدينا، ثم يُنشر على نطاقك وباسمك", st1_5: "مفحوص وفق قائمة الإطلاق لدينا",
     st2_k: "المرحلة الثانية", st2_h: "الرعاية", st2_l: "نبقى بعد الإطلاق.",
@@ -110,8 +121,7 @@
     s2_h: "التوصية", s2_p: "ما يستحق العمل وما لا يستحقه. نطاق مكتوب وسعر واضح أولًا.",
     s3_h: "البناء", s3_p: "نصمّم ونبني بالعربية والإنجليزية، حول الطريقة التي يقرّر بها عملاؤك.",
     s5_h: "الإطلاق", s5_p: "منشور على نطاقك، وباسمك.", s6_h: "البقاء", s6_p: "تقرير شهري، واقتراحاتنا، وتحسينات مع تطوّر نشاطك.", s4_h: "الفحص", s4_p: "كل رابط وزر ومقاس هاتف، والسرعة، واللغتان، على نظام فحص ما قبل الإطلاق لدينا. ثم نصلح ونفحص من جديد.",
-    prom_eyebrow: "<span class=\"rn\">VI</span> · وعدنا", prom_h: "خمسة أشياء <em>نُقسم عليها.</em>",
-    prom_hint: "مرّر المؤشر فوق كل وعد لتقرأه.",
+    prom_eyebrow: "<span class=\"rn\">VII</span> · وعدنا", prom_h: "خمسة أشياء <em>نُقسم عليها.</em>",
     p1_h: "نفهم قبل أن نوصي.", p1_p: "نستمع أولًا وننظر إلى الأدلة. إن كنت تحتاج تعديلًا صغيرًا، أو لا شيء على الإطلاق، سنقول لك ذلك.",
     p2_h: "لا نختلق شيئًا.", p2_p: "لا تقييمات مزيّفة، ولا جوائز مخترعة، ولا نتائج مستعارة. وأعمالنا معروضة بما هي عليه بالضبط.",
     p3_h: "لا نطلق شيئًا من دون فحص.", p3_p: "السرعة والأمان وكل رابط وزر، واللغتان، وكل مقاس هاتف: تُفحص على نظام فحص ما قبل الإطلاق لدينا قبل أن يُنشر أي شيء.",
@@ -119,19 +129,22 @@
     p5_h: "لا نختفي.", p5_p: "ما بنيناه نحن مسؤولون عنه. بعد الإطلاق نبقيه سريعًا وصحيحًا، ونخبرك كل شهر بما رأيناه وما نقترحه.",
     prom_quote: "اختبارنا في كل مشروع: هل ستقول إننا فهمنا ما يهم، وسهّلنا الأمور، وسلّمنا ما وعدنا به؟",
     team_eyebrow: "الفريق", team_h: "الأشخاص <em>وراء التدفّق.</em>",
+    team_note: "ثلاثة مؤسسين من عمّان. نبني كل موقع بأنفسنا، بأدوات الذكاء الاصطناعي وحكمنا الخاص، ونفحصه قبل أن يُنشر. تتحدث مع أحدنا، لا مع مدير حسابات.",
     n_wishta: "عبدالله كشتيني", n_weezy: "علي البوصيفي", n_mahmoud: "محمود أبو حجلة", role_cof: "شريك مؤسس",
     audit_eyebrow: "نظرة أولى مجانية", audit_h: "لنلقِ نظرة على <em>نشاطك.</em>",
     audit_p: "أخبرنا من أنت. ننظر إلى موقعك وإلى طريقة وصول العملاء إليك، ثم نخبرك بوضوح بما يستحق العمل. محادثة، لا عرض مبيعات.",
     audit_free: "مجانًا، ودون أي التزام.",
+    af1_h: "تكتب لنا", af1_p: "رسالة واحدة على واتساب، أو النموذج هنا.", af2_h: "ننظر", af2_p: "يقرأها أحد المؤسسين وينظر إلى كيف يجدك العملاء ويصلون إليك اليوم.", af3_h: "نجيبك بوضوح", af3_p: "ما يستحق العمل وما لا يستحقه، وما نقترح البدء به. نطاق مكتوب فقط إن أردت المتابعة.",
+    t_choose: "اختر نوعًا (اختياري)",
     f_biz: "اسم النشاط التجاري", f_type: "نوع النشاط",
     t_cafe: "مقهى أو مطعم", t_gym: "نادٍ رياضي أو استوديو", t_fashion: "ملابس أو أزياء", t_salon: "صالون أو عيادة", t_other: "شيء آخر",
     f_link: "رابط الموقع أو Instagram أو خرائط Google (اختياري)", f_name: "اسمك",
-    f_send: "أرسل عبر واتساب",
-    f_fine: "يفتح هذا واتساب مع تعبئة بياناتك. لا يُحفظ أي شيء على هذا الموقع. نردّ خلال 24 ساعة.",
-    f_sent: "يُفتح واتساب الآن مع رسالتك. اضغط إرسال هناك، وسنردّ خلال 24 ساعة. لم يُفتح؟ <a href=\"https://wa.me/962796237444\" target=\"_blank\" rel=\"noopener\">راسلنا مباشرة</a> أو اتصل على <a href=\"tel:+962796237444\" dir=\"ltr\">+962 79 623 7444</a>.",
+    f_send: "افتح واتساب مع هذه الرسالة",
+    f_fine: "يفتح هذا واتساب على هاتفك أو حاسوبك مع تعبئة بياناتك. لا يرسل هذا الموقع شيئًا ولا يحفظه.",
+    f_sent: "يُفتح واتساب الآن مع رسالتك. اضغط إرسال هناك، ويردّ عليك أحد المؤسسين شخصيًا. لم يُفتح؟ <a href=\"https://wa.me/962796237444\" target=\"_blank\" rel=\"noopener\">راسلنا مباشرة</a> أو اتصل على <a href=\"tel:+962796237444\" dir=\"ltr\">+962 79 623 7444</a>.",
     f_err: "يرجى إضافة اسم النشاط واسمك.",
     final_h: "عملاؤك يبحثون الآن. <em>دعهم يجدونك.</em>", final_cta: "احجز نظرة أولى مجانية", final_wa: "راسلنا على واتساب",
-    foot_where: "حضور رقمي للأعمال · عمّان، الأردن",
+    foot_where: "مواقع وحضور رقمي للأعمال · عمّان، الأردن",
     bar_wa: "واتساب", bar_audit: "نظرة أولى مجانية", foot_privacy: "سياسة الخصوصية",
     menu_open: "القائمة", menu_close: "إغلاق القائمة"
   };
@@ -141,12 +154,13 @@
     ar: { hello: "مرحبًا FellowFlow، أودّ نظرة أولى مجانية على نشاطي التجاري.", biz: "النشاط: ", type: "النوع: ", link: "الرابط: ", name: "اسمي: ", ph_biz: "اسم نشاطك", ph_name: "اسمك" }
   };
   // On a phone there is nothing to hover, so these two lines say "tap" instead.
-  var TOUCH = { en: { work_p: "Businesses in Amman we have designed for. Tap a site to see it come alive.", prom_hint: "Tap each one to read it." },
-                ar: { work_p: "أنشطة تجارية في عمّان صمّمنا لها. المس أي موقع لتراه يتحرّك.", prom_hint: "المس كل وعد لتقرأه." } };
+  var TOUCH = { en: { work_p: "Each one labelled by its real status. Tap the play button to see a site come alive." },
+                ar: { work_p: "كل موقع بوضعه الحقيقي. المس زر التشغيل لترى الموقع يتحرّك." } };
 
   if (coarse) {
     document.querySelectorAll("[data-i18n]").forEach(function (n) { var t = TOUCH[page][n.getAttribute("data-i18n")]; if (t) n.innerHTML = t; });
   }
+  if (page === "ar") document.querySelectorAll("[data-i18n-aria]").forEach(function (n) { var t = AR[n.getAttribute("data-i18n-aria")]; if (t) n.setAttribute("aria-label", t); });
   var h1 = document.querySelector(".words");
 
   function splitWords() {
@@ -179,84 +193,40 @@
     langLink.href = langLink.getAttribute("href").split("#")[0] + (here ? "#" + here : "");
   });
 
-  // Opening, once per visit. The streams, mark and name are timed in CSS; here we only decide
-  // whether to play it, and at the end we fly the mark and the name to their places in the header.
-  var intro = document.getElementById("intro");
-  var topLogo = document.querySelector(".top .logo");
-  var seen = false, introDone = false, introTimer = null, scene = null;
-  try { seen = sessionStorage.getItem("ff-intro") === "1"; } catch (e) {}
-
-  function flyTo(el, target) {
-    // Move `el` so it lands exactly on `target` (same top-left, scaled to the same width).
-    var a = el.getBoundingClientRect(), b = target.getBoundingClientRect();
-    var s = b.width / a.width;
-    el.style.transform = "translate(" + (b.left - a.left) + "px," + (b.top - a.top) + "px) scale(" + s + ")";
-  }
-  function endIntro() {
-    if (introDone) return;
-    introDone = true;
-    clearTimeout(introTimer);
-    try { sessionStorage.setItem("ff-intro", "1"); } catch (e) {}
-    intro.classList.add("done");
-    document.documentElement.classList.remove("intro-on");
-    flyTo(document.getElementById("intro-mark"), document.querySelector(".top .logo-mark"));
-    flyTo(document.getElementById("intro-word"), document.querySelector(".top .logo-word"));
-    setTimeout(function () { topLogo.classList.add("show"); }, 700);
-    setTimeout(function () { intro.classList.remove("play"); document.body.style.overflow = ""; if (scene) scene.stop(); }, 1250);
-  }
-  // The intro plays even with Reduce Motion on (founders' call, 2026-10-20): it is short, skippable and part of the brand.
-  if (!seen && window.FFIntro) {
-    intro.classList.add("play");
-    document.documentElement.classList.add("intro-on");     // hide the page under it (Safari's see-through toolbar shows what is behind)
-    document.body.style.overflow = "hidden";
-    // The scene needs the mark's picture loaded to know its shape; the CSS timings wait for nothing,
-    // so start the clock only once the picture is ready (or at once if it never loads).
-    var markImg = document.getElementById("intro-mark");
-    function begin() {
-      if (introDone || scene) return;
-      try { scene = window.FFIntro.start(document.getElementById("intro-canvas"), markImg); } catch (e) { endIntro(); return; }
-      intro.classList.add("rolling");
-      introTimer = setTimeout(endIntro, 5800);
-    }
-    if (markImg.decode) markImg.decode().then(begin, begin); else if (markImg.complete) begin(); else { markImg.onload = begin; markImg.onerror = begin; }
-    setTimeout(begin, 1500);                                     // never wait longer than this for the picture
-    intro.addEventListener("click", endIntro);
-    document.addEventListener("keydown", function (ev) { if (ev.key === "Escape") endIntro(); });
-    // Someone who keeps pressing Tab past the skip link and the intro's Skip button wants the page, which the
-    // intro still covers: end it, so what they reach is visible.
-    document.addEventListener("focusin", function (ev) { if (!intro.contains(ev.target) && !ev.target.classList.contains("skip")) endIntro(); });
-    setTimeout(function () { if (!introDone) endIntro(); }, 9500); // safety net
-  } else {
-    topLogo.classList.add("show");
-  }
+  // The opening overlay is gone (30 Oct 2026): the first screen's signature now plays beside the words, in hero.js.
 
   // Header line once the page scrolls.
   var top = document.querySelector(".top");
 
+  var tabletQ = window.matchMedia("(max-width: 1000px)");
   // Reveal sections as they enter the screen. The packages path draws itself the same way.
   var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+    // Anything already above the screen (a jump to #packages, a reload mid-page) counts as seen.
+    entries.forEach(function (e) { if (e.isIntersecting || e.boundingClientRect.bottom < 0) { e.target.classList.add("in"); io.unobserve(e.target); } });
   }, { rootMargin: "0px 0px -8% 0px" });
   document.querySelectorAll(".reveal, .sheet, .path-wrap").forEach(function (el) { io.observe(el); });
+
+  // The phone call bar stays out of the way while the first screen's own buttons are in view: one button, one place.
+  var callbar = document.querySelector(".callbar"), ctaRow = document.querySelector(".hero .cta-row");
+  if (callbar && ctaRow) new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { callbar.classList.toggle("off", e.isIntersecting); });
+  }, { threshold: 0.5 }).observe(ctaRow);
   var stagePath = document.querySelector(".stage-line path");
   if (stagePath) stagePath.style.setProperty("--len", stagePath.getTotalLength());
 
-  // The first screen: gold dust, a handful of specks with random size and timing, rising around the mark.
-  var sky = document.getElementById("sky"), dust = document.getElementById("dust");
-  if (sky && dust) {
-    var count = window.innerWidth < 640 ? 14 : 24;
-    for (var bi = 0; bi < count; bi++) {
-      var d = document.createElement("span"); d.className = "bubble-dot";
-      d.style.setProperty("--x", (4 + Math.random() * 92) + "%");
-      d.style.setProperty("--s", (2 + Math.random() * 5).toFixed(1) + "px");
-      d.style.setProperty("--d", (16 + Math.random() * 16).toFixed(1) + "s");
-      d.style.setProperty("--delay", (-Math.random() * 32).toFixed(1) + "s");
-      d.style.setProperty("--sway", Math.round((Math.random() - .5) * 120) + "px");
-      dust.appendChild(d);
-    }
-    var sizeSky = function () { sky.style.setProperty("--h", (sky.offsetHeight + 100) + "px"); };
-    sizeSky(); window.addEventListener("resize", sizeSky);
-  }
+  // Anything that keeps moving (the breathing mark, the seal, the sparks on the lines) pauses while it is off screen.
+  var pauser = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      e.target.classList.toggle("paused", !e.isIntersecting);
+      e.target.querySelectorAll("svg").forEach(function (s) { if (s.pauseAnimations) { e.isIntersecting ? s.unpauseAnimations() : s.pauseAnimations(); } });
+    });
+  }, { rootMargin: "60px 0px" });
+  document.querySelectorAll(".hero-art, .certificate, .journey, .why-map").forEach(function (el) { pauser.observe(el); });
+  // The rings in Our standard draw once the section is reached.
+  var gauges = document.getElementById("gauges");
+  if (gauges) io.observe(gauges);
+  // Packages: on a phone or tablet the included lists start folded, so the page stays short; the first stays open.
+  if (tabletQ.matches) document.querySelectorAll("details.incl-wrap").forEach(function (d, i) { if (i || window.innerWidth <= 640) d.removeAttribute("open"); });
 
   // The customer journey and the process line both light up step by step as they scroll into view.
   var journey = document.getElementById("journey");
@@ -299,16 +269,21 @@
   var cards = document.querySelectorAll(".card");
   function play(card) {
     var v = card.querySelector("video"), still = card.querySelector(".frame img");
-    if (!v || reduce) return;
+    if (!v) return;
     if (!v.getAttribute("poster") && still && still.currentSrc) v.poster = still.currentSrc;
     card.classList.add("playing");
     var p = v.play(); if (p && p.catch) p.catch(function () {});
   }
   function stop(card) { var v = card.querySelector("video"); if (!v) return; card.classList.remove("playing"); v.pause(); }
   if (coarse) {
+    // Nothing downloads by itself on a phone: the play button starts the recording, and it stops once off screen.
+    cards.forEach(function (c) {
+      var b = c.querySelector(".play-btn");
+      if (b) b.addEventListener("click", function () { c.classList.contains("playing") ? stop(c) : play(c); });
+    });
     var vio = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.intersectionRatio >= 0.7) play(e.target); else stop(e.target); });
-    }, { threshold: [0, 0.7] });
+      entries.forEach(function (e) { if (!e.isIntersecting) stop(e.target); });
+    }, { threshold: [0, 0.2] });
     cards.forEach(function (c) { vio.observe(c); });
   } else {
     cards.forEach(function (c) {
@@ -351,7 +326,7 @@
     var biz = form.biz.value.trim(), name = form.name.value.trim(), link = form.link.value.trim();
     var lines = [m.hello,
       m.biz + (biz || (preview ? "…" : "")),
-      m.type + form.type.options[form.type.selectedIndex].text,
+      form.type.value ? m.type + form.type.options[form.type.selectedIndex].text : "",
       link ? m.link + link : "",
       m.name + (name || (preview ? "…" : ""))].filter(Boolean);
     return lines.join("\n");
