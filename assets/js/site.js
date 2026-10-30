@@ -194,7 +194,7 @@
     langLink.href = langLink.getAttribute("href").split("#")[0] + (here ? "#" + here : "");
   });
 
-  // The opening overlay is gone (30 Oct 2026): the first screen's signature now plays beside the words, in hero.js.
+  // The opening (30 Oct 2026) lives in assets/js/convergence.js; the first screen's backdrop comes from it too.
 
   // Header line once the page scrolls.
   var top = document.querySelector(".top");

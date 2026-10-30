@@ -357,42 +357,33 @@ html[lang="ar"] .purpose { font-style: normal; }
 .marks { list-style: none; margin: 26px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 26px; }
 .marks li { display: inline-flex; align-items: center; gap: 8px; font: 500 .86rem var(--sans); color: var(--muted-navy); }
 .marks .ico { width: 17px; height: 17px; flex: none; color: var(--accent); }
-/* The first screen's signature: a canvas where the lights of a city gather into the mark (hero.js); the real
-   mark then takes its place and breathes very slowly. */
+/* The first screen's signature: the mark, and behind it the venation the opening grew (convergence.js paints it
+   into the canvas, with or without the opening); the mark breathes very slowly. */
 .hero-art { position: relative; height: 520px; display: grid; place-items: center; }
 .hero-copy { position: relative; z-index: 1; }
 .hero-art > * { grid-area: 1 / 1; }
-.form-canvas { width: 100%; height: 100%; transition: opacity 1s ease; }
-.hero-art.formed .form-canvas { opacity: .6; }
+.form-canvas { width: 100%; height: 100%; opacity: 0; transition: opacity 1s ease; }
+.hero-art.formed .form-canvas { opacity: 1; }
 .fly-mark { width: 210px; height: auto; opacity: 0; filter: drop-shadow(0 0 34px rgba(201,164,92,.35)); transition: opacity 1.2s ease; }
 .hero-art.formed .fly-mark { opacity: 1; animation: breathe 7s ease-in-out 1.2s infinite; }
 .hero-art.paused .fly-mark { animation-play-state: paused; }
 @keyframes breathe { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-9px) rotate(1.5deg); } }
-/* The opening ("The Butterfly Effect", intro.js): a navy veil, two gold lines that draw the mark, the filled mark
-   that opens its wings once, one ring, then the glide into the page. html.intro holds the first screen back. */
-.intro-veil { position: fixed; inset: 0; z-index: 70; background: var(--brand); display: grid; place-items: center; }
-/* "The Convergence" (convergence.js) paints its own veil on a canvas, so it can dissolve into the page. Until the
-   deferred script runs, html.intro alone keeps a navy cover over the page (intro-boot.js sets the class in <head>). */
-html.intro:not(.intro-live) body::after { content: ""; position: fixed; inset: 0; z-index: 70; background: var(--brand); }
-.intro-veil.cv { background: transparent; display: block; }
-.intro-veil.cv.through { pointer-events: none; }
+/* The opening ("The Convergence", convergence.js) draws on the first screen itself: a stage over the hero, a canvas,
+   a Skip. html.intro holds the words and the art back (intro-boot.js sets it in <head>); .through lets clicks pass. */
+.cv-stage { position: absolute; inset: 0; z-index: 4; pointer-events: none; }
 .cv-canvas { position: absolute; inset: 0; display: block; }
+.intro-skip { position: absolute; right: 24px; bottom: calc(24px + env(safe-area-inset-bottom)); pointer-events: auto; background: none; border: 1px solid rgba(245,228,200,.3); color: rgba(245,228,200,.75); font: 600 .74rem var(--sans); letter-spacing: .2em; text-transform: uppercase; padding: 10px 16px; cursor: pointer; transition: opacity .3s, border-color .3s; }
+.intro-skip:hover, .intro-skip:focus-visible { border-color: var(--gold-hi); color: var(--gold-hi); }
+.cv-stage.through .intro-skip { pointer-events: none; }
+html[lang="ar"] .intro-skip { right: auto; left: 24px; letter-spacing: 0; font-size: .9rem; }
+html.intro .hero .reveal, html.intro .words .w, html.intro .hero-art { opacity: 0 !important; transform: translateY(24px); transition: none !important; }
+html.intro .words .w { transform: translateY(.5em); }
+html.intro-fade .hero .reveal, html.intro-fade .words .w, html.intro-fade .hero-art { opacity: 0; transition: opacity .4s ease; }
 .replay { display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; padding: 8px 0; background: none; border: 0; border-bottom: 1px solid rgba(201,164,92,.28); color: rgba(245,228,200,.62); font: 600 .7rem var(--sans); letter-spacing: .22em; text-transform: uppercase; cursor: pointer; transition: color .3s, border-color .3s; }
 .replay .ico { width: 15px; height: 15px; }
 .replay:hover, .replay:focus-visible { color: var(--gold-hi); border-color: var(--gold-hi); outline: none; }
 .replay:focus-visible { box-shadow: 0 0 0 3px rgba(232,205,143,.25); }
 html[lang="ar"] .replay { letter-spacing: 0; font-size: .9rem; }
-.intro-veil .intro-mark { width: min(62vw, 330px); height: auto; overflow: visible; transform-origin: 50% 50%; will-change: transform; }
-.intro-line { fill: none; stroke: var(--gold-hi); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 6px rgba(201,164,92,.55)); }
-.intro-fill { opacity: 0; } .intro-fill path { fill: #F5E4C8; }
-.intro-ring { fill: none; stroke: var(--accent); stroke-width: .8; opacity: 0; transform-origin: 122px 151px; }
-.intro-skip { position: absolute; right: 24px; bottom: calc(24px + env(safe-area-inset-bottom)); background: none; border: 1px solid rgba(245,228,200,.3); color: rgba(245,228,200,.75); font: 600 .74rem var(--sans); letter-spacing: .2em; text-transform: uppercase; padding: 10px 16px; cursor: pointer; transition: opacity .3s, border-color .3s; }
-.intro-skip:hover, .intro-skip:focus-visible { border-color: var(--gold-hi); color: var(--gold-hi); }
-html[lang="ar"] .intro-skip { right: auto; left: 24px; letter-spacing: 0; font-size: .9rem; }
-html.intro .hero .reveal, html.intro .words .w, html.intro .hero-art { opacity: 0 !important; transform: translateY(24px); transition: none !important; }
-html.intro .words .w { transform: translateY(.5em); }
-html.intro-mark .logo-mark { opacity: 0; }
-.logo-mark { transition: opacity .4s ease; }
 .hero-art { opacity: 1; transition: opacity .9s ease; }
 
 /* Sections. Navy sections sit on the page's navy; cream sections are
@@ -812,7 +803,7 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
 @media (prefers-reduced-motion: reduce) {
   .js .reveal, .words .w, .js .sheet { opacity: 1; transform: none; transition: none; }
   .spin, .s-spin, .bubble p::after, .fly-mark, .tapdot { animation: none; }
-  .form-canvas { display: none; } .fly-mark { opacity: 1; }
+  .fly-mark { opacity: 1; }
   .gauges .ring .val { transition: none; }
   .stage-line path, .deco { stroke-dashoffset: 0; }
   .jstep .phone { opacity: 1; }
@@ -896,8 +887,8 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
   .hero { padding-top: 104px; min-height: auto; }
   .lede { font-size: 1.05rem; margin-bottom: 22px; }
   .cta-row { gap: 10px; }
-  .hero-art { height: 270px; margin-top: 0; }
-  .fly-mark { width: 140px; }
+  .hero-art { order: -1; height: 290px; margin: 0 auto 4px; }   /* on a phone the mark comes first: the opening forms it where it lives */
+  .fly-mark { width: 150px; }
   /* The journey: the phone stands beside its words, so four steps take two screens, not six. */
   .journey { gap: 54px; --cx: 59px; margin-top: 40px; }
   .jstep { grid-template-columns: auto 1fr; gap: 14px; text-align: start; align-items: start; justify-items: start; }
