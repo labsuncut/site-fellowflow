@@ -371,6 +371,17 @@ html[lang="ar"] .purpose { font-style: normal; }
 /* The opening ("The Butterfly Effect", intro.js): a navy veil, two gold lines that draw the mark, the filled mark
    that opens its wings once, one ring, then the glide into the page. html.intro holds the first screen back. */
 .intro-veil { position: fixed; inset: 0; z-index: 70; background: var(--brand); display: grid; place-items: center; }
+/* "The Convergence" (convergence.js) paints its own veil on a canvas, so it can dissolve into the page. Until the
+   deferred script runs, html.intro alone keeps a navy cover over the page (intro-boot.js sets the class in <head>). */
+html.intro:not(.intro-live) body::after { content: ""; position: fixed; inset: 0; z-index: 70; background: var(--brand); }
+.intro-veil.cv { background: transparent; display: block; }
+.intro-veil.cv.through { pointer-events: none; }
+.cv-canvas { position: absolute; inset: 0; display: block; }
+.replay { display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; padding: 8px 0; background: none; border: 0; border-bottom: 1px solid rgba(201,164,92,.28); color: rgba(245,228,200,.62); font: 600 .7rem var(--sans); letter-spacing: .22em; text-transform: uppercase; cursor: pointer; transition: color .3s, border-color .3s; }
+.replay .ico { width: 15px; height: 15px; }
+.replay:hover, .replay:focus-visible { color: var(--gold-hi); border-color: var(--gold-hi); outline: none; }
+.replay:focus-visible { box-shadow: 0 0 0 3px rgba(232,205,143,.25); }
+html[lang="ar"] .replay { letter-spacing: 0; font-size: .9rem; }
 .intro-veil .intro-mark { width: min(62vw, 330px); height: auto; overflow: visible; transform-origin: 50% 50%; will-change: transform; }
 .intro-line { fill: none; stroke: var(--gold-hi); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; filter: drop-shadow(0 0 6px rgba(201,164,92,.55)); }
 .intro-fill { opacity: 0; } .intro-fill path { fill: #F5E4C8; }

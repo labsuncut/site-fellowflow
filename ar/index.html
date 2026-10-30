@@ -33,8 +33,8 @@
 <link rel="preload" href="../assets/fonts/amiri-arabic-normal-1bb639.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/amiri-arabic-normal-5c7846.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../assets/fonts/ibm-plex-sans-arabic-arabic-normal-00b30d.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="../assets/css/site.css?v=39">
-<script src="../assets/js/intro.js?v=5"></script>
+<link rel="stylesheet" href="../assets/css/site.css?v=40">
+<script src="../assets/js/intro-boot.js?v=1"></script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -137,8 +137,9 @@
 
 <main id="main">
 
-<!-- 1. First screen. The opening (assets/js/intro.js, "The Butterfly Effect", about two seconds, once per tab,
-     Skip from the first frame) draws the mark and hands it to this screen; behind it, a still city (hero.js). -->
+<!-- 1. First screen. The opening ("The Convergence", assets/js/convergence.js, about three seconds, once per tab,
+     Skip from the first frame, replay from the control below) forms the mark out of three currents and hands it
+     to this screen; behind it, a still city (hero.js). -->
 <section class="hero" id="top">
   <div class="wrap hero-in">
     <div class="hero-copy">
@@ -155,6 +156,7 @@
         <li><svg class="ico"><use href="#i-chat"/></svg><span data-i18n="mk3">يردّ عليك أحد المؤسسين</span></li>
       </ul>
       <p class="purpose reveal" data-i18n="hero_purpose">لنساعد نشاطك التجاري على التدفّق بشكل أفضل.</p>
+      <button type="button" class="replay reveal" id="replay-intro" hidden><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.3-5.7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 4v5h5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span data-i18n="hero_replay">أعِد تشغيل الافتتاح</span></button>
     </div>
     <div class="hero-art" id="sky" aria-hidden="true">
       <canvas class="form-canvas" id="form-canvas"></canvas>
@@ -530,6 +532,7 @@
 </nav>
 
 <script src="../assets/js/hero.js?v=4" defer></script>
-<script src="../assets/js/site.js?v=36" defer></script>
+<script src="../assets/js/convergence.js?v=1" defer></script>
+<script src="../assets/js/site.js?v=37" defer></script>
 </body>
 </html>
