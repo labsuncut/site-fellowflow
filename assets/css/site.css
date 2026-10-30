@@ -561,6 +561,7 @@ html[lang="ar"] .gain-p { font-style: normal; }
 .gallery.pair { max-width: 960px; margin-inline: auto; }
 /* Four sites: four small cards in a row (two by two on a tablet, one on a phone). */
 .gallery.quad { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px 22px; }
+.gallery.quad.three { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 44px 28px; max-width: 980px; }
 .gallery.quad .card h3 { font-size: 1.3rem; }
 .gallery.quad .card-meta { grid-template-columns: 1fr; }
 .gallery.quad .tag { grid-column: 1; grid-row: auto; justify-self: start; }
@@ -818,7 +819,7 @@ html[lang="ar"] .legal h1, html[lang="ar"] .legal h2 { line-height: 1.5; }
   .hero-art { height: 420px; max-width: 640px; width: 100%; margin: 0 auto; }
   .steps::before, .steps::after { display: none; }
   .work-head { margin-bottom: 44px; }
-  .gallery, .gallery.quad { grid-template-columns: 1fr 1fr; gap: 44px 30px; }
+  .gallery, .gallery.quad, .gallery.quad.three { grid-template-columns: 1fr 1fr; gap: 44px 30px; }
   .journey { grid-template-columns: 1fr; gap: 50px; justify-items: center; }
   .jline { display: none; }
   .jstep { grid-template-columns: auto 1fr; gap: 30px; text-align: start; align-items: center; max-width: 640px; width: 100%; }

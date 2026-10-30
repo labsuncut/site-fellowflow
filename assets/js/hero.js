@@ -5,7 +5,6 @@
   var art = document.getElementById("sky"), canvas = document.getElementById("form-canvas"), img = document.getElementById("hero-mark");
   if (!art || !canvas || !img) return;
   var T = { city: 600, flow: 1500, hold: 500 };
-  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var seen = false; try { seen = sessionStorage.getItem("ff-formed") === "1"; } catch (e) {}
   var started = false;
   function settle() { art.classList.add("formed"); try { sessionStorage.setItem("ff-formed", "1"); } catch (e) {} }
@@ -24,7 +23,8 @@
     if (box.width && box.height) { canvas.width = Math.round(box.width * dpr); canvas.height = Math.round(box.height * dpr); city(canvas.getContext("2d"), canvas.width, canvas.height, dpr); }
     settle();
   }
-  if (reduce || seen) { still(); return; }
+  // Founders' rule (30 Oct 2026): the formation plays even with Reduce Motion on, once per tab.
+  if (seen) { still(); return; }
   function ease(x) { return x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2; }
   function targets(rect, dpr, step) {
     var w = Math.round(rect.width * dpr), h = Math.round(rect.height * dpr);
