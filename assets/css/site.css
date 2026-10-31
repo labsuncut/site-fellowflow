@@ -304,8 +304,9 @@ html[lang="ar"] .step { padding: 0 0 0 28px; }
 html[lang="ar"] .sign { font-style: normal; }
 
 /* ---- the privacy page (one cream sheet of plain text) ---- */
-.legal { position: relative; z-index: 2; background: var(--cream); color: #1a1f2b; padding: 130px 0 80px; }
-.legal .wrap { max-width: 760px; }
+.legal { position: relative; z-index: 2; background: var(--cream); color: #1a1f2b; padding: 130px var(--gutter) 80px; }
+.legal > * { max-width: 760px; margin-inline: auto; }
+.legal h1 { max-width: 760px; }
 .legal h1 { color: #0a1428; font-size: clamp(2.4rem, 5vw, 3.6rem); margin: 16px 0 10px; }
 .legal h1 em { color: #8a6a3e; }
 .legal h2 { color: #0a1428; font-size: 1.7rem; margin: 40px 0 10px; }
