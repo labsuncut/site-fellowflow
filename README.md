@@ -7,7 +7,8 @@ Our own brand website, built and run the same way we build for clients. Plain HT
 - Privacy policy: `privacy/index.html` (linked in every footer). If the site ever adds a form service, cookie, tracker or other outside service, or the team starts keeping client details in a new tool, update that page and its date in the same change (and the Arabic page once it exists).
 - Visit counts: Cloudflare Web Analytics (turned on by the founders on 25 Oct 2026). Cloudflare adds its script to every page by itself; our security rule allows it with `https://static.cloudflareinsights.com` in `script-src`, in `_headers` and in each page's CSP `<meta>`. If it is ever switched off, remove that address from both and the "Visit counts" lines from the privacy page.
 - Checks: every push to `main` runs `.github/workflows/site-checks.yml` on GitHub. It checks that the Arabic page is up to date, then waits for Cloudflare to publish and checks the live site (pages, links, console errors, and that the live HTML matches this repository). See the Actions tab.
-- Colours: top of `assets/css/site.css` (navy and cream from the logo, gold highlights).
+- The world: `assets/js/world.js` draws the living world behind the whole page on one WebGL2 canvas (a ray-marched colony of cells, no libraries, no image files). The page's words, controls and scroll drive it from `assets/js/site.js`. Without WebGL2, or with Reduce Motion, the page still works: a still gradient, or the awakened world standing still.
+- Colours and type: top of `assets/css/site.css` (near-black navy, cream, warm gold; teal only where the world is alive). Fonts: `assets/css/fonts.css`, files in `assets/fonts/`.
 - Logo: `assets/img/logo/` (cut from the 640px JPEG; replace with the vector when we have it).
 - Our work images: `assets/img/work/`. Team photos: `assets/img/team/`.
 - Facts: `business.json`.

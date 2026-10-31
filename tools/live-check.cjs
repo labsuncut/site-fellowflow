@@ -30,7 +30,7 @@ const firstDiff = (a, b) => { let i = 0; while (i < a.length && a[i] === b[i]) i
   // shared script and style files (a change may leave index.html as it was).
   const wait = Number(process.env.WAIT || 0);
   if (wait) {
-    const files = [...Object.entries(PAGES), ...['assets/js/site.js', 'assets/js/intro.js', 'assets/css/site.css'].map((f) => ['/' + f, f])];
+    const files = [...Object.entries(PAGES), ...['assets/js/site.js', 'assets/js/world.js', 'assets/css/site.css', 'assets/css/fonts.css'].map((f) => ['/' + f, f])];
     const until = Date.now() + wait * 1000;
     for (;;) {
       const same = await Promise.all(files.map(async ([p, f]) => {
